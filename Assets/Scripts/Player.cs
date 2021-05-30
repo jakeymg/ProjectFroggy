@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
     private CharacterController _controller;
+    [SerializeField]
+    private Transform _groundChecker;
+    [SerializeField]
+    private LayerMask Ground;
+    [SerializeField]
+    private float _groundCheckerRadius = 0.2f;
     [SerializeField]
     private Vector3 _playerVelocity;
     [SerializeField]
@@ -14,36 +21,67 @@ public class Player : MonoBehaviour
     private float _jumpHeight = 1.0f;
     [SerializeField]
     private float _gravity = -9.81f;
+    [SerializeField]
+    private bool _isGrounded;
+    private Vector2 moveVal;
     private Vector3 moveDirection;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _groundChecker = GameObject.Find("GroundChecker").GetComponent<Transform>();
+        Ground = LayerMask.GetMask("Ground");
 
         if (_controller == null)
         {
             Debug.Log("Character controller cannot be found");
         }
+
+        if (_groundChecker == null)
+        {
+            Debug.Log("Ground Checker couldn't be found");
+        }
     }
 
     void Update()
     {
-        
-
         MovePlayer();
     }
 
-    private void MovePlayer()
+    void OnMove(InputValue value)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        moveDirection = new Vector3(horizontalInput, 0, verticalInput);
+        moveVal = value.Get<Vector2>();       
+    }
 
-        _controller.Move(Vector3.ClampMagnitude(moveDirection, 1.0f) * Time.deltaTime * _playerSpeed);
+    private void MovePlayer()
+    {      
+        CheckIfGrounded();
+
+        moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
+
+        _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
 
         if (moveDirection != Vector3.zero)
         {
             transform.forward = moveDirection;
         }
+
+        ApplyGravity();
+    }
+
+    private void CheckIfGrounded()
+    {
+        _isGrounded = Physics.CheckSphere(_groundChecker.position, _groundCheckerRadius, Ground, QueryTriggerInteraction.Ignore);
+
+        if (_isGrounded && _playerVelocity.y < 0)
+        {
+            _playerVelocity.y = _gravity;
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        _playerVelocity.y += _gravity * Time.deltaTime;
+        _controller.Move(_playerVelocity * Time.deltaTime);
     }
 }
