@@ -26,6 +26,10 @@ public class Player : MonoBehaviour
     private bool _isGrounded;
     private Vector2 moveVal;
     private Vector3 moveDirection;
+    private Vector3 slideDirection;
+    [SerializeField]
+    private float _slideFriction = 0.3f;
+    private Vector3 slopeNormal;
 
     void Start()
     {
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        SlideMovement();
         MovePlayer();
     }
 
@@ -67,7 +72,24 @@ public class Player : MonoBehaviour
             transform.forward = moveDirection;
         }
 
+        CheckSlope();
+
         ApplyGravity();
+    }
+
+    private void CheckSlope()
+    {
+        _isGrounded = Vector3.Angle (Vector3.up, slopeNormal) <= _controller.slopeLimit;
+    }
+
+    private void SlideMovement()
+    {
+        if (!_isGrounded) 
+        {
+            slideDirection.x += (1f - slopeNormal.y) * slopeNormal.x * (_playerSpeed - _slideFriction);
+            slideDirection.z += (1f - slopeNormal.y) * slopeNormal.z * (_playerSpeed - _slideFriction);
+            _controller.Move(slideDirection * Time.deltaTime);
+        }
     }
 
     private void CheckIfGrounded()
@@ -78,6 +100,11 @@ public class Player : MonoBehaviour
         {
             _playerVelocity.y = _gravity;
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) 
+    {
+        slopeNormal = hit.normal;
     }
 
     private void ApplyGravity()
