@@ -3051,7 +3051,7 @@ MonoBehaviour:
   _playerVelocity: {x: 0, y: 0, z: 0}
   _playerSpeed: 5
   _jumpHeight: 1
-  _gravity: -9.81
+  _gravity: -6.81
   _isGrounded: 0
 --- !u!23 &822629503
 MeshRenderer:

@@ -15,12 +15,13 @@ public class Player : MonoBehaviour
     private float _groundCheckerRadius = 0.2f;
     [SerializeField]
     private Vector3 _playerVelocity;
+    private float _maxVelocityY = -14.0f;
     [SerializeField]
     private float _playerSpeed = 5.0f;
     [SerializeField]
     private float _jumpHeight = 1.0f;
     [SerializeField]
-    private float _gravity = -9.81f;
+    private float _gravity = -6.81f;
     [SerializeField]
     private bool _isGrounded;
     private Vector2 moveVal;
@@ -82,6 +83,12 @@ public class Player : MonoBehaviour
     private void ApplyGravity()
     {
         _playerVelocity.y += _gravity * Time.deltaTime;
+
+        if (_playerVelocity.y <= _maxVelocityY)
+        {
+            _playerVelocity.y = _maxVelocityY;
+        }
+
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
 }
