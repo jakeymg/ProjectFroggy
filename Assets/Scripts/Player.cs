@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sphereCastRadius = 0.2f;
     [SerializeField] private float _sphereCastDistance = 0.25f;
     [SerializeField] private LayerMask Ground;
-    [SerializeField] private float _groundCheckerRadius = 0.2f;
-    [SerializeField] private Transform _groundCheckSphere;
 
     [Header("Ground Raycast Settings")]
     public bool showDebug = false;
@@ -40,7 +38,6 @@ public class Player : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         Ground = LayerMask.GetMask("Ground");
-        _groundCheckSphere = GameObject.Find("_groundCheckSphere").GetComponent<Transform>();
 
         if (_controller == null)
         {
@@ -60,7 +57,7 @@ public class Player : MonoBehaviour
         }
         else if (!_isGrounded && _groundSlopeAngle >= 10f)
         {
-            print("Player definitely shouldn't be here");
+            print("Player should be falling");
         }
 
         MovePlayer();
@@ -87,8 +84,9 @@ public class Player : MonoBehaviour
 
     private void CheckIfGrounded()
     {
+        Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);
 
-        _isGrounded = Physics.CheckSphere(_groundCheckSphere.position, _sphereCastRadius, Ground, QueryTriggerInteraction.Ignore);
+        _isGrounded = Physics.CheckSphere(_groundCheckOrigin, _sphereCastRadius, Ground, QueryTriggerInteraction.Ignore);
 
         if (_isGrounded && _playerVelocity.y < 0)
         {
@@ -134,7 +132,9 @@ public class Player : MonoBehaviour
             //  temp: basically, finds vector moving across hit surface 
             Vector3 temp = Vector3.Cross(hit.normal, Vector3.down);
             //  Now use this vector and the hit normal, to find the other vector moving up and down the hit surface
-            groundSlopeDir = Vector3.Cross(temp, hit.normal); 
+            groundSlopeDir = Vector3.Cross(temp, hit.normal);
+            // This will show you the direction the player should be sliding from it's transform towards the ground
+            if (showDebug) {Debug.DrawRay(transform.position, groundSlopeDir * 5.0f, Color.red);}
         }
 
         // Now that's all fine and dandy, but on edges, corners, etc, we get angle values that we don't want.
