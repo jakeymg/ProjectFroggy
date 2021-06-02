@@ -60,7 +60,6 @@ public class Player : MonoBehaviour
     {
         moveVal = value.Get<Vector2>();       
     }
-
     private void MovePlayer()
     {              
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour
         ApplySlide();
         ApplyGravity();
     }
-
     private void CheckIfGrounded()
     {
         Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);
@@ -87,7 +85,6 @@ public class Player : MonoBehaviour
             _playerVelocity.y = _gravity;
         }
     }
-
     private void CheckSlopeAngle()
     {
         if (_isGrounded)
@@ -105,7 +102,6 @@ public class Player : MonoBehaviour
 
         _controller.Move(slideVelocity * Time.deltaTime);
     }
-
     private void ApplyGravity()
     {
         _playerVelocity.y += _gravity * Time.deltaTime;
@@ -117,7 +113,6 @@ public class Player : MonoBehaviour
 
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
-
     private void ApplySlide()
     {
         if (_isGrounded && _groundSlopeAngle >= 45f)
@@ -135,7 +130,6 @@ public class Player : MonoBehaviour
             slideVelocity = Vector3.zero;
         }
     }
-
     public void CheckGround(Vector3 origin)
     {
         // Out hit point from our cast(s)
@@ -193,7 +187,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     void OnDrawGizmosSelected()
     {
         if (showDebug)
