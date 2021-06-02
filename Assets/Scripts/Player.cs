@@ -99,32 +99,9 @@ public class Player : MonoBehaviour
     {
         slideVelocity += groundSlopeDir * _slideFrictionMultiplier;
 
-        if (slideVelocity.x >= 5.0f)
-        {
-            slideVelocity.x = 5.0f;
-        }
-        else if (slideVelocity.x <= -5.0f)
-        {
-            slideVelocity.x = -5.0f;
-        }
-
-        if (slideVelocity.z >= 5.0f)
-        {
-            slideVelocity.z = 5.0f;
-        }
-        else if (slideVelocity.z <= -5.0f)
-        {
-            slideVelocity.z = -5.0f;
-        }
-
-        if (slideVelocity.y >= 5.0f)
-        {
-            slideVelocity.y = 5.0f;
-        }
-        else if (slideVelocity.y <= -5.0f)
-        {
-            slideVelocity.y = -5.0f;
-        }
+        slideVelocity.x = Mathf.Clamp(slideVelocity.x, -5.0f, 5.0f);
+        slideVelocity.z = Mathf.Clamp(slideVelocity.z, -5.0f, 5.0f);
+        slideVelocity.y = Mathf.Clamp(slideVelocity.y, -5.0f, 5.0f);
 
         _controller.Move(slideVelocity * Time.deltaTime);
     }
