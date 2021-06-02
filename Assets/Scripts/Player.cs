@@ -53,21 +53,6 @@ public class Player : MonoBehaviour
 
         CheckSlopeAngle();
 
-        if (_isGrounded && _groundSlopeAngle >= 45f)
-        {
-            print("Player should be sliding");
-            SlidePlayer();
-        }
-        else if (!_isGrounded && _groundSlopeAngle >= 10f)
-        {
-            print("Player should be falling");
-            SlidePlayer();
-        }
-        else
-        {
-            slideVelocity = Vector3.zero;
-        }
-
         MovePlayer();
     }
 
@@ -87,6 +72,7 @@ public class Player : MonoBehaviour
             transform.forward = moveDirection;
         }
 
+        ApplySlide();
         ApplyGravity();
     }
 
@@ -112,6 +98,34 @@ public class Player : MonoBehaviour
     private void SlidePlayer()
     {
         slideVelocity += groundSlopeDir * _slideFrictionMultiplier;
+
+        if (slideVelocity.x >= 5.0f)
+        {
+            slideVelocity.x = 5.0f;
+        }
+        else if (slideVelocity.x <= -5.0f)
+        {
+            slideVelocity.x = -5.0f;
+        }
+
+        if (slideVelocity.z >= 5.0f)
+        {
+            slideVelocity.z = 5.0f;
+        }
+        else if (slideVelocity.z <= -5.0f)
+        {
+            slideVelocity.z = -5.0f;
+        }
+
+        if (slideVelocity.y >= 5.0f)
+        {
+            slideVelocity.y = 5.0f;
+        }
+        else if (slideVelocity.y <= -5.0f)
+        {
+            slideVelocity.y = -5.0f;
+        }
+
         _controller.Move(slideVelocity * Time.deltaTime);
     }
 
@@ -125,6 +139,24 @@ public class Player : MonoBehaviour
         }
 
         _controller.Move(_playerVelocity * Time.deltaTime);
+    }
+
+    private void ApplySlide()
+    {
+        if (_isGrounded && _groundSlopeAngle >= 45f)
+        {
+            if (showDebug) {print("Player should be sliding");}
+            SlidePlayer();
+        }
+        else if (!_isGrounded && _groundSlopeAngle >= 10f)
+        {
+            if (showDebug) {print("Player should be falling");}
+            SlidePlayer();
+        }
+        else
+        {
+            slideVelocity = Vector3.zero;
+        }
     }
 
     public void CheckGround(Vector3 origin)
