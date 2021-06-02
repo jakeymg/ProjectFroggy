@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float _groundSlopeAngle= 0f;
     [SerializeField] private Vector3 groundSlopeDir = Vector3.zero;
-    private Vector2 moveVal
+    private Vector2 moveVal;
 
     void Start()
     {
