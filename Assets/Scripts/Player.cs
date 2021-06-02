@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _playerSpeed = 5.0f;
-    [SerializeField]private Vector3 _playerVelocity;
+    [SerializeField] private Vector3 _playerVelocity;
+    [SerializeField] private Vector3 slideVelocity = Vector3.zero;
 
     [Header("Gravity Settings")]
     [SerializeField] private float _gravity = -6.81f;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sphereCastRadius = 0.2f;
     [SerializeField] private float _sphereCastDistance = 0.25f;
     [SerializeField] private LayerMask Ground;
+    [SerializeField] private float _slideFrictionMultiplier = 0.1f;
 
     [Header("Ground Raycast Settings")]
     public bool showDebug = false;
@@ -54,10 +56,16 @@ public class Player : MonoBehaviour
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             print("Player should be sliding");
+            SlidePlayer();
         }
         else if (!_isGrounded && _groundSlopeAngle >= 10f)
         {
             print("Player should be falling");
+            SlidePlayer();
+        }
+        else
+        {
+            slideVelocity = Vector3.zero;
         }
 
         MovePlayer();
@@ -100,6 +108,11 @@ public class Player : MonoBehaviour
         {
             CheckGround(new Vector3(transform.position.x, transform.position.y - (_controller.height / 2) + _startDistanceFromBottom, transform.position.z));
         }
+    }
+    private void SlidePlayer()
+    {
+        slideVelocity += groundSlopeDir * _slideFrictionMultiplier;
+        _controller.Move(slideVelocity * Time.deltaTime);
     }
 
     private void ApplyGravity()

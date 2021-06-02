@@ -3045,6 +3045,7 @@ MonoBehaviour:
   _controller: {fileID: 0}
   _playerSpeed: 5
   _playerVelocity: {x: 0, y: 0, z: 0}
+  slideVelocity: {x: 0, y: 0, z: 0}
   _gravity: -6.81
   _maxVelocityY: -14
   _startDistanceFromBottom: 0.2
@@ -3053,7 +3054,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 0
-  _groundCheckerRadius: 0.2
+  _slideFrictionMultiplier: 0.1
   showDebug: 0
   _raycastLength: 0.75
   _rayOriginOffset1: {x: -0.2, y: 0, z: 0.16}
