@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _playerSpeed = 5.0f;
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 slideVelocity = Vector3.zero;
+    [SerializeField] private bool playerIsMoving;
+    [SerializeField] private bool playerIsSliding;
+    [SerializeField] private bool playerIsFalling;
 
     [Header("Gravity Settings")]
     [SerializeField] private float _gravity = -6.81f;
@@ -18,16 +21,16 @@ public class Player : MonoBehaviour
 
     [Header("Ground/Slope Settings")]
     [SerializeField] private float _startDistanceFromBottom = 0.2f;
-    [SerializeField] private float _sphereCastRadius = 0.2f;
-    [SerializeField] private float _sphereCastDistance = 0.25f;
+    [SerializeField] private float _sphereCastRadius = 0.25f;
+    [SerializeField] private float _sphereCastDistance = 0.3f;
     [SerializeField] private LayerMask Ground;
     [SerializeField] private float _slideFrictionMultiplier = 0.1f;
 
     [Header("Ground Raycast Settings")]
     public bool showDebug = false;
     [SerializeField] private float _raycastLength = 0.75f;
-    [SerializeField] private Vector3 _rayOriginOffset1 = new Vector3(-0.2f, 0f, 0.16f);
-    [SerializeField] private Vector3 _rayOriginOffset2 = new Vector3(0.2f, 0f, -0.16f);
+    [SerializeField] private Vector3 _rayOriginOffset1 = new Vector3(-0.3f, 0f, 0.2f);
+    [SerializeField] private Vector3 _rayOriginOffset2 = new Vector3(0.3f, 0f, -0.2f);
 
     [Header("Calculation Results")]
     [SerializeField] private bool _isGrounded;
@@ -61,18 +64,25 @@ public class Player : MonoBehaviour
         moveVal = value.Get<Vector2>();       
     }
     private void MovePlayer()
-    {              
+    {   
+        ApplySlide();
+        ApplyGravity();
+
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
 
-        _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
+        if (playerIsSliding)
+        {
+            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * _slideFrictionMultiplier));
+        }
+        else
+        {
+            _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
+        }
 
         if (moveDirection != Vector3.zero)
         {
             transform.forward = moveDirection;
         }
-
-        ApplySlide();
-        ApplyGravity();
     }
     private void CheckIfGrounded()
     {
@@ -118,16 +128,21 @@ public class Player : MonoBehaviour
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             if (showDebug) {print("Player should be sliding");}
+            playerIsSliding = true;
             SlidePlayer();
+
         }
-        else if (!_isGrounded && _groundSlopeAngle >= 10f)
+        else if (!_isGrounded && _groundSlopeAngle >= 25f)
         {
             if (showDebug) {print("Player should be falling");}
+            playerIsFalling = true;
             SlidePlayer();
         }
         else
         {
             slideVelocity = Vector3.zero;
+            playerIsFalling = false;
+            playerIsSliding = false;
         }
     }
     public void CheckGround(Vector3 origin)
@@ -149,6 +164,7 @@ public class Player : MonoBehaviour
             Vector3 temp = Vector3.Cross(hit.normal, Vector3.down);
             //  Now use this vector and the hit normal, to find the other vector moving up and down the hit surface
             groundSlopeDir = Vector3.Cross(temp, hit.normal);
+            groundSlopeDir.Normalize();
             // This will show you the direction the player should be sliding from it's transform towards the ground
             if (showDebug) {Debug.DrawRay(transform.position, groundSlopeDir * 5.0f, Color.red);}
         }
