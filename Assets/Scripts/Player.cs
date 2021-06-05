@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _playerSpeed = 5.0f;
     [SerializeField] private Vector3 _playerVelocity;
-    [SerializeField] private Vector3 slideVelocity = Vector3.zero;
+    [SerializeField] private Vector3 _slideDirection = Vector3.zero;
     [SerializeField] private bool playerIsMoving;
     [SerializeField] private bool playerIsSliding;
     [SerializeField] private bool playerIsFalling;
@@ -104,13 +104,13 @@ public class Player : MonoBehaviour
     }
     private void SlidePlayer()
     {
-        slideVelocity += groundSlopeDir * _slideFrictionMultiplier;
+        _slideDirection += groundSlopeDir * _slideFrictionMultiplier;
 
-        slideVelocity.x = Mathf.Clamp(slideVelocity.x, -5.0f, 5.0f);
-        slideVelocity.z = Mathf.Clamp(slideVelocity.z, -5.0f, 5.0f);
-        slideVelocity.y = Mathf.Clamp(slideVelocity.y, -5.0f, 5.0f);
+        _slideDirection.x = Mathf.Clamp(_slideDirection.x, -5.0f, 5.0f);
+        _slideDirection.z = Mathf.Clamp(_slideDirection.z, -5.0f, 5.0f);
+        _slideDirection.y = Mathf.Clamp(_slideDirection.y, -5.0f, 5.0f);
 
-        _controller.Move(slideVelocity * Time.deltaTime);
+        _controller.Move(_slideDirection * Time.deltaTime);
     }
     private void ApplyGravity()
     {
@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
     }
     private void ApplySlide()
     {
+
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             if (showDebug) {print("Player should be sliding");}
@@ -140,7 +141,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            slideVelocity = Vector3.zero;
+            _slideDirection = Vector3.zero;
             playerIsFalling = false;
             playerIsSliding = false;
         }
