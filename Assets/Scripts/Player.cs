@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sphereCastRadius = 0.25f;
     [SerializeField] private float _sphereCastDistance = 0.3f;
     [SerializeField] private LayerMask Ground;
-    [SerializeField] private float _slideFrictionMultiplier = 0.1f;
+    [SerializeField] private float _slideFrictionMultiplier = 0.2f;
 
     [Header("Ground Raycast Settings")]
     public bool showDebug = false;
@@ -69,6 +69,15 @@ public class Player : MonoBehaviour
         ApplyGravity();
 
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
+        
+        if (moveDirection != Vector3.zero)
+        {
+            playerIsMoving = true;
+        }
+        else
+        {
+            playerIsMoving = false;
+        }
 
         if (playerIsSliding)
         {
