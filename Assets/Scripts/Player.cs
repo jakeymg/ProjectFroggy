@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 _slideDirection = Vector3.zero;
     [SerializeField] private float _maxSlideSpeed = 3.0f;
-    [SerializeField] private bool playerIsMoving;
+    [SerializeField] private bool playerIsWalking;
+    [SerializeField] private bool playerIsRunning;
     [SerializeField] private bool playerIsSliding;
     [SerializeField] private bool playerIsFalling;
 
@@ -37,18 +38,17 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float _groundSlopeAngle= 0f;
     [SerializeField] private Vector3 groundSlopeDir = Vector3.zero;
-    private Vector2 moveVal;
-    private Vector3 moveDirection;
+    [SerializeField] private Vector2 moveVal;
+    [SerializeField] private Vector3 moveDirection;
+
+    [Header("Particle Systems")]
+    [SerializeField] private ParticleSystem _movementDust;
 
     void Start()
     {
-        _controller = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>(); if (_controller == null) { Debug.Log("Character controller cannot be found");}
         Ground = LayerMask.GetMask("Ground");
-
-        if (_controller == null)
-        {
-            Debug.Log("Character controller cannot be found");
-        }
+        _movementDust = GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>(); if (_movementDust == null) {Debug.Log("Movement Dust particle system can't be found");}
     }
 
     void FixedUpdate()
@@ -71,11 +71,22 @@ public class Player : MonoBehaviour
         
         if (moveDirection != Vector3.zero)
         {
-            playerIsMoving = true;
+            if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
+            {
+                playerIsWalking = false;
+                playerIsRunning = true;
+                CreateDust();
+            }
+            else
+            {
+                playerIsRunning = false;
+                playerIsWalking = true;
+            }
         }
         else
         {
-            playerIsMoving = false;
+            playerIsWalking = false;
+            playerIsRunning = false;
         }
 
         if (playerIsFalling)
@@ -86,7 +97,6 @@ public class Player : MonoBehaviour
         {
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
         }
-        //_controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
 
         if (moveDirection != Vector3.zero)
         {
@@ -148,19 +158,34 @@ public class Player : MonoBehaviour
             if (showDebug) {print("Player should be sliding");}
             playerIsSliding = true;
             SlidePlayer();
-
+            CreateDust();
         }
         else if (!_isGrounded && _groundSlopeAngle >= 25f)
         {
             if (showDebug) {print("Player should be falling");}
             playerIsFalling = true;
             SlidePlayer();
+            CreateDust();
         }
         else
         {
             _slideDirection = Vector3.zero;
             playerIsFalling = false;
             playerIsSliding = false;
+        }
+    }
+
+    private void CreateDust()
+    {
+        if (playerIsSliding)
+        {
+            _movementDust.Play();
+        }
+        else if (playerIsFalling)
+        {}
+        else
+        {
+            _movementDust.Play();
         }
     }
 
