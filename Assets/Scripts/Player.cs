@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _playerSpeed = 5.0f;
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 _slideDirection = Vector3.zero;
+    [SerializeField] private float _maxSlideSpeed = 3.0f;
     [SerializeField] private bool playerIsMoving;
     [SerializeField] private bool playerIsSliding;
     [SerializeField] private bool playerIsFalling;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sphereCastRadius = 0.25f;
     [SerializeField] private float _sphereCastDistance = 0.3f;
     [SerializeField] private LayerMask Ground;
-    [SerializeField] private float _slideFrictionMultiplier = 0.2f;
+    [SerializeField] private float _slideFrictionMultiplier = 0.35f;
 
     [Header("Ground Raycast Settings")]
     public bool showDebug = false;
@@ -63,11 +64,9 @@ public class Player : MonoBehaviour
     {
         moveVal = value.Get<Vector2>();       
     }
-    private void MovePlayer()
-    {   
-        ApplySlide();
-        ApplyGravity();
 
+    private void MovePlayer()
+    {        
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
         if (moveDirection != Vector3.zero)
@@ -79,20 +78,25 @@ public class Player : MonoBehaviour
             playerIsMoving = false;
         }
 
-        if (playerIsSliding)
+        if (playerIsFalling)
         {
-            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * _slideFrictionMultiplier));
+            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed / 2.0f));  
         }
         else
         {
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
         }
+        //_controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
 
         if (moveDirection != Vector3.zero)
         {
             transform.forward = moveDirection;
         }
+
+        ApplySlide();
+        ApplyGravity();
     }
+
     private void CheckIfGrounded()
     {
         Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);
@@ -104,6 +108,7 @@ public class Player : MonoBehaviour
             _playerVelocity.y = _gravity;
         }
     }
+
     private void CheckSlopeAngle()
     {
         if (_isGrounded)
@@ -111,16 +116,18 @@ public class Player : MonoBehaviour
             CheckGround(new Vector3(transform.position.x, transform.position.y - (_controller.height / 2) + _startDistanceFromBottom, transform.position.z));
         }
     }
+
     private void SlidePlayer()
     {
         _slideDirection += groundSlopeDir * _slideFrictionMultiplier;
 
-        _slideDirection.x = Mathf.Clamp(_slideDirection.x, -5.0f, 5.0f);
-        _slideDirection.z = Mathf.Clamp(_slideDirection.z, -5.0f, 5.0f);
-        _slideDirection.y = Mathf.Clamp(_slideDirection.y, -5.0f, 5.0f);
+        _slideDirection.x = Mathf.Clamp(_slideDirection.x, -_maxSlideSpeed, _maxSlideSpeed);
+        _slideDirection.z = Mathf.Clamp(_slideDirection.z, -_maxSlideSpeed, _maxSlideSpeed);
+        _slideDirection.y = Mathf.Clamp(_slideDirection.y, -_maxSlideSpeed, _maxSlideSpeed);
 
         _controller.Move(_slideDirection * Time.deltaTime);
     }
+
     private void ApplyGravity()
     {
         _playerVelocity.y += _gravity * Time.deltaTime;
@@ -132,6 +139,7 @@ public class Player : MonoBehaviour
 
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
+
     private void ApplySlide()
     {
 
@@ -155,6 +163,7 @@ public class Player : MonoBehaviour
             playerIsSliding = false;
         }
     }
+
     public void CheckGround(Vector3 origin)
     {
         // Out hit point from our cast(s)
@@ -213,6 +222,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     void OnDrawGizmosSelected()
     {
         if (showDebug)

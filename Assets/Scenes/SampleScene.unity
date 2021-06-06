@@ -3687,6 +3687,7 @@ MonoBehaviour:
   _playerSpeed: 5
   _playerVelocity: {x: 0, y: 0, z: 0}
   _slideDirection: {x: 0, y: 0, z: 0}
+  _maxSlideSpeed: 3
   playerIsMoving: 0
   playerIsSliding: 0
   playerIsFalling: 0
@@ -3698,7 +3699,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 0
-  _slideFrictionMultiplier: 0.1
+  _slideFrictionMultiplier: 0.35
   showDebug: 0
   _raycastLength: 0.75
   _rayOriginOffset1: {x: -0.3, y: 0, z: 0.2}
