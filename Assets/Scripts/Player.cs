@@ -33,9 +33,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _raycastLength = 0.75f;
     [SerializeField] private Vector3 _rayOriginOffset1 = new Vector3(-0.3f, 0f, 0.2f);
     [SerializeField] private Vector3 _rayOriginOffset2 = new Vector3(0.3f, 0f, -0.2f);
+    [SerializeField] private float _rayOriginOffset3 = 0.3f;
 
     [Header("Calculation Results")]
     [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _isOnEdge;
     [SerializeField] private float _groundSlopeAngle= 0f;
     [SerializeField] private Vector3 groundSlopeDir = Vector3.zero;
     [SerializeField] private Vector2 moveVal;
@@ -92,6 +94,10 @@ public class Player : MonoBehaviour
         if (playerIsFalling)
         {
             _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed / 2.0f));  
+        }
+        else if (playerIsSliding)
+        {
+            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed / 2.0f));
         }
         else
         {
@@ -160,12 +166,27 @@ public class Player : MonoBehaviour
             SlidePlayer();
             CreateDust();
         }
-        else if (!_isGrounded && _groundSlopeAngle >= 25f)
+        else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
             if (showDebug) {print("Player should be falling");}
             playerIsFalling = true;
             SlidePlayer();
-            CreateDust();
+        }
+        else if (_isOnEdge)
+        {
+            if (showDebug) {print("Player is too far off edge");}
+            
+            if (_groundSlopeAngle >= 1f)
+            {
+                playerIsSliding = true;
+                SlidePlayer();
+                CreateDust();
+            }
+            else
+            {
+                playerIsFalling = true;
+                SlidePlayer();
+            }
         }
         else
         {
@@ -218,6 +239,7 @@ public class Player : MonoBehaviour
         // edge cases here. There are lots of situations that could pop up, so test and see what gives you trouble.
         RaycastHit slopeHit1;
         RaycastHit slopeHit2;
+        RaycastHit slopeHit3;
 
         // FIRST RAYCAST
         if (Physics.Raycast(origin + _rayOriginOffset1, Vector3.down, out slopeHit1, _raycastLength))
@@ -243,9 +265,21 @@ public class Player : MonoBehaviour
             {
                 // 2 collision points (sphere and first raycast): AVERAGE the two
                 float average = (_groundSlopeAngle + angleOne) / 2;
-		_groundSlopeAngle = average;
+		        _groundSlopeAngle = average;
             }
         }
+
+        // Check if Player has ground infront
+        if (!Physics.Raycast(origin + (transform.forward * _rayOriginOffset3), Vector3.down, out slopeHit3, _raycastLength))
+        {
+            _isOnEdge = true;
+        }
+        else if (Physics.Raycast(origin + (transform.forward * _rayOriginOffset3), Vector3.down, out slopeHit3, _raycastLength))
+        {
+            _isOnEdge = false;
+        }
+
+        Debug.DrawLine(origin + (transform.forward * _rayOriginOffset3), (origin + (transform.forward * _rayOriginOffset3)) - new Vector3(0f, _raycastLength, 0f), Color.red);
     }
 
     void OnDrawGizmosSelected()
