@@ -84,6 +84,8 @@ public class Player : MonoBehaviour
                 playerIsRunning = false;
                 playerIsWalking = true;
             }
+
+            transform.forward = moveDirection;
         }
         else
         {
@@ -102,11 +104,6 @@ public class Player : MonoBehaviour
         else
         {
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
-        }
-
-        if (moveDirection != Vector3.zero)
-        {
-            transform.forward = moveDirection;
         }
 
         ApplySlide();
