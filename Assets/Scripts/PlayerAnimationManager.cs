@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 
-public class AnimationManager : MonoBehaviour
+public class PlayerAnimationManager : MonoBehaviour
 {
     [SerializeField] private AnimancerComponent _Animancer;
 
     [SerializeField] private AnimationClip _Idle;
-
-    // private void OnEnable() 
-    // {
-    //     _Animancer.Play(_Idle);
-    // }
 
     public void PlayIdleAnimation()
     {

@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private StateMachine _stateMachine;
-    
-    [Header("Movement Settings")]
     [SerializeField] private CharacterController _controller;
+    [SerializeField] private PlayerAnimationManager _animationManager;
+
+    [Header("Movement Settings")]
     [SerializeField] private float _playerSpeed = 5.0f;
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 _slideDirection = Vector3.zero;
@@ -49,14 +50,19 @@ public class Player : MonoBehaviour
     [Header("Particle Systems")]
     [SerializeField] private ParticleSystem _movementDust;
 
-    void Start()
+    private void Awake() 
     {
         _controller = GetComponent<CharacterController>(); if (_controller == null) { Debug.Log("Character controller cannot be found");}
         _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
-        Ground = LayerMask.GetMask("Ground");
+        _animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
         _movementDust = GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>(); if (_movementDust == null) {Debug.Log("Movement Dust particle system can't be found");}
-
-        _stateMachine.ChangeState(new IdleState(this.GetComponent<GameObject>()));
+        
+        Ground = LayerMask.GetMask("Ground");
+    }
+    
+    void Start()
+    {
+        _stateMachine.ChangeState(new IdleState(this));
     }
 
     private void Update() 
