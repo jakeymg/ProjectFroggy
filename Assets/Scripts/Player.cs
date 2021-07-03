@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private StateMachine _stateMachine;
-
+    
     [Header("Movement Settings")]
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _playerSpeed = 5.0f;
@@ -52,9 +52,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>(); if (_controller == null) { Debug.Log("Character controller cannot be found");}
-        _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine not found");}
+        _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
         Ground = LayerMask.GetMask("Ground");
         _movementDust = GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>(); if (_movementDust == null) {Debug.Log("Movement Dust particle system can't be found");}
+
+        _stateMachine.ChangeState(new IdleState(this.GetComponent<GameObject>()));
+    }
+
+    private void Update() 
+    {
+        _stateMachine.Update();
     }
 
     void FixedUpdate()

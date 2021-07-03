@@ -15,7 +15,7 @@ public class StateMachine : MonoBehaviour
         currentState.OnEnter();
     }
 
-    private void Update() 
+    public void Update() 
     {
         if (currentState != null)
         {
