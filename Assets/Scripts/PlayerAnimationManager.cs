@@ -8,9 +8,15 @@ public class PlayerAnimationManager : MonoBehaviour
     [SerializeField] private AnimancerComponent _Animancer;
 
     [SerializeField] private AnimationClip _Idle;
+    [SerializeField] private AnimationClip _Walk;
 
     public void PlayIdleAnimation()
     {
-        _Animancer.Play(_Idle);
+        _Animancer.Play(_Idle, 0.25f);
+    }
+
+    public void PlayWalkAnimation()
+    {
+        _Animancer.Play(_Walk, 0.25f);
     }
 }

@@ -92,8 +92,7 @@ public class Player : MonoBehaviour
         {
             if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
             {
-                playerIsWalking = false;
-                playerIsRunning = true;
+                 _stateMachine.ChangeState(new WalkState(this));
                 CreateDust();
             }
             else
