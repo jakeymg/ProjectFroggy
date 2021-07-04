@@ -10,10 +10,13 @@ public class StateMachine : MonoBehaviour
     {
         if (currentState != null)
         {
-            currentState.OnExit();
+            if (newState.GetType().ToString() != currentState.GetType().ToString())
+            {
+                currentState.OnExit();
+                newState.OnEnter();
+            }
         }
-        currentState = newState;
-        currentState.OnEnter();
+        currentState = newState;      
     }
 
     public void Update() 
