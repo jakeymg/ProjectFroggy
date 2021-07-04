@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    State currentState;
+    protected State currentState;
+
     public void ChangeState(State newState)
     {
         if (currentState != null)

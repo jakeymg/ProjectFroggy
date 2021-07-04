@@ -92,21 +92,19 @@ public class Player : MonoBehaviour
         {
             if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
             {
-                 _stateMachine.ChangeState(new WalkState(this));
+                _stateMachine.ChangeState(new WalkState(this));
                 CreateDust();
             }
             else
             {
-                playerIsRunning = false;
-                playerIsWalking = true;
+                _stateMachine.ChangeState(new WalkState(this));
             }
 
             transform.forward = moveDirection;
         }
         else
         {
-            playerIsWalking = false;
-            playerIsRunning = false;
+            _stateMachine.ChangeState(new IdleState(this));
         }
 
         if (playerIsFalling)
