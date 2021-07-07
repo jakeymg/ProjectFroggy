@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         {
             if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
             {
-                _stateMachine.ChangeState(new WalkState(this));
+                _stateMachine.ChangeState(new RunState(this));
                 CreateDust();
             }
             else
