@@ -12,11 +12,12 @@ public class IdleState : State
     public override void OnEnter()
     {
         Debug.Log("Entering IdleState");
+        owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 
     public override void Execute()
     {
-       owner.GetComponent<PlayerAnimationManager>().PlayIdleAnimation();
+        
     }
 
     public override void OnExit()

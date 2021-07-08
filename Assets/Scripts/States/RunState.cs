@@ -11,11 +11,12 @@ public class RunState : State
     public override void OnEnter()
     {
         Debug.Log("Entering RunState");
+        owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 
     public override void Execute()
     {
-       owner.GetComponent<PlayerAnimationManager>().PlayRunAnimation();
+        owner.PlayDustParticle();
     }
 
     public override void OnExit()

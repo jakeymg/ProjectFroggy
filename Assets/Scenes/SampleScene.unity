@@ -3928,9 +3928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Animancer: {fileID: 822629509}
-  _Idle: {fileID: -8945691123924629249, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  _Walk: {fileID: 8349542763059015795, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  _Run: {fileID: -7551964380084998518, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  _IdleWalkRunMixer: {fileID: 11400000, guid: 48a7b4aea2e6b434a9c68de53d78628f, type: 2}
 --- !u!114 &822629509
 MonoBehaviour:
   m_ObjectHideFlags: 0

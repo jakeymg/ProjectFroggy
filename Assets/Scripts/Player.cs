@@ -81,7 +81,8 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        moveVal = value.Get<Vector2>();       
+        moveVal = value.Get<Vector2>();
+        _animationManager.IdleWalkRunMixerValue = moveVal.magnitude;
     }
 
     private void MovePlayer()
@@ -93,7 +94,6 @@ public class Player : MonoBehaviour
             if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
             {
                 _stateMachine.ChangeState(new RunState(this));
-                CreateDust();
             }
             else
             {
@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
             if (showDebug) {print("Player should be sliding");}
             playerIsSliding = true;
             SlidePlayer();
-            CreateDust();
+            PlayDustParticle();
         }
         else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
@@ -191,7 +191,7 @@ public class Player : MonoBehaviour
             {
                 playerIsSliding = true;
                 SlidePlayer();
-                CreateDust();
+                PlayDustParticle();
             }
             else
             {
@@ -207,80 +207,49 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CreateDust()
+    public void PlayDustParticle()
     {
-        if (playerIsSliding)
-        {
-            _movementDust.Play();
-        }
-        else if (playerIsFalling)
-        {}
-        else
-        {
-            _movementDust.Play();
-        }
+        GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>().Play();
     }
 
     public void CheckGround(Vector3 origin)
     {
-        // Out hit point from our cast(s)
         RaycastHit hit;
 
-        // SPHERECAST
-        // "Casts a sphere along a ray and returns detailed information on what was hit."
         if (Physics.SphereCast(origin, _sphereCastRadius, Vector3.down, out hit, _sphereCastDistance, Ground))
         {
-            // Angle of our slope (between these two vectors). 
-            // A hit normal is at a 90 degree angle from the surface that is collided with (at the point of collision).
-            // e.g. On a flat surface, both vectors are facing straight up, so the angle is 0.
             _groundSlopeAngle = Vector3.Angle(hit.normal, Vector3.up);
 
-            // Find the vector that represents our slope as well. 
-            //  temp: basically, finds vector moving across hit surface 
             Vector3 temp = Vector3.Cross(hit.normal, Vector3.down);
-            //  Now use this vector and the hit normal, to find the other vector moving up and down the hit surface
             groundSlopeDir = Vector3.Cross(temp, hit.normal);
             groundSlopeDir.Normalize();
-            // This will show you the direction the player should be sliding from it's transform towards the ground
             if (showDebug) {Debug.DrawRay(transform.position, groundSlopeDir * 5.0f, Color.red);}
         }
 
-        // Now that's all fine and dandy, but on edges, corners, etc, we get angle values that we don't want.
-        // To correct for this, let's do some raycasts. You could do more raycasts, and check for more
-        // edge cases here. There are lots of situations that could pop up, so test and see what gives you trouble.
         RaycastHit slopeHit1;
         RaycastHit slopeHit2;
         RaycastHit slopeHit3;
 
-        // FIRST RAYCAST
         if (Physics.Raycast(origin + _rayOriginOffset1, Vector3.down, out slopeHit1, _raycastLength))
         {
-            // Debug line to first hit point
             if (showDebug) { Debug.DrawLine(origin + _rayOriginOffset1, slopeHit1.point, Color.red); }
-            // Get angle of slope on hit normal
             float angleOne = Vector3.Angle(slopeHit1.normal, Vector3.up);
 
-            // 2ND RAYCAST
             if (Physics.Raycast(origin + _rayOriginOffset2, Vector3.down, out slopeHit2, _raycastLength))
             {
-                // Debug line to second hit point
                 if (showDebug) { Debug.DrawLine(origin + _rayOriginOffset2, slopeHit2.point, Color.red); }
-                // Get angle of slope of these two hit points.
                 float angleTwo = Vector3.Angle(slopeHit2.normal, Vector3.up);
-                // 3 collision points: Take the MEDIAN by sorting array and grabbing middle.
                 float[] tempArray = new float[] { _groundSlopeAngle, angleOne, angleTwo };
                 Array.Sort(tempArray);
                 _groundSlopeAngle = tempArray[1];
             }
             else
             {
-                // 2 collision points (sphere and first raycast): AVERAGE the two
                 float average = (_groundSlopeAngle + angleOne) / 2;
 		        _groundSlopeAngle = average;
             }
         }
 
-        // Check if Player has ground infront
         if (!Physics.Raycast(origin + (transform.forward * _rayOriginOffset3), Vector3.down, out slopeHit3, _raycastLength))
         {
             _isOnEdge = true;
@@ -297,7 +266,6 @@ public class Player : MonoBehaviour
     {
         if (showDebug)
         {
-            // Visualize SphereCast with two spheres and a line
             Vector3 startPoint = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2) + _startDistanceFromBottom, transform.position.z);
             Vector3 endPoint = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2) + _startDistanceFromBottom - _sphereCastDistance, transform.position.z);
 

@@ -11,11 +11,12 @@ public class WalkState : State
     public override void OnEnter()
     {
         Debug.Log("Entering WalkState");
+        owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 
     public override void Execute()
     {
-       owner.GetComponent<PlayerAnimationManager>().PlayWalkAnimation();
+
     }
 
     public override void OnExit()

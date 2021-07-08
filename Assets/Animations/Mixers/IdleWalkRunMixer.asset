@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2d01d4f425b3848938f199392c9afb, type: 3}
-  m_Name: Movement_Mixer
+  m_Script: {fileID: 11500000, guid: a472a4806da7f9147a4a5cd7eee170df, type: 3}
+  m_Name: IdleWalkRunMixer
   m_EditorClassIdentifier: 
   _Transition:
     _FadeDuration: 0.25
@@ -26,8 +26,8 @@ MonoBehaviour:
     _Speeds: []
     _SynchroniseChildren: 00
     _Thresholds:
-    - {x: 0, y: 0}
-    - {x: 0.6, y: 0.6}
-    - {x: 1, y: 1}
-    _DefaultParameter: {x: 0, y: 0}
-    _Type: 0
+    - 0
+    - 0.5
+    - 1
+    _DefaultParameter: 0
+    _ExtrapolateSpeed: 0

@@ -6,22 +6,13 @@ using Animancer;
 public class PlayerAnimationManager : MonoBehaviour
 {
     [SerializeField] private AnimancerComponent _Animancer;
-    [SerializeField] private AnimationClip _Idle;
-    [SerializeField] private AnimationClip _Walk;
-    [SerializeField] private AnimationClip _Run;
+    [SerializeField] private LinearMixerTransition _IdleWalkRunMixer;
+    private LinearMixerState _IdleWalkRunState;
+    public float IdleWalkRunMixerValue {get => _IdleWalkRunState.Parameter; set => _IdleWalkRunState.Parameter = value;}
 
-    public void PlayIdleAnimation()
+    public void PlayIdleWalkRunMixer()
     {
-        _Animancer.Play(_Idle, 0.25f);
-    }
-
-    public void PlayWalkAnimation()
-    {
-        _Animancer.Play(_Walk, 0.25f);
-    }
-
-    public void PlayRunAnimation()
-    {
-        _Animancer.Play(_Run, 0.25f);
+        _Animancer.Play(_IdleWalkRunMixer);
+        _IdleWalkRunState = _IdleWalkRunMixer.Transition.State;
     }
 }
