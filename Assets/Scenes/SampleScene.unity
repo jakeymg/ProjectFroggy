@@ -3928,6 +3928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Animancer: {fileID: 822629509}
+  _SittingStart: {fileID: -4173182996324890193, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  _SittingOne: {fileID: -3505090100846251808, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  _SittingTwo: {fileID: -575661766842029341, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
   _IdleWalkRunMixer: {fileID: 11400000, guid: 48a7b4aea2e6b434a9c68de53d78628f, type: 2}
 --- !u!114 &822629509
 MonoBehaviour:
@@ -9701,7 +9704,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 822629505}
   m_Follow: {fileID: 822629505}
   m_Lens:
-    FieldOfView: 70
+    FieldOfView: 80
     OrthographicSize: 6
     NearClipPlane: 0.001
     FarClipPlane: 1000
@@ -9722,14 +9725,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204660061}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 8.501068, z: -7.0710683}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 9.0904455, z: -6.427876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 233644892}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!43 &1387199803
 Mesh:
   m_ObjectHideFlags: 0
@@ -10359,7 +10362,7 @@ Camera:
     height: 1
   near clip plane: 0.001
   far clip plane: 1000
-  field of view: 70
+  field of view: 80
   orthographic: 0
   orthographic size: 6
   m_Depth: -1
@@ -10384,8 +10387,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 8.501068, z: -7.0710683}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 9.0904455, z: -6.427876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

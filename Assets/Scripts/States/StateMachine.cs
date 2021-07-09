@@ -14,9 +14,9 @@ public class StateMachine : MonoBehaviour
             {
                 currentState.OnExit();
                 newState.OnEnter();
+                currentState = newState; 
             }
         }
-        currentState = newState;      
     }
 
     public void Update() 
@@ -25,5 +25,11 @@ public class StateMachine : MonoBehaviour
         {
             currentState.Execute();
         }
+    }
+
+    public void InitialiseStateMachine(State firstState)
+    {
+        firstState.OnEnter();
+        currentState = firstState;
     }
 }
