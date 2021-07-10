@@ -20,8 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool playerIsRunning;
     [SerializeField] private bool playerIsSliding;
     [SerializeField] private bool playerIsFalling;
-
-    public bool playerSitting = false;
+    [SerializeField] private string _currentState;
 
     [Header("Gravity Settings")]
     [SerializeField] private float _gravity = -6.81f;
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
     private void Update() 
     {
         _stateMachine.Update();
+        _currentState = _stateMachine.currentState.GetType().ToString();
     }
 
     void FixedUpdate()
@@ -101,6 +101,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeToSitting()
+    {
+        _stateMachine.ChangeState(new SitState(this));
+    }
+
     private void MovePlayer()
     {        
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
@@ -111,7 +116,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (playerSitting != true){_stateMachine.ChangeState(new IdleState(this));}
+            if (_currentState != "SitState"){_stateMachine.ChangeState(new IdleState(this));}
         }
 
         if (playerIsFalling)
@@ -141,12 +146,6 @@ public class Player : MonoBehaviour
         {
             _playerVelocity.y = _gravity;
         }
-    }
-
-    public void ChangeToSitting()
-    {
-        _stateMachine.ChangeState(new SitState(this));
-        playerSitting = true;
     }
 
     private void CheckSlopeAngle()

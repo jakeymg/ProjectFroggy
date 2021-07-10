@@ -6,8 +6,8 @@ using Animancer;
 public class PlayerAnimationManager : MonoBehaviour
 {
     [SerializeField] private AnimancerComponent _Animancer;
-    [SerializeField] private AnimationClip _SittingStart;
-    [SerializeField] private AnimationClip _SittingOne;
+
+    [SerializeField] private AnimationClip[] _SittingIdle;
     [SerializeField] private AnimationClip _SittingTwo;
     [SerializeField] private LinearMixerTransition _IdleWalkRunMixer;
     private LinearMixerState _IdleWalkRunState;
@@ -21,6 +21,29 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlaySittingAnimation()
     {
-        _Animancer.Play(_SittingStart, 0.25f);
+        StopAllCoroutines();
+        StartCoroutine(CoroutineSittingAnimation());
+    }
+
+    private IEnumerator CoroutineSittingAnimation()
+    {
+        for (int i = 0; i < _SittingIdle.Length; i++)
+        {
+            var state = Play(i);
+            yield return state;
+        }
+
+        Play(1);
+    }
+
+    private AnimancerState Play(int index)
+    {
+        var animation = _SittingIdle[index];
+        return _Animancer.Play(animation);
+    }
+
+    public void PlaySittingHeadMove()
+    {
+        
     }
 }

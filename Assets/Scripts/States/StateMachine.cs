@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    protected State currentState;
+    protected State _currentState;
+    public State currentState { get => _currentState; set => currentState = _currentState;}
 
     public void ChangeState(State newState)
     {
-        if (currentState != null)
+        if (_currentState != null)
         {
-            if (newState.GetType().ToString() != currentState.GetType().ToString())
+            if (newState.GetType().ToString() != _currentState.GetType().ToString())
             {
-                currentState.OnExit();
+                _currentState.OnExit();
                 newState.OnEnter();
-                currentState = newState; 
+                _currentState = newState; 
             }
         }
     }
 
     public void Update() 
     {
-        if (currentState != null)
+        if (_currentState != null)
         {
-            currentState.Execute();
+            _currentState.Execute();
         }
     }
 
     public void InitialiseStateMachine(State firstState)
     {
         firstState.OnEnter();
-        currentState = firstState;
+        _currentState = firstState;
     }
 }
