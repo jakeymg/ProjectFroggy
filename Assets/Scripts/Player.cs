@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 _slideDirection = Vector3.zero;
     [SerializeField] private float _maxSlideSpeed = 3.0f;
-    [SerializeField] private bool playerIsWalking;
-    [SerializeField] private bool playerIsRunning;
     [SerializeField] private bool playerIsSliding;
     [SerializeField] private bool playerIsFalling;
     [SerializeField] private string _currentState;
@@ -69,11 +67,13 @@ public class Player : MonoBehaviour
     private void Update() 
     {
         _stateMachine.Update();
-        _currentState = _stateMachine.currentState.GetType().ToString();
+        //_currentState = _stateMachine.currentState.GetType().ToString();
     }
 
     void FixedUpdate()
     {
+        _currentState = _stateMachine.currentState.GetType().ToString();
+
         CheckIfGrounded();
 
         CheckSlopeAngle();

@@ -15,6 +15,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlayIdleWalkRunMixer()
     {
+        StopAllCoroutines();
         _Animancer.Play(_IdleWalkRunMixer);
         _IdleWalkRunState = _IdleWalkRunMixer.Transition.State;
     }
@@ -32,8 +33,9 @@ public class PlayerAnimationManager : MonoBehaviour
             var state = Play(i);
             yield return state;
         }
+        //_Animancer.Play(_SittingIdle[1], 0.25f);
 
-        Play(1);
+        StartCoroutine(CoroutineSittingIdle());
     }
 
     private AnimancerState Play(int index)
@@ -42,8 +44,12 @@ public class PlayerAnimationManager : MonoBehaviour
         return _Animancer.Play(animation);
     }
 
-    public void PlaySittingHeadMove()
+    private IEnumerator CoroutineSittingIdle()
     {
-        
+        yield return new WaitForSeconds(Random.Range(3.0f, 15.0f));
+        yield return _Animancer.Play(_SittingTwo, 0.25f);
+        _Animancer.Play(_SittingIdle[1], 0.25f);
+
+        StartCoroutine(CoroutineSittingIdle());
     }
 }
