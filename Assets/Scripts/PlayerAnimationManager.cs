@@ -15,7 +15,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlayIdleWalkRunMixer()
     {
-        StopAllCoroutines();
         _Animancer.Play(_IdleWalkRunMixer);
         _IdleWalkRunState = _IdleWalkRunMixer.Transition.State;
     }

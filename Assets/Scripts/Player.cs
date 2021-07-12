@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector3 _playerVelocity;
     [SerializeField] private Vector3 _slideDirection = Vector3.zero;
     [SerializeField] private float _maxSlideSpeed = 3.0f;
-    [SerializeField] private bool playerIsSliding;
-    [SerializeField] private bool playerIsFalling;
     [SerializeField] private string _currentState;
 
     [Header("Gravity Settings")]
@@ -69,7 +67,6 @@ public class Player : MonoBehaviour
     private void Update() 
     {
         _stateMachine.Update();
-        //_currentState = _stateMachine.currentState.GetType().ToString();
     }
 
     void FixedUpdate()
@@ -117,16 +114,16 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (_currentState != "SitState"){_stateMachine.ChangeState(new IdleState(this));}
+            ShouldPlayerBeIdle();
         }
 
-        if (playerIsFalling)
+        if (_currentState == "FallState")
         {
-            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed / 2.0f));  
+            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * 0.5f));  
         }
-        else if (playerIsSliding)
+        else if (_currentState == "SlideState")
         {
-            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed / 2.0f));
+            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * 0.5f));
         }
         else
         {
@@ -135,6 +132,14 @@ public class Player : MonoBehaviour
 
         ApplySlide();
         ApplyGravity();
+    }
+
+    private void ShouldPlayerBeIdle()
+    {
+        if (_currentState == "FallState"){return;}
+        else if (_currentState == "SlideState"){return;}
+        else if (_currentState == "SitState"){return;}
+        else {_stateMachine.ChangeState(new IdleState(this));}
     }
 
     private void CheckIfGrounded()
@@ -186,14 +191,14 @@ public class Player : MonoBehaviour
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             if (showDebug) {print("Player should be sliding");}
-            playerIsSliding = true;
+            _stateMachine.ChangeState(new SlideState(this));
             SlidePlayer();
             PlayDustParticle();
         }
         else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
             if (showDebug) {print("Player should be falling");}
-            playerIsFalling = true;
+            _stateMachine.ChangeState(new FallState(this));
             SlidePlayer();
         }
         else if (_isOnEdge)
@@ -202,27 +207,29 @@ public class Player : MonoBehaviour
             
             if (_groundSlopeAngle >= 1f)
             {
-                playerIsSliding = true;
+                _stateMachine.ChangeState(new SlideState(this));
                 SlidePlayer();
                 PlayDustParticle();
             }
+            else if(_groundSlopeAngle == 0)
+            {
+                
+            }
             else
             {
-                playerIsFalling = true;
+                _stateMachine.ChangeState(new FallState(this));
                 SlidePlayer();
             }
         }
         else
         {
             _slideDirection = Vector3.zero;
-            playerIsFalling = false;
-            playerIsSliding = false;
         }
     }
 
     public void PlayDustParticle()
     {
-        GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>().Play();
+        _movementDust.Play();
     }
 
     public void CheckGround(Vector3 origin)
