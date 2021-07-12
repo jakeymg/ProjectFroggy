@@ -22,5 +22,6 @@ public class SitState : State
     public override void OnExit()
     {
         Debug.Log("Exiting SitState");
+        owner.GetComponent<PlayerAnimationManager>().StopAllCoroutines();
     }
 }
