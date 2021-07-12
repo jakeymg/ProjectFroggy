@@ -66,14 +66,14 @@ public class Player : MonoBehaviour
 
     private void Update() 
     {
-        _stateMachine.Update();
+        //_stateMachine.Update();
     }
 
     void FixedUpdate()
     {
         _currentState = _stateMachine.currentState.GetType().ToString();
 
-        _stateMachine.FixedUpdate();
+        //_stateMachine.FixedUpdate();
 
         //CheckIfGrounded();
 
