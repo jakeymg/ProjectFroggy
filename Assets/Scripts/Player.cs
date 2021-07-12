@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 moveVal;
     [SerializeField] private Vector3 moveDirection;
 
+    [SerializeField] private float moveVelocity;
+
     [Header("Particle Systems")]
     [SerializeField] private ParticleSystem _movementDust;
 
@@ -84,11 +86,12 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         moveVal = value.Get<Vector2>();
-        _animationManager.IdleWalkRunMixerValue = moveVal.magnitude;
+        moveVelocity = moveVal.magnitude;
+        _animationManager.IdleWalkRunMixerValue = moveVelocity;
         
-        if (moveDirection != Vector3.zero)
+        if (moveVal != Vector2.zero)
         {
-            if (moveVal.x < -0.6f || moveVal.x > 0.6f || moveVal.y < -0.6f || moveVal.y > 0.6f)
+            if (moveVelocity >= 0.6f)
             {
                 _stateMachine.ChangeState(new RunState(this));
             }
@@ -96,8 +99,6 @@ public class Player : MonoBehaviour
             {
                 _stateMachine.ChangeState(new WalkState(this));
             }
-
-            transform.forward = moveDirection;
         }
     }
 
