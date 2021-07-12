@@ -18,6 +18,15 @@ public class SlideState : State
 
     }
 
+    public override void FixedExecute()
+    {
+        owner.CheckIfGrounded();
+
+        owner.CheckSlopeAngle();
+
+        owner.MovePlayer();
+    }
+
     public override void OnExit()
     {
         Debug.Log("Exiting SlideState");

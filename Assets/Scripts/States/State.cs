@@ -15,6 +15,11 @@ public abstract class State
         Debug.Log("Current state is test state");
     }
 
+    public virtual void FixedExecute()
+    {
+
+    }
+
     public virtual void OnExit()
     {
         Debug.Log("Exiting test state");

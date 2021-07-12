@@ -73,11 +73,13 @@ public class Player : MonoBehaviour
     {
         _currentState = _stateMachine.currentState.GetType().ToString();
 
-        CheckIfGrounded();
+        _stateMachine.FixedUpdate();
 
-        CheckSlopeAngle();
+        //CheckIfGrounded();
 
-        MovePlayer();
+        //CheckSlopeAngle();
+
+        //MovePlayer();
     }
 
     void OnMove(InputValue value)
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour
         _stateMachine.ChangeState(new SitState(this));
     }
 
-    private void MovePlayer()
+    public void MovePlayer()
     {        
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
@@ -130,7 +132,7 @@ public class Player : MonoBehaviour
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
         }
 
-        ApplySlide();
+        ShouldPlayerSlideOrFall();
         ApplyGravity();
     }
 
@@ -142,7 +144,7 @@ public class Player : MonoBehaviour
         else {_stateMachine.ChangeState(new IdleState(this));}
     }
 
-    private void CheckIfGrounded()
+    public void CheckIfGrounded()
     {
         Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);
 
@@ -154,7 +156,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CheckSlopeAngle()
+    public void CheckSlopeAngle()
     {
         if (_isGrounded)
         {
@@ -162,7 +164,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void SlidePlayer()
+    public void SlidePlayer()
     {
         _slideDirection += groundSlopeDir * _slideFrictionMultiplier;
 
@@ -185,7 +187,7 @@ public class Player : MonoBehaviour
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
 
-    private void ApplySlide()
+    private void ShouldPlayerSlideOrFall()
     {
 
         if (_isGrounded && _groundSlopeAngle >= 45f)
