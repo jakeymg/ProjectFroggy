@@ -15,7 +15,7 @@ public class SlideState : State
 
     public override void Execute()
     {
-
+        owner.PlayDustParticle();
     }
 
     public override void FixedExecute()
@@ -25,6 +25,8 @@ public class SlideState : State
         owner.CheckSlopeAngle();
 
         owner.MovePlayer();
+        
+        owner.SlidePlayer();
     }
 
     public override void OnExit()

@@ -25,6 +25,8 @@ public class FallState : State
         owner.CheckSlopeAngle();
 
         owner.MovePlayer();
+
+        owner.SlidePlayer();
     }
 
     public override void OnExit()

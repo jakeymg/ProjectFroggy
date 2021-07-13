@@ -65,21 +65,11 @@ public class Player : MonoBehaviour
     }
 
     private void Update() 
-    {
-        //_stateMachine.Update();
-    }
+    {}
 
     void FixedUpdate()
     {
         _currentState = _stateMachine.currentState.GetType().ToString();
-
-        //_stateMachine.FixedUpdate();
-
-        //CheckIfGrounded();
-
-        //CheckSlopeAngle();
-
-        //MovePlayer();
     }
 
     void OnMove(InputValue value)
@@ -138,10 +128,12 @@ public class Player : MonoBehaviour
 
     private void ShouldPlayerBeIdle()
     {
-        if (_currentState == "FallState"){return;}
-        else if (_currentState == "SlideState"){return;}
-        else if (_currentState == "SitState"){return;}
-        else {_stateMachine.ChangeState(new IdleState(this));}
+        if (_currentState != "FallState" 
+        || _currentState != "SlideState" 
+        || _currentState != "SitState")
+        {_stateMachine.ChangeState(new IdleState(this));}
+        else
+        {}
     }
 
     public void CheckIfGrounded()
@@ -194,14 +186,11 @@ public class Player : MonoBehaviour
         {
             if (showDebug) {print("Player should be sliding");}
             _stateMachine.ChangeState(new SlideState(this));
-            SlidePlayer();
-            PlayDustParticle();
         }
         else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
             if (showDebug) {print("Player should be falling");}
             _stateMachine.ChangeState(new FallState(this));
-            SlidePlayer();
         }
         else if (_isOnEdge)
         {
@@ -210,8 +199,6 @@ public class Player : MonoBehaviour
             if (_groundSlopeAngle >= 1f)
             {
                 _stateMachine.ChangeState(new SlideState(this));
-                SlidePlayer();
-                PlayDustParticle();
             }
             else if(_groundSlopeAngle == 0)
             {
@@ -220,7 +207,6 @@ public class Player : MonoBehaviour
             else
             {
                 _stateMachine.ChangeState(new FallState(this));
-                SlidePlayer();
             }
         }
         else
