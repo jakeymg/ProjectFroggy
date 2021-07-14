@@ -72,23 +72,11 @@ public class Player : MonoBehaviour
         _currentState = _stateMachine.currentState.GetType().ToString();
     }
 
-    void OnMove(InputValue value)
+    void OnMove(InputValue input)
     {
-        moveVal = value.Get<Vector2>();
+        moveVal = input.Get<Vector2>();
         moveVelocity = moveVal.magnitude;
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
-        
-        if (moveVal != Vector2.zero)
-        {
-            if (moveVelocity >= 0.6f)
-            {
-                _stateMachine.ChangeState(new RunState(this));
-            }
-            else
-            {
-                _stateMachine.ChangeState(new WalkState(this));
-            }
-        }
     }
 
     public void ChangeToSitting()
@@ -97,7 +85,7 @@ public class Player : MonoBehaviour
     }
 
     public void MovePlayer()
-    {        
+    {
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
         if (moveDirection != Vector3.zero)
@@ -124,16 +112,6 @@ public class Player : MonoBehaviour
 
         ShouldPlayerSlideOrFall();
         ApplyGravity();
-    }
-
-    private void ShouldPlayerBeIdle()
-    {
-        if (_currentState != "FallState" 
-        || _currentState != "SlideState" 
-        || _currentState != "SitState")
-        {_stateMachine.ChangeState(new IdleState(this));}
-        else
-        {}
     }
 
     public void CheckIfGrounded()
@@ -178,40 +156,61 @@ public class Player : MonoBehaviour
 
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
+    
+    private void ShouldPlayerBeIdle()
+    {
+        if (_currentState != "FallState" 
+        || _currentState != "SlideState" 
+        || _currentState != "SitState")
+        {_stateMachine.ChangeState(new IdleState(this));}
+        else
+        {}
+    }
 
     private void ShouldPlayerSlideOrFall()
     {
+        //This could be way cleaner - Basically all my checks
 
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             if (showDebug) {print("Player should be sliding");}
             _stateMachine.ChangeState(new SlideState(this));
         }
+
         else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
             if (showDebug) {print("Player should be falling");}
             _stateMachine.ChangeState(new FallState(this));
         }
+
         else if (_isOnEdge)
         {
             if (showDebug) {print("Player is too far off edge");}
             
-            if (_groundSlopeAngle >= 1f)
+            if (_groundSlopeAngle >= 1f){_stateMachine.ChangeState(new SlideState(this));}
+            else if(_groundSlopeAngle == 0){ Debug.Log("Feeling Wobbly"); /* WobbleState eventually */ }
+            else {_stateMachine.ChangeState(new FallState(this));}
+        }
+
+        else 
+        {
+            _slideDirection = Vector3.zero;
+            ShouldPlayerRunOrWalk();
+        }
+    }
+
+    private void ShouldPlayerRunOrWalk()
+    {
+        if (moveVal != Vector2.zero)
+        {
+            if (moveVelocity >= 0.6f)
             {
-                _stateMachine.ChangeState(new SlideState(this));
-            }
-            else if(_groundSlopeAngle == 0)
-            {
-                
+                _stateMachine.ChangeState(new RunState(this));
             }
             else
             {
-                _stateMachine.ChangeState(new FallState(this));
+                _stateMachine.ChangeState(new WalkState(this));
             }
-        }
-        else
-        {
-            _slideDirection = Vector3.zero;
         }
     }
 
