@@ -11,6 +11,7 @@ public class SlideState : State
     public override void OnEnter()
     {
         Debug.Log("Entering SlideState");
+        owner.GetComponent<PlayerAnimationManager>().PlaySliding();
     }
 
     public override void Execute()
