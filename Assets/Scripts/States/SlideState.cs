@@ -17,6 +17,8 @@ public class SlideState : State
     public override void Execute()
     {
         owner.PlayDustParticle();
+
+        //if running against a slope should play run animation? using slide direction compared to move direction here?
     }
 
     public override void FixedExecute()
