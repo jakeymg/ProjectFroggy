@@ -11,7 +11,7 @@ public class SlideState : State
     public override void OnEnter()
     {
         Debug.Log("Entering SlideState");
-        owner.GetComponent<PlayerAnimationManager>().PlaySliding();
+        //owner.GetComponent<PlayerAnimationManager>().PlaySliding();
     }
 
     public override void Execute()
@@ -24,12 +24,10 @@ public class SlideState : State
     public override void FixedExecute()
     {
         owner.CheckIfGrounded();
-
-        owner.CheckSlopeAngle();
-
-        owner.MovePlayer();
+        owner.CheckSlopeAngle();        
+        owner.ShouldPlayerSlideOrFall();
         
-        owner.SlidePlayer();
+        owner.MovePlayer();
     }
 
     public override void OnExit()

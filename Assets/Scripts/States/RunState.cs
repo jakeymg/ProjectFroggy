@@ -22,8 +22,8 @@ public class RunState : State
     public override void FixedExecute()
     {
         owner.CheckIfGrounded();
-
-        owner.CheckSlopeAngle();
+        owner.CheckSlopeAngle();        
+        owner.ShouldPlayerSlideOrFall();
 
         owner.MovePlayer();
     }

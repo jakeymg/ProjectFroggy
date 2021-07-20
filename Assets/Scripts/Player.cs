@@ -92,10 +92,6 @@ public class Player : MonoBehaviour
         {
             transform.forward = moveDirection;
         }
-        else
-        {
-            ShouldPlayerBeIdle();
-        }
 
         if (_currentState == "FallState")
         {
@@ -110,8 +106,9 @@ public class Player : MonoBehaviour
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
         }
 
-        ShouldPlayerSlideOrFall();
+        SlidePlayer();
         ApplyGravity();
+
     }
 
     public void CheckIfGrounded()
@@ -145,7 +142,7 @@ public class Player : MonoBehaviour
         _controller.Move(_slideDirection * Time.deltaTime);
     }
 
-    private void ApplyGravity()
+    public void ApplyGravity()
     {
         _playerVelocity.y += _gravity * Time.deltaTime;
 
@@ -159,15 +156,14 @@ public class Player : MonoBehaviour
     
     private void ShouldPlayerBeIdle()
     {
-        if (_currentState != "FallState" 
-        || _currentState != "SlideState" 
-        || _currentState != "SitState")
-        {_stateMachine.ChangeState(new IdleState(this));}
-        else
+        if (_currentState == "SitState"
+        || _currentState == "IdleState")
         {}
+        else
+        {_stateMachine.ChangeState(new IdleState(this));}
     }
 
-    private void ShouldPlayerSlideOrFall()
+    public void ShouldPlayerSlideOrFall()
     {
         //This could be way cleaner - Basically all my checks
 
@@ -187,8 +183,11 @@ public class Player : MonoBehaviour
         {
             if (showDebug) {print("Player is too far off edge");}
             
-            if (_groundSlopeAngle >= 1f){_stateMachine.ChangeState(new SlideState(this));}
-            else if(_groundSlopeAngle == 0){ Debug.Log("Feeling Wobbly"); /* WobbleState eventually */ }
+            if (_groundSlopeAngle >= 0f)
+            {
+                _stateMachine.ChangeState(new SlideState(this)); 
+                Debug.Log("Feeling Wobbly"); /* WobbleState eventually */ 
+            }
             else {_stateMachine.ChangeState(new FallState(this));}
         }
 
@@ -211,6 +210,10 @@ public class Player : MonoBehaviour
             {
                 _stateMachine.ChangeState(new WalkState(this));
             }
+        }
+        else
+        {
+            ShouldPlayerBeIdle();
         }
     }
 
