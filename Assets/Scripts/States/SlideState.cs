@@ -28,6 +28,7 @@ public class SlideState : State
         owner.ShouldPlayerSlideOrFall();
         
         owner.MovePlayer();
+        owner.SlidePlayer();
     }
 
     public override void OnExit()

@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
             _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
         }
 
-        SlidePlayer();
+        //SlidePlayer();
         ApplyGravity();
 
     }
