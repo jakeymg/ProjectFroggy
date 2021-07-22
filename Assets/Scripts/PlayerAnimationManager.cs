@@ -10,6 +10,7 @@ public class PlayerAnimationManager : MonoBehaviour
     [SerializeField] private AnimationClip[] _SittingIdle;
     [SerializeField] private AnimationClip _SittingTwo;
     [SerializeField] private AnimationClip _Sliding;
+    [SerializeField] private AnimationClip _Falling;
     [SerializeField] private LinearMixerTransition _IdleWalkRunMixer;
     private LinearMixerState _IdleWalkRunState;
     public float IdleWalkRunMixerValue {get => _IdleWalkRunState.Parameter; set => _IdleWalkRunState.Parameter = value;}
@@ -23,6 +24,11 @@ public class PlayerAnimationManager : MonoBehaviour
     public void PlaySliding()
     {
         _Animancer.Play(_Sliding, 0.1f);
+    }
+
+    public void PlayFalling()
+    {
+        _Animancer.Play(_Falling, 0.1f);
     }
 
     public void PlaySittingAnimation()

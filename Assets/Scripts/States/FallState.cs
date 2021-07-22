@@ -11,6 +11,7 @@ public class FallState : State
     public override void OnEnter()
     {
         Debug.Log("Entering FallState");
+        owner.GetComponent<PlayerAnimationManager>().PlayFalling();
     }
 
     public override void Execute()
