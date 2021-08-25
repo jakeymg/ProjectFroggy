@@ -11,14 +11,11 @@ public class SlideState : State
     public override void OnEnter()
     {
         Debug.Log("Entering SlideState");
-        //owner.GetComponent<PlayerAnimationManager>().PlaySliding();
     }
 
     public override void Execute()
     {
         owner.PlayDustParticle();
-
-        //if running against a slope should play run animation? using slide direction compared to move direction here?
     }
 
     public override void FixedExecute()
@@ -27,7 +24,7 @@ public class SlideState : State
         owner.CheckSlopeAngle();        
         owner.ShouldPlayerSlideOrFall();
         
-        owner.MovePlayer();
+        owner.MovePlayer(0.5f);
         owner.SlidePlayer();
     }
 

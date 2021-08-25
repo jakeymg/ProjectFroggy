@@ -25,7 +25,7 @@ public class FallState : State
         owner.CheckSlopeAngle();        
         owner.ShouldPlayerSlideOrFall();
 
-        owner.MovePlayer();
+        owner.MovePlayer(0.5f);
         owner.SlidePlayer();
     }
 

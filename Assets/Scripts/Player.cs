@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         _stateMachine.ChangeState(new SitState(this));
     }
 
-    public void MovePlayer()
+    public void MovePlayer(float speedModifier = 1f)
     {
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
@@ -93,18 +93,7 @@ public class Player : MonoBehaviour
             transform.forward = moveDirection;
         }
 
-        if (_currentState == "FallState")
-        {
-            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * 0.5f));  
-        }
-        else if (_currentState == "SlideState")
-        {
-            _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * 0.5f));
-        }
-        else
-        {
-            _controller.Move(moveDirection * Time.deltaTime * _playerSpeed);
-        }
+        _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * speedModifier));
 
         //SlidePlayer();
         ApplyGravity();
@@ -156,11 +145,10 @@ public class Player : MonoBehaviour
     
     private void ShouldPlayerBeIdle()
     {
-        if (_currentState == "SitState"
-        || _currentState == "IdleState")
-        {}
-        else
-        {_stateMachine.ChangeState(new IdleState(this));}
+        if (_currentState != "SitState" && _currentState != "IdleState")
+        {
+            _stateMachine.ChangeState(new IdleState(this));
+        }
     }
 
     public void ShouldPlayerSlideOrFall()
