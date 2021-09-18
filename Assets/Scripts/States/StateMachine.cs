@@ -7,6 +7,8 @@ public class StateMachine : MonoBehaviour
     protected State _currentState;
     public State currentState { get => _currentState; set => currentState = _currentState;}
 
+    [SerializeField] private UIManager UIManager;
+
     public void ChangeState(State newState)
     {
         if (_currentState != null)
@@ -15,7 +17,8 @@ public class StateMachine : MonoBehaviour
             {
                 _currentState.OnExit();
                 newState.OnEnter();
-                _currentState = newState; 
+                _currentState = newState;
+                UIManager.ChangeCurrentStateText(_currentState.GetType().ToString()); 
             }
         }
     }
@@ -40,5 +43,6 @@ public class StateMachine : MonoBehaviour
     {
         firstState.OnEnter();
         _currentState = firstState;
+        UIManager.ChangeCurrentStateText(_currentState.GetType().ToString());
     }
 }

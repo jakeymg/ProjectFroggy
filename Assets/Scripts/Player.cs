@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerAnimationManager _animationManager;
+    [SerializeField] private UIManager _uimanager;
 
     [Header("Movement Settings")]
     [SerializeField] private float _playerSpeed = 5.0f;
@@ -65,11 +66,13 @@ public class Player : MonoBehaviour
     }
 
     private void Update() 
-    {}
+    {
+        
+    }
 
     void FixedUpdate()
-    {
-        _currentState = _stateMachine.currentState.GetType().ToString();
+    {    
+
     }
 
     void OnMove(InputValue input)
@@ -77,6 +80,11 @@ public class Player : MonoBehaviour
         moveVal = input.Get<Vector2>();
         moveVelocity = moveVal.magnitude;
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
+    }
+
+    void OnMainAction()
+    {
+        
     }
 
     public void ChangeToSitting()
@@ -145,7 +153,7 @@ public class Player : MonoBehaviour
     
     private void ShouldPlayerBeIdle()
     {
-        if (_currentState != "SitState" && _currentState != "IdleState")
+        if (_stateMachine.currentState.GetType().ToString() != "SitState" && _stateMachine.currentState.GetType().ToString() != "IdleState")
         {
             _stateMachine.ChangeState(new IdleState(this));
         }
