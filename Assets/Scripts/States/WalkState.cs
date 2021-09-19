@@ -10,7 +10,6 @@ public class WalkState : State
 
     public override void OnEnter()
     {
-        Debug.Log("Entering WalkState");
         owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 
@@ -30,6 +29,5 @@ public class WalkState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting WalkState");
     }
 }

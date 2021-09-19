@@ -10,7 +10,6 @@ public class SlideState : State
 
     public override void OnEnter()
     {
-        Debug.Log("Entering SlideState");
     }
 
     public override void Execute()
@@ -30,6 +29,5 @@ public class SlideState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting SlideState");
     }
 }

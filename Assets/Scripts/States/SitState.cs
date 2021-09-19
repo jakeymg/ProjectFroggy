@@ -10,7 +10,6 @@ public class SitState : State
 
     public override void OnEnter()
     {
-        Debug.Log("Entering SitState");
         owner.GetComponent<PlayerAnimationManager>().PlaySittingAnimation();
     }
 
@@ -30,7 +29,6 @@ public class SitState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting SitState");
         owner.GetComponent<PlayerAnimationManager>().StopAllCoroutines();
     }
 }

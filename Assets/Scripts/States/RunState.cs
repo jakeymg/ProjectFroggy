@@ -10,7 +10,6 @@ public class RunState : State
 
     public override void OnEnter()
     {
-        Debug.Log("Entering RunState");
         owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 
@@ -30,6 +29,5 @@ public class RunState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting RunState");
     }
 }

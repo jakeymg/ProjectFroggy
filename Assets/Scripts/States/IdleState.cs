@@ -13,7 +13,6 @@ public class IdleState : State
 
     public override void OnEnter()
     {
-        Debug.Log("Entering IdleState");
         _stateMachine = owner.GetComponent<StateMachine>();
         owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
@@ -38,6 +37,5 @@ public class IdleState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting IdleState");
     }
 }

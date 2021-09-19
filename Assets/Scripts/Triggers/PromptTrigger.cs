@@ -5,12 +5,13 @@ using UnityEngine;
 public class PromptTrigger : MonoBehaviour
 {
     [SerializeField] private UIManager _uimanager;
+    [SerializeField] private string _promptString;
 
     private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")
         {
-            _uimanager.ShowActionPrompt("(X) to hide");
+            _uimanager.ShowActionPrompt(_promptString);
         }
     }
 
