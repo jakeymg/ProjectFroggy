@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
     void OnMainAction()
     {
-        
+        _uimanager.OpenDialougePanel("I speak of my own free will");
     }
 
     public void ChangeToSitting()

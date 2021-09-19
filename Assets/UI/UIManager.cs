@@ -7,11 +7,11 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Canvas mainCanvas;
-    [SerializeField] private GameObject actionPrompt_Panel;
-
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private GameObject actionPromptPanel;
     [SerializeField] private TextMeshProUGUI currentStateText;
+    [SerializeField] private GameObject dialougePanel;
+    [SerializeField] private TextMeshProUGUI dialougeTextArea;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -20,23 +20,47 @@ public class UIManager : MonoBehaviour
 
     public void ShowActionPrompt(string actionPromptText)
     {
-        actionPrompt_Panel.GetComponent<CanvasGroup>().alpha = 1f;
-        actionPrompt_Panel.GetComponentInChildren<TextMeshProUGUI>().text = actionPromptText;
-        actionPrompt_Panel.SetActive(true);
+        actionPromptPanel.SetActive(true);
+        FadeInPanel(actionPromptPanel, -370);
+
+        actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = actionPromptText; 
         
-        FadeInPanel(actionPrompt_Panel);
     }
 
     public void HideActionPrompt()
-    {
-        actionPrompt_Panel.GetComponent<CanvasGroup>().alpha = 0f;
-        actionPrompt_Panel.SetActive(false);
-
-        FadeInPanel(actionPrompt_Panel);
+    {        
+        FadeOutPanel(actionPromptPanel, -390);
+        actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
+        actionPromptPanel.SetActive(true);
     }
 
-    private void FadeInPanel(GameObject panel)
+    public void OpenDialougePanel(string textToPrint)
     {
-        float panelAlpha = panel.GetComponent<CanvasGroup>().alpha;
+        actionPromptPanel.SetActive(false);
+        FadeInPanel(dialougePanel, -290);
+        GetComponent<DialougeTypewriterEffect>().Run(textToPrint, dialougeTextArea);
+    }
+
+    public void CloseDialougePanel()
+    {
+        FadeOutPanel(dialougePanel, -310);
+        dialougeTextArea.text = string.Empty;
+        actionPromptPanel.SetActive(true);
+    }
+
+    private void FadeInPanel(GameObject panel, float posY)
+    {
+        CanvasGroup panelCanvasGroup = panel.GetComponent<CanvasGroup>();
+
+        LeanTween.moveLocalY(panel, posY, 0.33f);
+        LeanTween.alphaCanvas(panelCanvasGroup, 1f, 0.33f);
+    }
+
+    private void FadeOutPanel(GameObject panel, float posY)
+    {
+        CanvasGroup panelCanvasGroup = panel.GetComponent<CanvasGroup>();
+
+        LeanTween.moveLocalY(panel, posY, 0.33f);
+        LeanTween.alphaCanvas(panelCanvasGroup, 0f, 0.33f);
     }
 }
