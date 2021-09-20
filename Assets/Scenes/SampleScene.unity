@@ -20618,7 +20618,15 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b657029b-c23e-45f4-8f2d-a647d1e5efca
+    m_ActionName: Gameplay/Move[/DualShock4GamepadHID/leftStick,/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/DualShock4GamepadHID/dpad,/XInputControllerWindows/dpad]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d77ef43e-e5ff-40a5-95e1-ac53fbab6bad
+    m_ActionName: Gameplay/MainAction[/Keyboard/z,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -20737,6 +20745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1749484617}
   actionPromptPanel: {fileID: 1861403577}
+  recentTriggeredObject: {fileID: 0}
   currentStateText: {fileID: 1866641131}
   dialougePanel: {fileID: 1161301368}
   dialougeTextArea: {fileID: 2146145458}
@@ -29641,7 +29650,7 @@ PrefabInstance:
       objectReference: {fileID: 841300009}
     - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: _promptString
-      value: <sprite name="PS4_O_Button"> to read
+      value: <sprite name="PS4_X_Button"> to read
       objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374810, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_Name
