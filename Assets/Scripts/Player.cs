@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerAnimationManager _animationManager;
     [SerializeField] private UIManager _uimanager;
     [SerializeField] private GameObject _interactableTarget;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerControls playerControls;
     public event Action mainButtonPressed;
 
     [Header("Movement Settings")]
@@ -58,6 +60,14 @@ public class Player : MonoBehaviour
         _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
         _animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
         _movementDust = GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>(); if (_movementDust == null) {Debug.Log("Movement Dust particle system can't be found");}
+        playerInput = GetComponent<PlayerInput>();
+
+        playerControls = new PlayerControls();
+        playerControls.Gameplay.Enable();
+        playerControls.Gameplay.MainAction.started += OnMainAction;
+        playerControls.Gameplay.MainAction.performed += OnMainAction;
+        playerControls.Gameplay.MainAction.canceled += OnMainAction;
+
         
         Ground = LayerMask.GetMask("Ground");
     }
@@ -74,19 +84,31 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {    
-
+        MovementCheck();
     }
 
-    void OnMove(InputValue input)
+    void MovementCheck()
     {
-        moveVal = input.Get<Vector2>();
+        moveVal = playerControls.Gameplay.Move.ReadValue<Vector2>();
         moveVelocity = moveVal.magnitude;
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
     }
 
-    void OnMainAction()
+    void OnMainAction(InputAction.CallbackContext context)
     {
-        mainButtonPressed?.Invoke();
+        if (context.started)
+        {
+            mainButtonPressed?.Invoke();
+        }
+        else if (context.performed)
+        {
+               
+        }
+        else if (context.canceled)
+        {
+
+        }
+        
     }
 
     public void SetInteractableTarget(GameObject InteractableTarget)
