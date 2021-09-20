@@ -15,9 +15,9 @@ public class PromptTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            _player = other.GetComponent<Player>();
             _uimanager.ShowActionPrompt(_promptString);
             _interactionIsTriggerable = true;
-            _player = other.GetComponent<Player>();
             _player.SetInteractableTarget(this.gameObject);
             EnableDialougeTrigger();
         }
@@ -31,22 +31,23 @@ public class PromptTrigger : MonoBehaviour
             _interactionIsTriggerable = false;
             _player.RemoveInteractableTarget();
             DisableDialougeTrigger();
+            
             _player = null;
         }
     }
 
     private void TriggerDialouge()
     {
-        _uimanager.OpenDialougePanel(_signText);
+        _uimanager.OpenDialougePanel(_signText, this.GetComponent<PromptTrigger>());
         DisableDialougeTrigger();
     }
 
-    private void DisableDialougeTrigger()
+    public void DisableDialougeTrigger()
     {
         _player.mainButtonPressed -= TriggerDialouge;
     }
 
-    private void EnableDialougeTrigger()
+    public void EnableDialougeTrigger()
     {
         _player.mainButtonPressed += TriggerDialouge;
     }

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private GameObject actionPromptPanel;
+    [SerializeField] private PromptTrigger recentTriggeredObject;
     [SerializeField] private TextMeshProUGUI currentStateText;
     [SerializeField] private GameObject dialougePanel;
     [SerializeField] private TextMeshProUGUI dialougeTextArea;
@@ -34,13 +35,14 @@ public class UIManager : MonoBehaviour
     {        
         FadeOutPanel(actionPromptPanel, -390);
         actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        actionPromptPanel.SetActive(false);
+        actionPromptPanel.SetActive(true);
     }
 
-    public void OpenDialougePanel(SignDialougeObject signDialougeObject)
+    public void OpenDialougePanel(SignDialougeObject signDialougeObject, PromptTrigger something)
     {
-        HideActionPrompt();
+        actionPromptPanel.SetActive(false);
         FadeInPanel(dialougePanel, -290);
+        recentTriggeredObject = something;
         StartCoroutine(StepThroughDialouge(signDialougeObject));     
     }
 
@@ -54,6 +56,8 @@ public class UIManager : MonoBehaviour
             yield return new WaitUntil(() => _progressDialougeBool);
             _progressDialougeBool = false;
         }
+
+        CloseDialougePanel(recentTriggeredObject);
     }
 
     private void ProgressDialouge()
@@ -62,11 +66,12 @@ public class UIManager : MonoBehaviour
         _progressDialougeBool = true;
     }
 
-    public void CloseDialougePanel()
+    public void CloseDialougePanel(PromptTrigger recentTriggeredObject)
     {
         FadeOutPanel(dialougePanel, -310);
         dialougeTextArea.text = string.Empty;
         actionPromptPanel.SetActive(true);
+        recentTriggeredObject.EnableDialougeTrigger();
     }
 
     private void FadeInPanel(GameObject panel, float posY)
