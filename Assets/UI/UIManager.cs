@@ -34,12 +34,12 @@ public class UIManager : MonoBehaviour
     {        
         FadeOutPanel(actionPromptPanel, -390);
         actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        actionPromptPanel.SetActive(true);
+        actionPromptPanel.SetActive(false);
     }
 
     public void OpenDialougePanel(SignDialougeObject signDialougeObject)
     {
-        actionPromptPanel.SetActive(false);
+        HideActionPrompt();
         FadeInPanel(dialougePanel, -290);
         StartCoroutine(StepThroughDialouge(signDialougeObject));     
     }
@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
 
     private void ProgressDialouge()
     {
-        _player.mainButtonPressed += ProgressDialouge;
+        _player.mainButtonPressed -= ProgressDialouge;
         _progressDialougeBool = true;
     }
 

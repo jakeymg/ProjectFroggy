@@ -20741,6 +20741,8 @@ MonoBehaviour:
   dialougePanel: {fileID: 1161301368}
   dialougeTextArea: {fileID: 2146145458}
   dialougeTypewriterEffect: {fileID: 841300010}
+  _progressDialougeBool: 0
+  _player: {fileID: 822629502}
 --- !u!114 &841300010
 MonoBehaviour:
   m_ObjectHideFlags: 0
