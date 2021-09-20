@@ -2381,7 +2381,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22256
+  m_Name: pb_Mesh22330
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20483,6 +20483,7 @@ MonoBehaviour:
   _controller: {fileID: 822629506}
   _animationManager: {fileID: 822629508}
   _uimanager: {fileID: 841300009}
+  _interactableTarget: {fileID: 0}
   _playerSpeed: 5
   _playerVelocity: {x: 0, y: 0, z: 0}
   _slideDirection: {x: 0, y: 0, z: 0}
@@ -20739,6 +20740,7 @@ MonoBehaviour:
   currentStateText: {fileID: 1866641131}
   dialougePanel: {fileID: 1161301368}
   dialougeTextArea: {fileID: 2146145458}
+  dialougeTypewriterEffect: {fileID: 841300010}
 --- !u!114 &841300010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28535,7 +28537,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22322
+  m_Name: pb_Mesh22396
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

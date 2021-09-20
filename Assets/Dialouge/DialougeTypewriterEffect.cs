@@ -7,9 +7,9 @@ public class DialougeTypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float _printSpeed = 25f;
 
-    public void Run(string textToType, TextMeshProUGUI textLabel)
+    public Coroutine Run(string textToType, TextMeshProUGUI textLabel)
     {
-        StartCoroutine(TypeText(textToType, textLabel));
+        return StartCoroutine(TypeText(textToType, textLabel));
     }
 
     private IEnumerator TypeText(string textToType, TextMeshProUGUI textLabel)

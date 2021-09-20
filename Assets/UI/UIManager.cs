@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentStateText;
     [SerializeField] private GameObject dialougePanel;
     [SerializeField] private TextMeshProUGUI dialougeTextArea;
+    [SerializeField] private DialougeTypewriterEffect dialougeTypewriterEffect;
+    [SerializeField] private bool _progressDialougeBool = false;
+    [SerializeField] private Player _player;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -34,11 +37,29 @@ public class UIManager : MonoBehaviour
         actionPromptPanel.SetActive(true);
     }
 
-    public void OpenDialougePanel(string textToPrint)
+    public void OpenDialougePanel(SignDialougeObject signDialougeObject)
     {
         actionPromptPanel.SetActive(false);
         FadeInPanel(dialougePanel, -290);
-        GetComponent<DialougeTypewriterEffect>().Run(textToPrint, dialougeTextArea);
+        StartCoroutine(StepThroughDialouge(signDialougeObject));     
+    }
+
+    private IEnumerator StepThroughDialouge (SignDialougeObject signDialougeObject)
+    {
+        foreach (string text in signDialougeObject.Text)
+        {
+            yield return dialougeTypewriterEffect.Run(text, dialougeTextArea);
+            //Wait for dialouge to finish printing before letting player trigger next line
+            _player.mainButtonPressed += ProgressDialouge;
+            yield return new WaitUntil(() => _progressDialougeBool);
+            _progressDialougeBool = false;
+        }
+    }
+
+    private void ProgressDialouge()
+    {
+        _player.mainButtonPressed += ProgressDialouge;
+        _progressDialougeBool = true;
     }
 
     public void CloseDialougePanel()

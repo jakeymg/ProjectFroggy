@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerAnimationManager _animationManager;
     [SerializeField] private UIManager _uimanager;
+    [SerializeField] private GameObject _interactableTarget;
+    public event Action mainButtonPressed;
 
     [Header("Movement Settings")]
     [SerializeField] private float _playerSpeed = 5.0f;
@@ -65,7 +67,7 @@ public class Player : MonoBehaviour
         _stateMachine.InitialiseStateMachine(new IdleState(this));
     }
 
-    private void Update() 
+    void Update() 
     {
         
     }
@@ -84,7 +86,17 @@ public class Player : MonoBehaviour
 
     void OnMainAction()
     {
-        _uimanager.OpenDialougePanel("I speak of my own free will");
+        mainButtonPressed?.Invoke();
+    }
+
+    public void SetInteractableTarget(GameObject InteractableTarget)
+    {
+        _interactableTarget = InteractableTarget;
+    }
+
+    public void RemoveInteractableTarget()
+    {
+        _interactableTarget = null;
     }
 
     public void ChangeToSitting()

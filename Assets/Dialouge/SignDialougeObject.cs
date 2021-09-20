@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Sign Dialouge", menuName = "Dialouge Object/Sign Dialouge Object")]
 public class SignDialougeObject : ScriptableObject
 {   
-    [TextArea(2, 4)]
-    public string[] text;
+    [SerializeField][TextArea(2, 4)]
+    private string[] text;
+
+    public string[] Text {get {return text;}}
 }

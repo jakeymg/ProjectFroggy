@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uimanager: {fileID: 0}
   _promptString: '[X] to read'
+  _signText: {fileID: 0}
 --- !u!1001 &3044818989669067978
 PrefabInstance:
   m_ObjectHideFlags: 0
