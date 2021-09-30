@@ -2381,7 +2381,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22330
+  m_Name: pb_Mesh22342
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20484,6 +20484,7 @@ MonoBehaviour:
   _animationManager: {fileID: 822629508}
   _uimanager: {fileID: 841300009}
   _interactableTarget: {fileID: 0}
+  playerInput: {fileID: 0}
   _playerSpeed: 5
   _playerVelocity: {x: 0, y: 0, z: 0}
   _slideDirection: {x: 0, y: 0, z: 0}
@@ -20852,6 +20853,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2078486811228654802, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e917dbac9cf436542997936f82688be4, type: 2}
     - target: {fileID: 919132149155446097, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
       propertyPath: m_Name
       value: frog
@@ -28572,7 +28577,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22396
+  m_Name: pb_Mesh22408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
