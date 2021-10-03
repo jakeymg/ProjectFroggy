@@ -21,18 +21,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Eyes
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d4bbf07ef79612a43925fbf0313422de, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_58ac9aee0131455c8aff185fc26ab46e:
+        m_Texture: {fileID: 2800000, guid: b1457279b42c42e4fafc0c21cc030d88, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: b1457279b42c42e4fafc0c21cc030d88, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -90,6 +93,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_28389bd0ad4b4aafb9d9017620ac65e7: 3
+    - Vector1_e338ad0614644fca93a5e47422c9d712: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -122,6 +127,7 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_8563ae19999243ad9d7ffb8977410e00: {r: 0.8, g: 0.8, b: 0.8, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

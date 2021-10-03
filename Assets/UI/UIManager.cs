@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialougeTextArea;
     [SerializeField] private DialougeTypewriterEffect dialougeTypewriterEffect;
     [SerializeField] private bool _progressDialougeBool = false;
+    [SerializeField] private bool _dialougeIsActive = false;
     [SerializeField] private Player _player;
 
     public void ChangeCurrentStateText(string currentState)
@@ -40,6 +41,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenDialougePanel(SignDialougeObject signDialougeObject, PromptTrigger something)
     {
+        _dialougeIsActive = true;
         actionPromptPanel.SetActive(false);
         FadeInPanel(dialougePanel, -290);
         recentTriggeredObject = something;
@@ -68,6 +70,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseDialougePanel(PromptTrigger recentTriggeredObject)
     {
+        _dialougeIsActive = false;
         FadeOutPanel(dialougePanel, -310);
         dialougeTextArea.text = string.Empty;
         actionPromptPanel.SetActive(true);
@@ -88,5 +91,10 @@ public class UIManager : MonoBehaviour
 
         LeanTween.moveLocalY(panel, posY, 0.33f);
         LeanTween.alphaCanvas(panelCanvasGroup, 0f, 0.33f);
+    }
+
+    public bool IsDialougeActive()
+    {
+        return _dialougeIsActive;
     }
 }

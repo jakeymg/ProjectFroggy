@@ -91,6 +91,8 @@ public class Player : MonoBehaviour
     {
         moveVal = playerControls.Gameplay.Move.ReadValue<Vector2>();
         moveVelocity = moveVal.magnitude;
+        
+        if (_uimanager.IsDialougeActive()) return;
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
     }
 
@@ -128,6 +130,8 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(float speedModifier = 1f)
     {
+        if (_uimanager.IsDialougeActive()) return;
+
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
         if (moveDirection != Vector3.zero)
@@ -138,8 +142,7 @@ public class Player : MonoBehaviour
         _controller.Move(moveDirection * Time.deltaTime * (_playerSpeed * speedModifier));
 
         //SlidePlayer();
-        ApplyGravity();
-
+        //ApplyGravity();
     }
 
     public void CheckIfGrounded()
@@ -249,6 +252,7 @@ public class Player : MonoBehaviour
 
     public void PlayDustParticle()
     {
+        if (_uimanager.IsDialougeActive()) return;
         _movementDust.Play();
     }
 

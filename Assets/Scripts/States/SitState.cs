@@ -25,6 +25,7 @@ public class SitState : State
         owner.ShouldPlayerSlideOrFall();
 
         owner.MovePlayer();
+        owner.ApplyGravity();
     }
 
     public override void OnExit()

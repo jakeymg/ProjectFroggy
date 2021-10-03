@@ -33,6 +33,7 @@ public class IdleState : State
         owner.ShouldPlayerSlideOrFall();
 
         owner.MovePlayer();
+        owner.ApplyGravity();
     }
 
     public override void OnExit()

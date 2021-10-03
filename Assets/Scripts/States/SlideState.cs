@@ -25,6 +25,7 @@ public class SlideState : State
         
         owner.MovePlayer(0.5f);
         owner.SlidePlayer();
+        owner.ApplyGravity();
     }
 
     public override void OnExit()
