@@ -2349,6 +2349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 357786124}
   - component: {fileID: 357786126}
+  - component: {fileID: 357786125}
   m_Layer: 5
   m_Name: HealthBarParent
   m_TagString: Untagged
@@ -2379,6 +2380,23 @@ RectTransform:
   m_AnchoredPosition: {x: 190.5, y: -140.5}
   m_SizeDelta: {x: 205, y: 201}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &357786125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357786123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49bd019a1f93107438de405288e1a94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarDisplay: {fileID: 563168906}
+  HealthBarCurrentHealth: {fileID: 1041809470}
+  HealthBarMaxHealth: {fileID: 2020187340}
+  HealthBarCurrentHealthText: {fileID: 0}
+  HealthBarMaxHealthText: {fileID: 0}
 --- !u!222 &357786126
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2579,7 +2597,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22344
+  m_Name: pb_Mesh22360
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21048,6 +21066,7 @@ MonoBehaviour:
   dialougePanel: {fileID: 1161301368}
   dialougeTextArea: {fileID: 2146145458}
   dialougeTypewriterEffect: {fileID: 841300010}
+  UIHealthBarManager: {fileID: 357786123}
   _progressDialougeBool: 0
   _dialougeIsActive: 0
   _player: {fileID: 822629502}
@@ -29050,7 +29069,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22410
+  m_Name: pb_Mesh22432
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

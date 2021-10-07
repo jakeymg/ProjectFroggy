@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject dialougePanel;
     [SerializeField] private TextMeshProUGUI dialougeTextArea;
     [SerializeField] private DialougeTypewriterEffect dialougeTypewriterEffect;
+    [SerializeField] private GameObject UIHealthBarManager;
     [SerializeField] private bool _progressDialougeBool = false;
     [SerializeField] private bool _dialougeIsActive = false;
     [SerializeField] private Player _player;
