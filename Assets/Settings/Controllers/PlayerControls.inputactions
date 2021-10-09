@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CameraShift",
+                    "type": "Value",
+                    "id": "50467cf6-b6b1-4fdf-82a2-12efc00e156c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -174,6 +182,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MainAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e5b41ca-16fd-4415-9452-51d25d9cdb46",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraShift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

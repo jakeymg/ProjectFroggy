@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PromptTrigger : MonoBehaviour
 {
@@ -8,9 +9,14 @@ public class PromptTrigger : MonoBehaviour
     [SerializeField] private string _promptString;
     [SerializeField] private SignDialougeObject _signText;
     [SerializeField] private bool _interactionIsTriggerable;
+    [SerializeField] private CinemachineVirtualCamera _dialougeCamera;
     [SerializeField] private Player _player;
     public bool InteractionIsTriggerable {get{ return _interactionIsTriggerable;}}
 
+    private void Awake() 
+    {
+        _dialougeCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+    }
     private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")
@@ -50,6 +56,16 @@ public class PromptTrigger : MonoBehaviour
     public void EnableDialougeTrigger()
     {
         _player.mainButtonPressed += TriggerDialouge;
+    }
+
+    public void ChangeToDialougeCamera()
+    {
+        _dialougeCamera.Priority = 10;
+    }
+
+    public void ChangeToPlayerCamera()
+    {
+        _dialougeCamera.Priority = 0;
     }
 
 }

@@ -27,26 +27,35 @@ public class UIManager : MonoBehaviour
     public void ShowActionPrompt(string actionPromptText)
     {
         actionPromptPanel.SetActive(true);
+        actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = actionPromptText;
         FadeInPanel(actionPromptPanel, -370);
-
-        actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = actionPromptText; 
-        
     }
 
     public void HideActionPrompt()
     {        
         FadeOutPanel(actionPromptPanel, -390);
-        actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
+        //actionPromptPanel.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
         actionPromptPanel.SetActive(true);
     }
 
-    public void OpenDialougePanel(SignDialougeObject signDialougeObject, PromptTrigger something)
+    public void OpenDialougePanel(SignDialougeObject signDialougeObject, PromptTrigger TriggerObject)
     {
         _dialougeIsActive = true;
+        TriggerObject.ChangeToDialougeCamera();
         actionPromptPanel.SetActive(false);
         FadeInPanel(dialougePanel, -290);
-        recentTriggeredObject = something;
+        recentTriggeredObject = TriggerObject;
         StartCoroutine(StepThroughDialouge(signDialougeObject));     
+    }
+
+    public void CloseDialougePanel(PromptTrigger recentTriggeredObject)
+    {
+        _dialougeIsActive = false;
+        recentTriggeredObject.ChangeToPlayerCamera();
+        FadeOutPanel(dialougePanel, -310);
+        dialougeTextArea.text = string.Empty;
+        actionPromptPanel.SetActive(true);
+        recentTriggeredObject.EnableDialougeTrigger();
     }
 
     private IEnumerator StepThroughDialouge (SignDialougeObject signDialougeObject)
@@ -67,15 +76,6 @@ public class UIManager : MonoBehaviour
     {
         _player.mainButtonPressed -= ProgressDialouge;
         _progressDialougeBool = true;
-    }
-
-    public void CloseDialougePanel(PromptTrigger recentTriggeredObject)
-    {
-        _dialougeIsActive = false;
-        FadeOutPanel(dialougePanel, -310);
-        dialougeTextArea.text = string.Empty;
-        actionPromptPanel.SetActive(true);
-        recentTriggeredObject.EnableDialougeTrigger();
     }
 
     private void FadeInPanel(GameObject panel, float posY)

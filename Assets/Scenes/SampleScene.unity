@@ -2597,7 +2597,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22360
+  m_Name: pb_Mesh22508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20776,6 +20776,7 @@ MonoBehaviour:
   _uimanager: {fileID: 841300009}
   _interactableTarget: {fileID: 0}
   playerInput: {fileID: 0}
+  _mainCamera: {fileID: 1204660062}
   _playerSpeed: 5
   _playerVelocity: {x: 0, y: 0, z: 0}
   _slideDirection: {x: 0, y: 0, z: 0}
@@ -20800,6 +20801,7 @@ MonoBehaviour:
   _groundSlopeAngle: 0
   groundSlopeDir: {x: 0, y: 0, z: 0}
   moveVal: {x: 0, y: 0}
+  _rightStickVal: {x: 0, y: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   moveVelocity: 0
   _movementDust: {fileID: 1037867629}
@@ -20943,6 +20945,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d77ef43e-e5ff-40a5-95e1-ac53fbab6bad
     m_ActionName: Gameplay/MainAction[/Keyboard/z,/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50467cf6-b6b1-4fdf-82a2-12efc00e156c
+    m_ActionName: Gameplay/CameraShift[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -21936,7 +21942,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8177742058912427254, guid: 6f017a2974e7e2349911a4a57032202f, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -22194,7 +22200,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.05
-      minScalar: 0.3
+      minScalar: 0.75
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -22351,7 +22357,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -22404,7 +22410,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -22457,8 +22463,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -27715,7 +27721,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 5
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 822629505}
   m_Follow: {fileID: 822629505}
@@ -29069,7 +29075,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22432
+  m_Name: pb_Mesh22582
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29560,7 +29566,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -30238,16 +30244,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _signText
-      value: 
-      objectReference: {fileID: 11400000, guid: a38bb2da9dfb42c4da0d735c6c0fce93, type: 2}
-    - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: _uimanager
       value: 
       objectReference: {fileID: 841300009}
     - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _promptString
-      value: <sprite name="PS4_X_Button"> to read
+      propertyPath: _dialougeCamera
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374810, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_Name
@@ -31925,6 +31927,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.797312
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.089271
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.773283
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2090645
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.056018725
+      objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374808, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -31978,8 +32000,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 841300009}
     - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _promptString
-      value: <sprite name="PS4_X_Button"> to read
+      propertyPath: _dialougeCamera
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374810, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_Name

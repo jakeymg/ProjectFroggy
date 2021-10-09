@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _interactableTarget;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
+    [SerializeField] private CinemachineVirtualCamera _mainCamera;
     public event Action mainButtonPressed;
 
     [Header("Movement Settings")]
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _groundSlopeAngle= 0f;
     [SerializeField] private Vector3 groundSlopeDir = Vector3.zero;
     [SerializeField] private Vector2 moveVal;
+    [SerializeField] private Vector2 _rightStickVal;
     [SerializeField] private Vector3 moveDirection;
 
     [SerializeField] private float moveVelocity;
@@ -74,7 +77,7 @@ public class Player : MonoBehaviour
     
     void Start()
     {
-        _stateMachine.InitialiseStateMachine(new IdleState(this));
+        ChangeToIdle();
     }
 
     void Update() 
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {    
         MovementCheck();
+        RightStickInputCheck();
     }
 
     void MovementCheck()
@@ -94,6 +98,26 @@ public class Player : MonoBehaviour
         
         if (_uimanager.IsDialougeActive()) return;
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
+    }
+    
+    void RightStickInputCheck()
+    {
+        _rightStickVal = playerControls.Gameplay.CameraShift.ReadValue<Vector2>();
+        ShiftCameraView();
+    }
+
+    void ShiftCameraView()
+    {
+        float defaultYRot = 0f;
+        float defaultXRot = 40f;
+        float defaultCameraDist = 18f;
+
+        float currentYRot = _mainCamera.transform.rotation.y;
+        float currentXRot = _mainCamera.transform.rotation.x;
+        CinemachineFramingTransposer currentCameraDist = _mainCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+        currentCameraDist.m_CameraDistance = defaultCameraDist + (10f * _rightStickVal.y);
+
     }
 
     void OnMainAction(InputAction.CallbackContext context)
@@ -126,6 +150,11 @@ public class Player : MonoBehaviour
     public void ChangeToSitting()
     {
         _stateMachine.ChangeState(new SitState(this));
+    }
+
+    public void ChangeToIdle()
+    {
+        _stateMachine.InitialiseStateMachine(new IdleState(this));
     }
 
     public void MovePlayer(float speedModifier = 1f)
@@ -190,9 +219,11 @@ public class Player : MonoBehaviour
     
     private void ShouldPlayerBeIdle()
     {
+        if (_uimanager.IsDialougeActive()) return;
+        
         if (_stateMachine.currentState.GetType().ToString() != "SitState" && _stateMachine.currentState.GetType().ToString() != "IdleState")
         {
-            _stateMachine.ChangeState(new IdleState(this));
+            ChangeToIdle();
         }
     }
 

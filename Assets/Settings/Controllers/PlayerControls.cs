@@ -33,6 +33,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraShift"",
+                    ""type"": ""Value"",
+                    ""id"": ""50467cf6-b6b1-4fdf-82a2-12efc00e156c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -189,6 +197,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""MainAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e5b41ca-16fd-4415-9452-51d25d9cdb46"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +218,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_MainAction = m_Gameplay.FindAction("MainAction", throwIfNotFound: true);
+        m_Gameplay_CameraShift = m_Gameplay.FindAction("CameraShift", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,12 +270,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_MainAction;
+    private readonly InputAction m_Gameplay_CameraShift;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @MainAction => m_Wrapper.m_Gameplay_MainAction;
+        public InputAction @CameraShift => m_Wrapper.m_Gameplay_CameraShift;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -271,6 +293,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MainAction.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
                 @MainAction.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
                 @MainAction.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
+                @CameraShift.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
+                @CameraShift.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
+                @CameraShift.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -281,6 +306,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MainAction.started += instance.OnMainAction;
                 @MainAction.performed += instance.OnMainAction;
                 @MainAction.canceled += instance.OnMainAction;
+                @CameraShift.started += instance.OnCameraShift;
+                @CameraShift.performed += instance.OnCameraShift;
+                @CameraShift.canceled += instance.OnCameraShift;
             }
         }
     }
@@ -289,5 +317,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnMainAction(InputAction.CallbackContext context);
+        void OnCameraShift(InputAction.CallbackContext context);
     }
 }
