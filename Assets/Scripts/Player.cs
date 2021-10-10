@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _interactableTarget;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private CinemachineVirtualCamera _mainCamera;
+    [SerializeField] private CinemachineFramingTransposer _mainCameraFramingTransposer; 
     public event Action mainButtonPressed;
 
     [Header("Movement Settings")]
@@ -63,7 +65,11 @@ public class Player : MonoBehaviour
         _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
         _animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
         _movementDust = GameObject.Find("movementDust_Ps").GetComponent<ParticleSystem>(); if (_movementDust == null) {Debug.Log("Movement Dust particle system can't be found");}
-        playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>(); if (playerInput == null) { Debug.Log("Player Input cannot be found");}
+        playerStats = GetComponent<PlayerStats>(); if (playerStats == null) { Debug.Log("Player Stats cannot be found");}
+
+        if (_mainCamera == null) { Debug.Log("Player Follow Camera cannot be found");}
+        _mainCameraFramingTransposer = _mainCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         playerControls = new PlayerControls();
         playerControls.Gameplay.Enable();
@@ -88,7 +94,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {    
         MovementCheck();
-        RightStickInputCheck();
+        //RightStickInputCheck();
     }
 
     void MovementCheck()
@@ -108,16 +114,13 @@ public class Player : MonoBehaviour
 
     void ShiftCameraView()
     {
-        float defaultYRot = 0f;
-        float defaultXRot = 40f;
         float defaultCameraDist = 18f;
 
         float currentYRot = _mainCamera.transform.rotation.y;
         float currentXRot = _mainCamera.transform.rotation.x;
-        CinemachineFramingTransposer currentCameraDist = _mainCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
-        currentCameraDist.m_CameraDistance = defaultCameraDist + (10f * _rightStickVal.y);
-
+        _mainCameraFramingTransposer.m_CameraDistance = defaultCameraDist + (5f * -_rightStickVal.y);
+        _mainCameraFramingTransposer.m_ScreenX = 0.5f + (0.1f * -_rightStickVal.x);
     }
 
     void OnMainAction(InputAction.CallbackContext context)
