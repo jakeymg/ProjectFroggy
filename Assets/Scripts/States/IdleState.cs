@@ -20,7 +20,7 @@ public class IdleState : State
     public override void Execute()
     {
         _idleTime += Time.deltaTime;
-        if(_idleTime >= 30f)
+        if(_idleTime >= 12f)
         {
              owner.ChangeToSitting();
         }

@@ -102,7 +102,15 @@ public class Player : MonoBehaviour
         moveVal = playerControls.Gameplay.Move.ReadValue<Vector2>();
         moveVelocity = moveVal.magnitude;
         
-        if (_uimanager.IsDialougeActive()) return;
+        if (_uimanager.IsDialougeActive()) 
+        {
+            moveVelocity = 0;
+        }
+        else
+        {
+            moveVelocity = moveVal.magnitude;
+        }
+        
         _animationManager.IdleWalkRunMixerValue = moveVelocity;
     }
     
