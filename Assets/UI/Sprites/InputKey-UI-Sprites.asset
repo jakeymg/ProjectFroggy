@@ -79,26 +79,92 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: PS4_X_Button
-    m_HashCode: -156624263
+    m_Name: PS4_Cross_Button
+    m_HashCode: -1770237473
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 1
     m_Scale: 1
-    m_Name: PS4_O_Button
-    m_HashCode: 360987790
+    m_Name: PS4_Circle Button
+    m_HashCode: 265291788
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
+    m_Scale: 1
+    m_Name: PS4_Square_Button
+    m_HashCode: -113430560
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 3
+    m_Scale: 1
+    m_Name: PS4_Triangle_Button
+    m_HashCode: 258416879
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 4
+    m_Scale: 1
+    m_Name: GamePad_LeftTrigger
+    m_HashCode: -534023769
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 5
+    m_Scale: 1
+    m_Name: GamePad_RightTrigger
+    m_HashCode: 628347228
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 6
+    m_Scale: 1
+    m_Name: GamePad_DPAD_Left
+    m_HashCode: -1956897583
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 7
+    m_Scale: 1
+    m_Name: GamePad_DPAD_Right
+    m_HashCode: -127307126
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 8
+    m_Scale: 1
+    m_Name: GamePad_LeftStick
+    m_HashCode: -585238183
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 9
+    m_Scale: 1
+    m_Name: GamePad_LeftStick_Horizontal
+    m_HashCode: -815800584
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 10
+    m_Scale: 1
+    m_Name: GamePad_LeftStick_Vertical
+    m_HashCode: 466152660
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 11
     m_Scale: 1
     m_Name: Keyboard_x_Key
     m_HashCode: -120667454
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 3
+    m_GlyphIndex: 12
     m_Scale: 1
-    m_Name: Keyboard_z_Key
-    m_HashCode: -118304192
+    m_Name: Keyboard_Z_Key
+    m_HashCode: -80487712
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 13
+    m_Scale: 1
+    m_Name: Keyboard_C_Key
+    m_HashCode: -75078727
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 14
+    m_Scale: 1
+    m_Name: Keyboard_V_Key
+    m_HashCode: -84961044
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -138,8 +204,8 @@ MonoBehaviour:
       m_HorizontalBearingY: 98
       m_HorizontalAdvance: 128
     m_GlyphRect:
-      m_X: 0
-      m_Y: 256
+      m_X: 256
+      m_Y: 384
       m_Width: 128
       m_Height: 128
     m_Scale: 1
@@ -153,12 +219,177 @@ MonoBehaviour:
       m_HorizontalBearingY: 98
       m_HorizontalAdvance: 128
     m_GlyphRect:
+      m_X: 384
+      m_Y: 384
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -7093090715039654005, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 4
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 256
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 3879235568881371875, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 5
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
       m_X: 128
       m_Y: 256
       m_Width: 128
       m_Height: 128
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: -7093090715039654005, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+    sprite: {fileID: 6632789010771704249, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 6
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 256
+      m_Y: 256
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 2336923923981069849, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 7
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 384
+      m_Y: 256
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -9183825800388929623, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 8
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 128
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -6269824160116055303, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 9
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 128
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 6882469614880496664, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 256
+      m_Y: 128
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 6993258451883619063, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 11
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 5533973803217404127, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 12
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 0
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 3277022707702265356, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 13
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 256
+      m_Y: 0
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 2845959325176180222, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
+  - m_Index: 14
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 64
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 384
+      m_Y: 0
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 530382342012183234, guid: a57973d3dcb7a6d4986db7c1a1a88e3d, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
