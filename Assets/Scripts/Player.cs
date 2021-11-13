@@ -18,7 +18,12 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private CinemachineVirtualCamera _mainCamera;
     [SerializeField] private CinemachineFramingTransposer _mainCameraFramingTransposer; 
-    public event Action mainButtonPressed;
+
+    // EVENTS
+    public event Action eastButtonPressed;
+    public event Action southButtonPressed;
+    public event Action westButtonPressed;
+    public event Action northButtonPressed;
 
     [Header("Movement Settings")]
     [SerializeField] private float _playerSpeed = 5.0f;
@@ -73,9 +78,22 @@ public class Player : MonoBehaviour
 
         playerControls = new PlayerControls();
         playerControls.Gameplay.Enable();
-        playerControls.Gameplay.MainAction.started += OnMainAction;
-        playerControls.Gameplay.MainAction.performed += OnMainAction;
-        playerControls.Gameplay.MainAction.canceled += OnMainAction;
+
+        playerControls.Gameplay.EastButton.started += OnEastButton;
+        playerControls.Gameplay.EastButton.performed += OnEastButton;
+        playerControls.Gameplay.EastButton.canceled += OnEastButton;
+
+        playerControls.Gameplay.SouthButton.started += OnSouthButton;
+        playerControls.Gameplay.SouthButton.performed += OnSouthButton;
+        playerControls.Gameplay.SouthButton.canceled += OnSouthButton;
+
+        playerControls.Gameplay.WestButton.started += OnWestButton;
+        playerControls.Gameplay.WestButton.performed += OnWestButton;
+        playerControls.Gameplay.WestButton.canceled += OnWestButton;
+
+        playerControls.Gameplay.NorthButton.started += OnNorthButton;
+        playerControls.Gameplay.NorthButton.performed += OnNorthButton;
+        playerControls.Gameplay.NorthButton.canceled += OnNorthButton;
 
         
         Ground = LayerMask.GetMask("Ground");
@@ -131,11 +149,62 @@ public class Player : MonoBehaviour
         _mainCameraFramingTransposer.m_ScreenX = 0.5f + (0.1f * -_rightStickVal.x);
     }
 
-    void OnMainAction(InputAction.CallbackContext context)
+    void OnEastButton(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            mainButtonPressed?.Invoke();
+            eastButtonPressed?.Invoke();
+        }
+        else if (context.performed)
+        {
+               
+        }
+        else if (context.canceled)
+        {
+
+        }
+        
+    }
+
+    void OnSouthButton(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            southButtonPressed?.Invoke();
+        }
+        else if (context.performed)
+        {
+               
+        }
+        else if (context.canceled)
+        {
+
+        }
+        
+    }
+
+    void OnWestButton(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            westButtonPressed?.Invoke();
+        }
+        else if (context.performed)
+        {
+               
+        }
+        else if (context.canceled)
+        {
+
+        }
+        
+    }
+
+    void OnNorthButton(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            northButtonPressed?.Invoke();
         }
         else if (context.performed)
         {

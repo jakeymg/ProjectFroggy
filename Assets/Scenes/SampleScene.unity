@@ -2463,8 +2463,8 @@ MonoBehaviour:
   HealthBarCurrentHealthText: {fileID: 0}
   HealthBarMaxHealthText: {fileID: 0}
   _healthBarDisplayImage: {fileID: 0}
-  Player: {fileID: 822629502}
-  PlayerStats: {fileID: 0}
+  Player: {fileID: 822629501}
+  PlayerStats: {fileID: 822629503}
 --- !u!222 &357786126
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2665,7 +2665,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22508
+  m_Name: pb_Mesh33050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21259,6 +21259,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 50467cf6-b6b1-4fdf-82a2-12efc00e156c
     m_ActionName: Gameplay/CameraShift[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 841e4b9c-011e-4000-a77d-70b715809286
+    m_ActionName: BattleControls/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c23eed4c-c78a-4214-84e9-a26dc67db9e0
+    m_ActionName: BattleControls/EastButton
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 732e3733-91f4-49dd-9b5e-57dfe6c25623
+    m_ActionName: BattleControls/SouthButton
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bfe0df4-8985-4421-aff0-9aa57a21b75e
+    m_ActionName: BattleControls/WestButton
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ba8f5336-cd63-49dc-8b4c-d32b2e7468f7
+    m_ActionName: BattleControls/NorthButton
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6ac5543b-79cd-483f-b971-c3f186a73c95
+    m_ActionName: BattleControls/RightTrigger
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d8c5eae-63c9-4a4c-bc64-775bad3b5b8f
+    m_ActionName: BattleControls/LeftTrigger
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1c026ad-29c0-4a37-a053-bd1fe5311ebe
+    m_ActionName: BattleControls/StartButton
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -21385,7 +21417,7 @@ MonoBehaviour:
   UIHealthBarManager: {fileID: 357786123}
   _progressDialougeBool: 0
   _dialougeIsActive: 0
-  _player: {fileID: 822629502}
+  _player: {fileID: 822629501}
 --- !u!114 &841300010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29382,7 +29414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8}
+  m_AnchoredPosition: {x: 0, y: 6.9}
   m_SizeDelta: {x: 316, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562833440
@@ -30950,10 +30982,6 @@ PrefabInstance:
       propertyPath: _uimanager
       value: 
       objectReference: {fileID: 841300009}
-    - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _dialougeCamera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374810, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_Name
       value: SignPost (1)
@@ -30997,7 +31025,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 316, y: 121}
+  m_SizeDelta: {x: 280, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861403579
 MonoBehaviour:
@@ -31012,14 +31040,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8980392, b: 0.5019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bbe0e8aefd53f1045b5c7091f699ad73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ba1b1b51daee7449a4b7c24f0c71ef9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -32210,7 +32238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28246
+  m_Name: pb_Mesh33134
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32806,7 +32834,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.797312
+      value: -6.7973123
       objectReference: {fileID: 0}
     - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32818,7 +32846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2090645
+      value: 0.20906448
       objectReference: {fileID: 0}
     - target: {fileID: 1081200595, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_LocalRotation.z
@@ -32869,17 +32897,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _signText
-      value: 
-      objectReference: {fileID: 11400000, guid: 0fd78abb8a85acd49a95c62500ef4790, type: 2}
-    - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: _uimanager
       value: 
       objectReference: {fileID: 841300009}
-    - target: {fileID: 3044818990179374809, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
-      propertyPath: _dialougeCamera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3044818990179374810, guid: ef7e84865cfe5414a83e74a0df35f497, type: 3}
       propertyPath: m_Name
       value: SignPost

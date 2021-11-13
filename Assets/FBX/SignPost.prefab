@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081200594}
-  m_LocalRotation: {x: 0.20906456, y: 0.25268412, z: -0.05601874, w: 0.9430296}
-  m_LocalPosition: {x: -6.7973104, y: 5.089274, z: -11.773281}
+  m_LocalRotation: {x: 0.20906451, y: 0.25268412, z: -0.056018732, w: 0.9430296}
+  m_LocalPosition: {x: -6.797311, y: 5.089272, z: -11.773283}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1421666884}
@@ -229,10 +229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uimanager: {fileID: 0}
-  _promptString: <sprite name="PS4_X_Button"> to read
-  _signText: {fileID: 11400000, guid: a38bb2da9dfb42c4da0d735c6c0fce93, type: 2}
+  _promptString: <sprite name="PS4_Circle Button"> to read
+  _signText: {fileID: 11400000, guid: 0fd78abb8a85acd49a95c62500ef4790, type: 2}
   _interactionIsTriggerable: 0
-  _dialougeCamera: {fileID: 1081200596}
+  _dialougeCamera: {fileID: 0}
   _player: {fileID: 0}
 --- !u!1001 &3044818989669067978
 PrefabInstance:

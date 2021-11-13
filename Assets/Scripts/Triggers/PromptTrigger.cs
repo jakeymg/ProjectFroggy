@@ -50,12 +50,12 @@ public class PromptTrigger : MonoBehaviour
 
     public void DisableDialougeTrigger()
     {
-        _player.mainButtonPressed -= TriggerDialouge;
+        _player.eastButtonPressed -= TriggerDialouge;
     }
 
     public void EnableDialougeTrigger()
     {
-        _player.mainButtonPressed += TriggerDialouge;
+        _player.eastButtonPressed += TriggerDialouge;
     }
 
     public void ChangeToDialougeCamera()

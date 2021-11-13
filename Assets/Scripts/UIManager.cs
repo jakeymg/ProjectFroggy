@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject UIHealthBarManager;
     [SerializeField] private bool _progressDialougeBool = false;
     [SerializeField] private bool _dialougeIsActive = false;
-    [SerializeField] private Player _player;
+    [SerializeField] private GameObject _player;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
         {
             yield return dialougeTypewriterEffect.Run(text, dialougeTextArea);
             //Wait for dialouge to finish printing before letting player trigger next line
-            _player.mainButtonPressed += ProgressDialouge;
+            _player.GetComponent<Player>().eastButtonPressed += ProgressDialouge;
             yield return new WaitUntil(() => _progressDialougeBool);
             _progressDialougeBool = false;
         }
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
 
     private void ProgressDialouge()
     {
-        _player.mainButtonPressed -= ProgressDialouge;
+        _player.GetComponent<Player>().eastButtonPressed -= ProgressDialouge;
         _progressDialougeBool = true;
     }
 

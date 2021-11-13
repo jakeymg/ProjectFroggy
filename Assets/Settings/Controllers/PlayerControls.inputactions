@@ -14,7 +14,15 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MainAction",
+                    "name": "CameraShift",
+                    "type": "Value",
+                    "id": "50467cf6-b6b1-4fdf-82a2-12efc00e156c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "EastButton",
                     "type": "Button",
                     "id": "d77ef43e-e5ff-40a5-95e1-ac53fbab6bad",
                     "expectedControlType": "Button",
@@ -22,10 +30,26 @@
                     "interactions": ""
                 },
                 {
-                    "name": "CameraShift",
-                    "type": "Value",
-                    "id": "50467cf6-b6b1-4fdf-82a2-12efc00e156c",
-                    "expectedControlType": "Vector2",
+                    "name": "SouthButton",
+                    "type": "Button",
+                    "id": "2d3f39c3-7849-4976-9346-371750cf0b44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WestButton",
+                    "type": "Button",
+                    "id": "c8ac2651-fc08-458a-a828-d584a467e31b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NorthButton",
+                    "type": "Button",
+                    "id": "c64b1246-d191-45b9-8a16-15ad3d4d91c8",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -170,18 +194,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MainAction",
+                    "action": "EastButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "1b1e2188-cb3c-4c4e-b2ef-2f810fbf62d1",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EastButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d2c6dbd-d3ef-42fe-8aac-fc78b6387ce9",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SouthButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c75e726b-4f4b-44af-ab60-689c03f8607c",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MainAction",
+                    "action": "SouthButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f287365b-d8aa-4d35-9d94-515e2d8f4b20",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WestButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81a3b3c4-fb61-44dc-a351-b19357f53ac8",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NorthButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

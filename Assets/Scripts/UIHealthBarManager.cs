@@ -14,7 +14,7 @@ public class UIHealthBarManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HealthBarMaxHealthText;
     [SerializeField] private UnityEngine.UI.Image _healthBarDisplayImage;
 
-    [SerializeField] private Player Player;
+    [SerializeField] private GameObject Player;
     [SerializeField] private PlayerStats PlayerStats;
     
     private void Awake() 

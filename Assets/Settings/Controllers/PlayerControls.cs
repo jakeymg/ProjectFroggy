@@ -27,7 +27,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MainAction"",
+                    ""name"": ""CameraShift"",
+                    ""type"": ""Value"",
+                    ""id"": ""50467cf6-b6b1-4fdf-82a2-12efc00e156c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EastButton"",
                     ""type"": ""Button"",
                     ""id"": ""d77ef43e-e5ff-40a5-95e1-ac53fbab6bad"",
                     ""expectedControlType"": ""Button"",
@@ -35,10 +43,26 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""CameraShift"",
-                    ""type"": ""Value"",
-                    ""id"": ""50467cf6-b6b1-4fdf-82a2-12efc00e156c"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""SouthButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d3f39c3-7849-4976-9346-371750cf0b44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WestButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8ac2651-fc08-458a-a828-d584a467e31b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""NorthButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""c64b1246-d191-45b9-8a16-15ad3d4d91c8"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -183,18 +207,62 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MainAction"",
+                    ""action"": ""EastButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""1b1e2188-cb3c-4c4e-b2ef-2f810fbf62d1"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EastButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d2c6dbd-d3ef-42fe-8aac-fc78b6387ce9"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SouthButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c75e726b-4f4b-44af-ab60-689c03f8607c"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MainAction"",
+                    ""action"": ""SouthButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f287365b-d8aa-4d35-9d94-515e2d8f4b20"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WestButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81a3b3c4-fb61-44dc-a351-b19357f53ac8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NorthButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -498,8 +566,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_MainAction = m_Gameplay.FindAction("MainAction", throwIfNotFound: true);
         m_Gameplay_CameraShift = m_Gameplay.FindAction("CameraShift", throwIfNotFound: true);
+        m_Gameplay_EastButton = m_Gameplay.FindAction("EastButton", throwIfNotFound: true);
+        m_Gameplay_SouthButton = m_Gameplay.FindAction("SouthButton", throwIfNotFound: true);
+        m_Gameplay_WestButton = m_Gameplay.FindAction("WestButton", throwIfNotFound: true);
+        m_Gameplay_NorthButton = m_Gameplay.FindAction("NorthButton", throwIfNotFound: true);
         // BattleControls
         m_BattleControls = asset.FindActionMap("BattleControls", throwIfNotFound: true);
         m_BattleControls_Move = m_BattleControls.FindAction("Move", throwIfNotFound: true);
@@ -560,15 +631,21 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_MainAction;
     private readonly InputAction m_Gameplay_CameraShift;
+    private readonly InputAction m_Gameplay_EastButton;
+    private readonly InputAction m_Gameplay_SouthButton;
+    private readonly InputAction m_Gameplay_WestButton;
+    private readonly InputAction m_Gameplay_NorthButton;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @MainAction => m_Wrapper.m_Gameplay_MainAction;
         public InputAction @CameraShift => m_Wrapper.m_Gameplay_CameraShift;
+        public InputAction @EastButton => m_Wrapper.m_Gameplay_EastButton;
+        public InputAction @SouthButton => m_Wrapper.m_Gameplay_SouthButton;
+        public InputAction @WestButton => m_Wrapper.m_Gameplay_WestButton;
+        public InputAction @NorthButton => m_Wrapper.m_Gameplay_NorthButton;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -581,12 +658,21 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @MainAction.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
-                @MainAction.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
-                @MainAction.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMainAction;
                 @CameraShift.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
                 @CameraShift.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
                 @CameraShift.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraShift;
+                @EastButton.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEastButton;
+                @EastButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEastButton;
+                @EastButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEastButton;
+                @SouthButton.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouthButton;
+                @SouthButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouthButton;
+                @SouthButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouthButton;
+                @WestButton.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWestButton;
+                @WestButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWestButton;
+                @WestButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWestButton;
+                @NorthButton.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorthButton;
+                @NorthButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorthButton;
+                @NorthButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorthButton;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -594,12 +680,21 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @MainAction.started += instance.OnMainAction;
-                @MainAction.performed += instance.OnMainAction;
-                @MainAction.canceled += instance.OnMainAction;
                 @CameraShift.started += instance.OnCameraShift;
                 @CameraShift.performed += instance.OnCameraShift;
                 @CameraShift.canceled += instance.OnCameraShift;
+                @EastButton.started += instance.OnEastButton;
+                @EastButton.performed += instance.OnEastButton;
+                @EastButton.canceled += instance.OnEastButton;
+                @SouthButton.started += instance.OnSouthButton;
+                @SouthButton.performed += instance.OnSouthButton;
+                @SouthButton.canceled += instance.OnSouthButton;
+                @WestButton.started += instance.OnWestButton;
+                @WestButton.performed += instance.OnWestButton;
+                @WestButton.canceled += instance.OnWestButton;
+                @NorthButton.started += instance.OnNorthButton;
+                @NorthButton.performed += instance.OnNorthButton;
+                @NorthButton.canceled += instance.OnNorthButton;
             }
         }
     }
@@ -696,8 +791,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnMainAction(InputAction.CallbackContext context);
         void OnCameraShift(InputAction.CallbackContext context);
+        void OnEastButton(InputAction.CallbackContext context);
+        void OnSouthButton(InputAction.CallbackContext context);
+        void OnWestButton(InputAction.CallbackContext context);
+        void OnNorthButton(InputAction.CallbackContext context);
     }
     public interface IBattleControlsActions
     {
