@@ -15,7 +15,18 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private CinemachineVirtualCamera _mainCamera;
-    [SerializeField] private CinemachineFramingTransposer _mainCameraFramingTransposer; 
+    [SerializeField] private CinemachineFramingTransposer _mainCameraFramingTransposer;
+    
+    [Header("Player Battle Actions")]
+    [SerializeField] private PlayerBattleAction currentPlayerBattleAction;
+    [SerializeField] private PlayerBattleAction defaultPlayerBattleAction;
+    [SerializeField] private enum PlayerBattleAction {
+        Attack,
+        Sticker,
+        Catch,
+        Run,
+    }
+
     
     // EVENTS
     public event Action eastButtonPressed;
@@ -52,6 +63,17 @@ public class BattleManager : MonoBehaviour
         playerControls.BattleControls.NorthButton.performed += OnNorthButton;
         playerControls.BattleControls.NorthButton.canceled += OnNorthButton;
 
+    }
+
+    private void Start() 
+    {
+        SetStartingBattleAction();
+    }
+
+    private void SetStartingBattleAction()
+    {
+        string newBattleActionString = defaultPlayerBattleAction.ToString();
+        _uimanager.ChangePlayerBattleActionText(newBattleActionString);
     }
 
     void OnEastButton(InputAction.CallbackContext context)

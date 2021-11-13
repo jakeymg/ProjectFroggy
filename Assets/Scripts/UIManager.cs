@@ -7,21 +7,39 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private GameObject _player;
+
+    [Header("Prompts")]
     [SerializeField] private GameObject actionPromptPanel;
     [SerializeField] private PromptTrigger recentTriggeredObject;
+
+    [Header("Debugging")]
     [SerializeField] private TextMeshProUGUI currentStateText;
+
+    [Header("Dialouge")]
     [SerializeField] private GameObject dialougePanel;
     [SerializeField] private TextMeshProUGUI dialougeTextArea;
     [SerializeField] private DialougeTypewriterEffect dialougeTypewriterEffect;
-    [SerializeField] private GameObject UIHealthBarManager;
     [SerializeField] private bool _progressDialougeBool = false;
     [SerializeField] private bool _dialougeIsActive = false;
-    [SerializeField] private GameObject _player;
+
+    [Header("HealthBar")]
+    [SerializeField] private GameObject UIHealthBarManager;
+
+    [Header("Battle Actions")]
+    [SerializeField] private GameObject playerBattleActionPanel;
+    [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
 
     public void ChangeCurrentStateText(string currentState)
     {
         currentStateText.text = currentState;
+    }
+
+    public void ChangePlayerBattleActionText(string newString)
+    {
+        currentPlayerBattleActionText.text = newString;
     }
 
     public void ShowActionPrompt(string actionPromptText)

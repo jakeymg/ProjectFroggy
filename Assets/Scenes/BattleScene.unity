@@ -3258,6 +3258,8 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   _mainCamera: {fileID: 1797471956}
   _mainCameraFramingTransposer: {fileID: 0}
+  currentPlayerBattleAction: 0
+  defaultPlayerBattleAction: 0
 --- !u!114 &1484170404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4195,16 +4197,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1637058637}
+  _player: {fileID: 0}
   actionPromptPanel: {fileID: 1332764227}
   recentTriggeredObject: {fileID: 0}
   currentStateText: {fileID: 468821521}
   dialougePanel: {fileID: 982525820}
   dialougeTextArea: {fileID: 1873443500}
   dialougeTypewriterEffect: {fileID: 2117195912}
-  UIHealthBarManager: {fileID: 2128293124}
   _progressDialougeBool: 0
   _dialougeIsActive: 0
-  _player: {fileID: 0}
+  UIHealthBarManager: {fileID: 2128293124}
+  playerBattleActionPanel: {fileID: 1241673588}
+  currentPlayerBattleActionText: {fileID: 521708333}
 --- !u!4 &2117195914
 Transform:
   m_ObjectHideFlags: 0
