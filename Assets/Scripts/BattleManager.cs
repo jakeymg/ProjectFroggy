@@ -50,7 +50,7 @@ public class BattleManager : MonoBehaviour
     private void Awake() 
     {
         _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
-        _animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
+        //_animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
         playerInput = GetComponent<PlayerInput>(); if (playerInput == null) { Debug.Log("Player Input cannot be found");}
         playerStats = GetComponent<PlayerStats>(); if (playerStats == null) { Debug.Log("Player Stats cannot be found");}
 
@@ -82,13 +82,12 @@ public class BattleManager : MonoBehaviour
     {
         SetStartingBattleAction();
         SetEnemyTransformStartingPosition();
+        ChangeToBattleActionMenuState();
     }
 
     private void FixedUpdate() 
     {
-        CheckDirectionInput();
-        CheckTimeBeforeNextAction();
-        CycleBattleMenu();
+        
     }
 
     private void SetStartingBattleAction()
@@ -130,6 +129,11 @@ public class BattleManager : MonoBehaviour
     public void ChangeToBattleActionMenuState()
     {
         _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
+    }
+
+    public void ChangeToChooseTargetState()
+    {
+        _stateMachine.ChangeState(new BattleChooseTargetState(this));
     }
 
     private void CycleNextPlayerBattleAction()
@@ -186,12 +190,12 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
-    private void CheckDirectionInput()
+    public void CheckDirectionInput()
     {
         _directionInput = playerControls.BattleControls.Move.ReadValue<Vector2>();
     }
 
-    private void CheckTimeBeforeNextAction()
+    public void CheckTimeBeforeNextAction()
     {
         if (timeBeforeNextAction > 0f)
         {
@@ -203,7 +207,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void CycleBattleMenu()
+    public void CycleBattleMenu()
     {
         if (timeBeforeNextAction != 0f)
         {
@@ -222,7 +226,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void CycleTarget()
+    public void CycleTarget()
     {
         if (timeBeforeNextAction != 0f)
         {

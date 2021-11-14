@@ -21408,16 +21408,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1749484617}
+  _player: {fileID: 822629501}
   actionPromptPanel: {fileID: 1861403577}
   recentTriggeredObject: {fileID: 0}
   currentStateText: {fileID: 1866641131}
   dialougePanel: {fileID: 1161301368}
   dialougeTextArea: {fileID: 2146145458}
   dialougeTypewriterEffect: {fileID: 841300010}
-  UIHealthBarManager: {fileID: 357786123}
   _progressDialougeBool: 0
   _dialougeIsActive: 0
-  _player: {fileID: 822629501}
+  UIHealthBarManager: {fileID: 357786123}
+  playerBattleActionPanel: {fileID: 0}
+  currentPlayerBattleActionText: {fileID: 0}
 --- !u!114 &841300010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30135,7 +30137,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 1000
-  field of view: 45
+  field of view: 40
   orthographic: 0
   orthographic size: 8
   m_Depth: -1
@@ -30160,8 +30162,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 13.000176, z: -13.788801}
+  m_LocalRotation: {x: 0.085831694, y: -0.17298746, z: 0.015134449, w: 0.98106027}
+  m_LocalPosition: {x: 6.0628357, y: 5.125669, z: -16.657497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31094,7 +31096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1866641130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31137,7 +31139,7 @@ MonoBehaviour:
   m_text: Current State
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b47a9a5971ffd77419e91bf790eccc13, type: 2}
-  m_sharedMaterial: {fileID: -8379203670832908352, guid: 287dab56e1edaf34d9bd8ce8ad22a0f2, type: 2}
+  m_sharedMaterial: {fileID: 4510586424422254943, guid: b47a9a5971ffd77419e91bf790eccc13, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31161,7 +31163,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.7
+  m_fontSize: 36.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

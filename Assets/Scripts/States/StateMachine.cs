@@ -18,8 +18,9 @@ public class StateMachine : MonoBehaviour
                 _currentState.OnExit();
                 newState.OnEnter();
                 _currentState = newState;
-                UIManager.ChangeCurrentStateText(_currentState.GetType().ToString()); 
             }
+
+            UIManager.ChangeCurrentStateText(_currentState.GetType().ToString());
         }
     }
 
@@ -43,6 +44,6 @@ public class StateMachine : MonoBehaviour
     {
         firstState.OnEnter();
         _currentState = firstState;
-        UIManager.ChangeCurrentStateText(_currentState.GetType().ToString());
+        UIManager.ChangeCurrentStateText(firstState.GetType().ToString());
     }
 }

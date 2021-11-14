@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 
-public class BattleActionMenuState : State
+public class BattleChooseTargetState : State
 {
     BattleManager owner;
-    public BattleActionMenuState(BattleManager owner) { this.owner = owner;}
+    public BattleChooseTargetState(BattleManager owner) { this.owner = owner;}
     
     public override void OnEnter()
     {
@@ -22,7 +22,7 @@ public class BattleActionMenuState : State
     {
         owner.CheckDirectionInput();
         owner.CheckTimeBeforeNextAction();
-        owner.CycleBattleMenu();
+        owner.CycleTarget();
     }
 
     public override void OnExit()

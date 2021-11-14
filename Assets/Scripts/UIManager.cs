@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     [Header("Battle Actions")]
     [SerializeField] private GameObject playerBattleActionPanel;
     [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
+    [SerializeField] private GameObject ChooseTargetArrow;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -40,6 +41,11 @@ public class UIManager : MonoBehaviour
     public void ChangePlayerBattleActionText(string newString)
     {
         currentPlayerBattleActionText.text = newString;
+    }
+
+    public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
+    {
+        
     }
 
     public void ShowActionPrompt(string actionPromptText)
