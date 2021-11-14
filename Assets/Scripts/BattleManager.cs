@@ -20,12 +20,25 @@ public class BattleManager : MonoBehaviour
     [Header("Player Battle Actions")]
     [SerializeField] private PlayerBattleAction currentPlayerBattleAction;
     [SerializeField] private PlayerBattleAction defaultPlayerBattleAction;
+    [SerializeField] private float moveRepeatDelay;
+    [SerializeField] private float timeBeforeNextAction = 0f;
     [SerializeField] private enum PlayerBattleAction {
         Attack,
         Sticker,
         Catch,
         Run,
     }
+
+    [Header("Input Actions")]
+    [SerializeField] private Vector2 _directionInput;
+
+    [Header("Enemies")]
+    [SerializeField] private GameObject enemyOne;
+    [SerializeField] private Vector3 enemyOneTransformPosition;
+    [SerializeField] private GameObject enemyTwo;
+    [SerializeField] private Vector3 enemyTwoTransformPosition;
+    [SerializeField] private GameObject enemyThree;
+    [SerializeField] private Vector3 enemyThreeTransformPosition;
 
     
     // EVENTS
@@ -68,12 +81,164 @@ public class BattleManager : MonoBehaviour
     private void Start() 
     {
         SetStartingBattleAction();
+        SetEnemyTransformStartingPosition();
+    }
+
+    private void FixedUpdate() 
+    {
+        CheckDirectionInput();
+        CheckTimeBeforeNextAction();
+        CycleBattleMenu();
     }
 
     private void SetStartingBattleAction()
     {
-        string newBattleActionString = defaultPlayerBattleAction.ToString();
-        _uimanager.ChangePlayerBattleActionText(newBattleActionString);
+        string newPlayerBattleActionString = defaultPlayerBattleAction.ToString();
+        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+    }
+
+    private void SetEnemyTransformStartingPosition()
+    {
+        if (enemyOne != null)
+        {
+            enemyOneTransformPosition = enemyOne.transform.position;
+        }
+        else
+        {
+            Debug.Log("Enemy One is not assigned or present in scene.");
+        }
+
+        if (enemyTwo != null)
+        {
+            enemyTwoTransformPosition = enemyTwo.transform.position;
+        }
+        else
+        {
+            Debug.Log("Enemy Two is not assigned or present in scene.");
+        }
+
+        if (enemyThree != null)
+        {
+            enemyThreeTransformPosition = enemyThree.transform.position;
+        }
+        else
+        {
+            Debug.Log("Enemy Three is not assigned or present in scene.");
+        }
+    }
+
+    public void ChangeToBattleActionMenuState()
+    {
+        _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
+    }
+
+    private void CycleNextPlayerBattleAction()
+    {
+        switch(currentPlayerBattleAction)
+        {
+            case PlayerBattleAction.Attack:
+                currentPlayerBattleAction = PlayerBattleAction.Sticker;
+                break;
+            case PlayerBattleAction.Sticker:
+                currentPlayerBattleAction = PlayerBattleAction.Catch;
+                break;
+            case PlayerBattleAction.Catch:
+                currentPlayerBattleAction = PlayerBattleAction.Run;
+                break;
+            case PlayerBattleAction.Run:
+                currentPlayerBattleAction = PlayerBattleAction.Attack;
+                break;
+            default:
+                Debug.Log("Something is wrong with the Player Battle Action Menu");
+                break;
+        }
+
+        string newPlayerBattleActionString = currentPlayerBattleAction.ToString();
+        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    private void CyclePreviousPlayerBattleAction()
+    {
+        switch(currentPlayerBattleAction)
+        {
+            case PlayerBattleAction.Attack:
+                currentPlayerBattleAction = PlayerBattleAction.Run;
+                break;
+            case PlayerBattleAction.Sticker:
+                currentPlayerBattleAction = PlayerBattleAction.Attack;
+                break;
+            case PlayerBattleAction.Catch:
+                currentPlayerBattleAction = PlayerBattleAction.Sticker;
+                break;
+            case PlayerBattleAction.Run:
+                currentPlayerBattleAction = PlayerBattleAction.Catch;
+                break;
+            default:
+                Debug.Log("Something is wrong with the Player Battle Action Menu");
+                break;
+        }
+
+        string newPlayerBattleActionString = currentPlayerBattleAction.ToString();
+        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    private void CheckDirectionInput()
+    {
+        _directionInput = playerControls.BattleControls.Move.ReadValue<Vector2>();
+    }
+
+    private void CheckTimeBeforeNextAction()
+    {
+        if (timeBeforeNextAction > 0f)
+        {
+            timeBeforeNextAction -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            timeBeforeNextAction = 0f;
+        }
+    }
+
+    private void CycleBattleMenu()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+        else
+        {
+            if (_directionInput.x > 0f)
+            {
+                CycleNextPlayerBattleAction();
+            }
+            else if (_directionInput.x < 0f)
+            {
+                CyclePreviousPlayerBattleAction();
+            }
+        }
+    }
+
+    private void CycleTarget()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+        else
+        {
+            if (_directionInput.x > 0f)
+            {
+                //CycleNextTargt();
+            }
+            else if (_directionInput.x < 0f)
+            {
+                //CyclePreviousTarget();
+            }
+        }
     }
 
     void OnEastButton(InputAction.CallbackContext context)
