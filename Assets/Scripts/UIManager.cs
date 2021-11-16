@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("General")]
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _battleManager;
 
     [Header("Prompts")]
     [SerializeField] private GameObject actionPromptPanel;
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject playerBattleActionPanel;
     [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
     [SerializeField] private GameObject ChooseTargetArrow;
+    [SerializeField] private Vector3 targetArrowOffset;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -45,7 +47,8 @@ public class UIManager : MonoBehaviour
 
     public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
     {
-        
+        Camera cam = Camera.main;
+        ChooseTargetArrow.transform.position = cam.WorldToScreenPoint(newTargetPosition + targetArrowOffset);
     }
 
     public void ShowActionPrompt(string actionPromptText)

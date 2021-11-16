@@ -827,7 +827,7 @@ GameObject:
   - component: {fileID: 427622609}
   m_Layer: 0
   m_Name: Enemy2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -903,7 +903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427622608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.006367133, y: 1, z: 4}
+  m_LocalPosition: {x: -0, y: 1, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -994,7 +994,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 1000
-  field of view: 45
+  field of view: 40
   orthographic: 0
   orthographic size: 8
   m_Depth: -1
@@ -1053,8 +1053,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438466806}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 13.000176, z: -13.788801}
+  m_LocalRotation: {x: 0.085831694, y: -0.17298746, z: 0.015134449, w: 0.98106027}
+  m_LocalPosition: {x: 6.0628357, y: 5.125669, z: -16.657497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1341,7 +1341,7 @@ GameObject:
   - component: {fileID: 473059103}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1571,7 +1571,7 @@ GameObject:
   - component: {fileID: 586027492}
   m_Layer: 0
   m_Name: Enemy3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3338,12 +3338,12 @@ MonoBehaviour:
   moveRepeatDelay: 0.2
   timeBeforeNextAction: 0
   _directionInput: {x: 0, y: 0}
-  enemyOne: {fileID: 473059102}
-  enemyOneTransformPosition: {x: 0, y: 0, z: 0}
-  enemyTwo: {fileID: 427622608}
-  enemyTwoTransformPosition: {x: 0, y: 0, z: 0}
-  enemyThree: {fileID: 586027491}
-  enemyThreeTransformPosition: {x: 0, y: 0, z: 0}
+  _numberOfEnemies: 3
+  _currentTarget: {fileID: 0}
+  enemyPositionOne: {fileID: 473059102}
+  enemyPositionTwo: {fileID: 427622608}
+  enemyPositionThree: {fileID: 586027491}
+  enemyList: []
 --- !u!114 &1484170404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4283,6 +4283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1637058637}
   _player: {fileID: 0}
+  _battleManager: {fileID: 1484170399}
   actionPromptPanel: {fileID: 1332764227}
   recentTriggeredObject: {fileID: 0}
   currentStateText: {fileID: 468821521}
@@ -4294,6 +4295,8 @@ MonoBehaviour:
   UIHealthBarManager: {fileID: 2128293124}
   playerBattleActionPanel: {fileID: 1241673588}
   currentPlayerBattleActionText: {fileID: 521708333}
+  ChooseTargetArrow: {fileID: 913225361}
+  targetArrowOffset: {x: 0, y: 2, z: 0}
 --- !u!4 &2117195914
 Transform:
   m_ObjectHideFlags: 0

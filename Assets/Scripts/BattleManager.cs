@@ -33,13 +33,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Vector2 _directionInput;
 
     [Header("Enemies")]
-    [SerializeField] private GameObject enemyOne;
-    [SerializeField] private Vector3 enemyOneTransformPosition;
-    [SerializeField] private GameObject enemyTwo;
-    [SerializeField] private Vector3 enemyTwoTransformPosition;
-    [SerializeField] private GameObject enemyThree;
-    [SerializeField] private Vector3 enemyThreeTransformPosition;
-
+    [SerializeField] private int _numberOfEnemies;
+    [SerializeField] private GameObject _currentTarget;
+    [SerializeField] private GameObject enemyPositionOne;
+    [SerializeField] private GameObject enemyPositionTwo;
+    [SerializeField] private GameObject enemyPositionThree;
+    [SerializeField] private List<GameObject> enemyList;
     
     // EVENTS
     public event Action eastButtonPressed;
@@ -81,8 +80,11 @@ public class BattleManager : MonoBehaviour
     private void Start() 
     {
         SetStartingBattleAction();
-        SetEnemyTransformStartingPosition();
-        ChangeToBattleActionMenuState();
+        SetEnemyStartingPositions(_numberOfEnemies);
+        SetFirstTarget();
+        //ChangeToBattleActionMenuState();
+        ChangeToChooseTargetState();
+        
     }
 
     private void FixedUpdate() 
@@ -96,34 +98,40 @@ public class BattleManager : MonoBehaviour
         _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
     }
 
-    private void SetEnemyTransformStartingPosition()
+    public void SetEnemyStartingPositions(int numberOfEnemies)
     {
-        if (enemyOne != null)
+        switch(numberOfEnemies)
         {
-            enemyOneTransformPosition = enemyOne.transform.position;
+            case 1:
+                enemyPositionOne.SetActive(true);
+                enemyPositionTwo.SetActive(false);
+                enemyPositionThree.SetActive(false);
+                enemyPositionOne.transform.position = new Vector3(0, 1, 4);
+                break;
+            case 2:
+                enemyPositionOne.SetActive(true);
+                enemyPositionTwo.SetActive(true);
+                enemyPositionThree.SetActive(false);
+                enemyPositionOne.transform.position = new Vector3(2, 1, 4);
+                enemyPositionTwo.transform.position = new Vector3(-2, 1, 4);
+                break;
+            case 3:
+                enemyPositionOne.SetActive(true);
+                enemyPositionTwo.SetActive(true);
+                enemyPositionThree.SetActive(true);
+                enemyPositionOne.transform.position = new Vector3(0, 1, 4);
+                enemyPositionTwo.transform.position = new Vector3(3, 1, 4);
+                enemyPositionThree.transform.position = new Vector3(-3, 1, 4);
+                break;
+            default:
+                Debug.Log("Something is wrong when setting enemy starting positions");
+                break;
         }
-        else
-        {
-            Debug.Log("Enemy One is not assigned or present in scene.");
-        }
+    }
 
-        if (enemyTwo != null)
-        {
-            enemyTwoTransformPosition = enemyTwo.transform.position;
-        }
-        else
-        {
-            Debug.Log("Enemy Two is not assigned or present in scene.");
-        }
-
-        if (enemyThree != null)
-        {
-            enemyThreeTransformPosition = enemyThree.transform.position;
-        }
-        else
-        {
-            Debug.Log("Enemy Three is not assigned or present in scene.");
-        }
+    public void AssignEnemyToEnemyList(GameObject Enemy)
+    {
+        enemyList.Add(Enemy);
     }
 
     public void ChangeToBattleActionMenuState()
@@ -133,7 +141,44 @@ public class BattleManager : MonoBehaviour
 
     public void ChangeToChooseTargetState()
     {
+        _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
         _stateMachine.ChangeState(new BattleChooseTargetState(this));
+    }
+
+    public void CheckDirectionInput()
+    {
+        _directionInput = playerControls.BattleControls.Move.ReadValue<Vector2>();
+    }
+
+    public void CheckTimeBeforeNextAction()
+    {
+        if (timeBeforeNextAction > 0f)
+        {
+            timeBeforeNextAction -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            timeBeforeNextAction = 0f;
+        }
+    }
+
+    public void CycleBattleMenu()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+        else
+        {
+            if (_directionInput.x > 0f)
+            {
+                CycleNextPlayerBattleAction();
+            }
+            else if (_directionInput.x < 0f)
+            {
+                CyclePreviousPlayerBattleAction();
+            }
+        }
     }
 
     private void CycleNextPlayerBattleAction()
@@ -190,42 +235,6 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
-    public void CheckDirectionInput()
-    {
-        _directionInput = playerControls.BattleControls.Move.ReadValue<Vector2>();
-    }
-
-    public void CheckTimeBeforeNextAction()
-    {
-        if (timeBeforeNextAction > 0f)
-        {
-            timeBeforeNextAction -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            timeBeforeNextAction = 0f;
-        }
-    }
-
-    public void CycleBattleMenu()
-    {
-        if (timeBeforeNextAction != 0f)
-        {
-            return;
-        }
-        else
-        {
-            if (_directionInput.x > 0f)
-            {
-                CycleNextPlayerBattleAction();
-            }
-            else if (_directionInput.x < 0f)
-            {
-                CyclePreviousPlayerBattleAction();
-            }
-        }
-    }
-
     public void CycleTarget()
     {
         if (timeBeforeNextAction != 0f)
@@ -236,13 +245,95 @@ public class BattleManager : MonoBehaviour
         {
             if (_directionInput.x > 0f)
             {
-                //CycleNextTargt();
+                CycleNextTarget();
             }
             else if (_directionInput.x < 0f)
             {
-                //CyclePreviousTarget();
+                CyclePreviousTarget();
             }
         }
+    }
+
+    private void CycleNextTarget()
+    {
+        switch(_numberOfEnemies)
+        {
+            case 1:
+                break;
+            case 2:
+                if (_currentTarget == enemyPositionOne){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _currentTarget = enemyPositionTwo;
+                }
+                else if (_currentTarget == enemyPositionTwo){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _currentTarget = enemyPositionOne;
+                }
+                break;
+            case 3:
+                if (_currentTarget == enemyPositionOne){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _currentTarget = enemyPositionTwo;
+                }
+                else if (_currentTarget == enemyPositionTwo){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
+                    _currentTarget = enemyPositionThree;
+                }
+                else if (_currentTarget == enemyPositionThree){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _currentTarget = enemyPositionOne;
+                }
+                break;
+            default:
+                Debug.Log("Something is wrong when targetting next enemy");
+                break;
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    private void CyclePreviousTarget()
+    {
+        switch(_numberOfEnemies)
+        {
+            case 1:
+                break;
+            case 2:
+                if (_currentTarget == enemyPositionOne){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _currentTarget = enemyPositionTwo;
+                }
+                else if (_currentTarget == enemyPositionTwo){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _currentTarget = enemyPositionOne;
+                }
+                break;
+            case 3:
+                if (_currentTarget == enemyPositionOne){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
+                    _currentTarget = enemyPositionThree;
+                }
+                else if (_currentTarget == enemyPositionTwo){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _currentTarget = enemyPositionOne;
+                }
+                else if (_currentTarget == enemyPositionThree){
+                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _currentTarget = enemyPositionTwo;
+                }
+                break;
+            default:
+                Debug.Log("Something is wrong when targetting previous enemy");
+                break;
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+    
+    private void SetFirstTarget()
+    {
+        _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+        _currentTarget = enemyPositionOne;
     }
 
     void OnEastButton(InputAction.CallbackContext context)
