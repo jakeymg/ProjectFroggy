@@ -47,12 +47,14 @@ public class UIManager : MonoBehaviour
 
     public void ShowPlayerBattleActionMenu()
     {
-        playerBattleActionPanel.SetActive(true);
+        //playerBattleActionPanel.SetActive(true);
+        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 1f, 0.2f);
     }
 
     public void HidePlayerBattleActionMenu()
     {
-        playerBattleActionPanel.SetActive(false);
+        //playerBattleActionPanel.SetActive(false);
+        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
     }
 
     public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
@@ -63,12 +65,14 @@ public class UIManager : MonoBehaviour
 
     public void ShowTargetArrow()
     {
-        ChooseTargetArrow.SetActive(true);
+        //ChooseTargetArrow.SetActive(true);
+        LeanTween.alphaCanvas(ChooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.2f);
     }
 
     public void HideTargetArrow()
     {
-        ChooseTargetArrow.SetActive(false);
+        //ChooseTargetArrow.SetActive(false);
+        LeanTween.alphaCanvas(ChooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.2f);
     }
 
     public void ShowActionPrompt(string actionPromptText)
