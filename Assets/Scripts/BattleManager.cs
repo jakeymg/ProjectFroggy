@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private PlayerAnimationManager _animationManager;
     [SerializeField] private UIManager _uimanager;
+    public UIManager uiManager {get{ return _uimanager;}}
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private PlayerStats playerStats;
@@ -79,11 +80,10 @@ public class BattleManager : MonoBehaviour
 
     private void Start() 
     {
+        SetFirstBattleMenuState();
         SetStartingBattleAction();
         SetEnemyStartingPositions(_numberOfEnemies);
-        SetFirstTarget();
-        //ChangeToBattleActionMenuState();
-        ChangeToChooseTargetState();
+        SetFirstTarget(); 
         
     }
 
@@ -96,6 +96,7 @@ public class BattleManager : MonoBehaviour
     {
         string newPlayerBattleActionString = defaultPlayerBattleAction.ToString();
         _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+
     }
 
     public void SetEnemyStartingPositions(int numberOfEnemies)
@@ -134,14 +135,18 @@ public class BattleManager : MonoBehaviour
         enemyList.Add(Enemy);
     }
 
-    public void ChangeToBattleActionMenuState()
+    public void SetFirstBattleMenuState()
     {
         _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
     }
 
+    public void ChangeToBattleActionMenuState()
+    {
+        _stateMachine.ChangeState(new BattleActionMenuState(this));
+    }
+
     public void ChangeToChooseTargetState()
     {
-        _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
         _stateMachine.ChangeState(new BattleChooseTargetState(this));
     }
 
@@ -235,6 +240,32 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
+    public void ChooseBattleAction()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+
+        switch(currentPlayerBattleAction)
+        {
+            case PlayerBattleAction.Attack:
+                ChangeToChooseTargetState();
+                break;
+            case PlayerBattleAction.Catch:
+                break;
+            case PlayerBattleAction.Sticker:
+                break;
+            case PlayerBattleAction.Run:
+                break;
+            default:
+                Debug.Log("Something is wrong with the Choose Battle Action method");
+                break;
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
     public void CycleTarget()
     {
         if (timeBeforeNextAction != 0f)
@@ -324,6 +355,32 @@ public class BattleManager : MonoBehaviour
                 break;
             default:
                 Debug.Log("Something is wrong when targetting previous enemy");
+                break;
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    public void CancelTargetSelect()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+
+        switch(currentPlayerBattleAction)
+        {
+            case PlayerBattleAction.Attack:
+                ChangeToBattleActionMenuState();
+                break;
+            case PlayerBattleAction.Catch:
+                break;
+            case PlayerBattleAction.Sticker:
+                break;
+            case PlayerBattleAction.Run:
+                break;
+            default:
+                Debug.Log("Something is wrong with the Cancel Target Select method");
                 break;
         }
 

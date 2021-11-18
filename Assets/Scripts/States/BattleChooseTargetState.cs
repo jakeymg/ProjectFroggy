@@ -10,7 +10,8 @@ public class BattleChooseTargetState : State
     
     public override void OnEnter()
     {
-
+        owner.southButtonPressed += owner.CancelTargetSelect;
+        owner.uiManager.ShowTargetArrow();
     }
 
     public override void Execute()
@@ -27,6 +28,7 @@ public class BattleChooseTargetState : State
 
     public override void OnExit()
     {
-        
+        owner.southButtonPressed -= owner.CancelTargetSelect;
+        owner.uiManager.HideTargetArrow();
     }
 }

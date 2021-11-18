@@ -45,10 +45,30 @@ public class UIManager : MonoBehaviour
         currentPlayerBattleActionText.text = newString;
     }
 
+    public void ShowPlayerBattleActionMenu()
+    {
+        playerBattleActionPanel.SetActive(true);
+    }
+
+    public void HidePlayerBattleActionMenu()
+    {
+        playerBattleActionPanel.SetActive(false);
+    }
+
     public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
     {
         Camera cam = Camera.main;
         ChooseTargetArrow.transform.position = cam.WorldToScreenPoint(newTargetPosition + targetArrowOffset);
+    }
+
+    public void ShowTargetArrow()
+    {
+        ChooseTargetArrow.SetActive(true);
+    }
+
+    public void HideTargetArrow()
+    {
+        ChooseTargetArrow.SetActive(false);
     }
 
     public void ShowActionPrompt(string actionPromptText)
