@@ -29,11 +29,18 @@ public class UIManager : MonoBehaviour
     [Header("HealthBar")]
     [SerializeField] private GameObject UIHealthBarManager;
 
+    [Header("SelectionHand")]
+    [SerializeField] private GameObject selectionHandObject;
+
     [Header("Battle Actions")]
     [SerializeField] private GameObject playerBattleActionPanel;
     [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
-    [SerializeField] private GameObject ChooseTargetArrow;
+    [SerializeField] private GameObject chooseTargetArrow;
     [SerializeField] private Vector3 targetArrowOffset;
+
+    [Header("Sticker Battle Menu")]
+    [SerializeField] private GameObject stickerSelectPanel;
+    [SerializeField] private GameObject StickerGridArea;
 
     public void ChangeCurrentStateText(string currentState)
     {
@@ -57,22 +64,47 @@ public class UIManager : MonoBehaviour
         LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
     }
 
+    public void ShowStickerSelectPanel()
+    {
+        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 1f, 0.2f);
+    }
+
+    public void HideStickerSelectPanel()
+    {
+        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
+    }
+
     public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
     {
         Camera cam = Camera.main;
-        ChooseTargetArrow.transform.position = cam.WorldToScreenPoint(newTargetPosition + targetArrowOffset);
+        chooseTargetArrow.transform.position = cam.WorldToScreenPoint(newTargetPosition + targetArrowOffset);
     }
 
     public void ShowTargetArrow()
     {
-        //ChooseTargetArrow.SetActive(true);
-        LeanTween.alphaCanvas(ChooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.2f);
+        //chooseTargetArrow.SetActive(true);
+        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.2f);
     }
 
     public void HideTargetArrow()
     {
-        //ChooseTargetArrow.SetActive(false);
-        LeanTween.alphaCanvas(ChooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.2f);
+        //chooseTargetArrow.SetActive(false);
+        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.2f);
+    }
+
+    public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)
+    {
+        selectionHandObject.transform.position = newSelectionPosition + offsetAmount;
+    }
+
+    public void ShowSelectionHand()
+    {
+        LeanTween.alphaCanvas(selectionHandObject.GetComponent<CanvasGroup>(), 1f, 0f);
+    }
+
+    public void HideSelectionHand()
+    {
+        LeanTween.alphaCanvas(selectionHandObject.GetComponent<CanvasGroup>(), 0f, 0f);
     }
 
     public void ShowActionPrompt(string actionPromptText)

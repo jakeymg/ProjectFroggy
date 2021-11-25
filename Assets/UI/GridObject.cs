@@ -14,10 +14,25 @@ public class GridObject : MonoBehaviour
     [SerializeField] private bool occupied;
     [SerializeField] private GameObject currentStickerObject;
     [SerializeField] private TextMeshProUGUI debugGridPositionText;
+    [SerializeField] private Vector3 gridOriginPosCanvas;
+    [SerializeField] private float yPosOffset;
 
     private void Start() 
     {
         SetUnoccupied();
+        StartCoroutine(SetGridPositionCoroutine());
+    }
+
+    IEnumerator SetGridPositionCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        SetGridOriginPos();
+    }
+
+    public void SetGridOriginPos()
+    {
+        gridOriginPosCanvas = (this.GetComponent<RectTransform>().localPosition) + new Vector3(0, yPosOffset, 0);
     }
 
     public void SetDebugText()
@@ -31,9 +46,19 @@ public class GridObject : MonoBehaviour
         gridObejctId = id;
     }
 
+    public int FetchGridObjectId()
+    {
+        return gridObejctId;
+    }
+
     public void SetPageNumber(int pageId)
     {
         page = pageId;
+    }
+
+    public int FetchPageNumber()
+    {
+        return page;
     }
 
     public void SetRowPosition(int rowId)
@@ -41,9 +66,19 @@ public class GridObject : MonoBehaviour
         row = rowId;
     }
 
+    public int FetchRowPosition()
+    {
+        return row;
+    }
+
     public void SetColPosition(int colId)
     {
         col = colId;
+    }
+
+    public int FetchColPosition()
+    {
+        return col;
     }
 
     public void SetOccupied(GameObject newStickerObejct)

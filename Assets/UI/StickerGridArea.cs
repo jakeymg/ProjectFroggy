@@ -11,6 +11,8 @@ public class StickerGridArea : MonoBehaviour
     [SerializeField] private int rowsUnlocked;
     [SerializeField] private int gridObjectPerRow;
     [SerializeField] private int totalNumberOfGridObjects;
+    [SerializeField] private GameObject currentSelectedGridObject;
+    [SerializeField] private GameObject currentSelectionOutlineObject;
     [SerializeField] private GameObject[] gridObjectArray;
     [SerializeField] private GameObject gridObjectPrefab;
     
@@ -18,6 +20,10 @@ public class StickerGridArea : MonoBehaviour
     {
         CalculateNumberOfGridObjects();
         CreateGridObjectArray();
+    }
+    
+    private void Update() {
+        ChangeCurrentSelectedOutlinePosition(currentSelectedGridObject.transform.position);
     }
 
     private void CalculateNumberOfGridObjects()
@@ -33,7 +39,7 @@ public class StickerGridArea : MonoBehaviour
         {
             //Creates a new instance of the Grid Object Prefab, sets it as a child of this UI component so the grid layout can place it and set a unique ID
             gridObjectArray[i] = (GameObject)Instantiate(gridObjectPrefab);
-            gridObjectArray[i].transform.SetParent(this.transform);
+            gridObjectArray[i].transform.SetParent(this.transform, false);
             gridObjectArray[i].GetComponent<GridObject>().SetGridObjectId(i);
 
             gridObjectArray[i].GetComponent<GridObject>().SetPageNumber(pageNumber);
@@ -44,6 +50,20 @@ public class StickerGridArea : MonoBehaviour
 
             gridObjectArray[i].GetComponent<GridObject>().SetDebugText();
         }
+
+        SetColRowToZero();
+        SetFirstSelectedGridObject(gridObjectArray[0]);
+    }
+
+    private void SetColRowToZero()
+    {
+        rowId = 0;
+        colId = 0;
+    }
+
+    private void SetFirstSelectedGridObject(GameObject gridObject)
+    {
+        currentSelectedGridObject = gridObject;
     }
 
     private void CheckColId()
@@ -55,5 +75,35 @@ public class StickerGridArea : MonoBehaviour
     private void CheckRowId()
     {
         if (rowId == 4) {rowId = 3;}
+    }
+
+    private void ChangeCurrentSelectedOutlinePosition(Vector3 newPosition)
+    {
+        currentSelectionOutlineObject.transform.position = newPosition;
+    }
+    
+    public Vector3 FetchCurrentGridObjectPosition()
+    {
+        return currentSelectedGridObject.transform.position;
+    }
+
+    private int CheckCurrentSelectedGridObjectRowPosition()
+    {
+        return currentSelectedGridObject.GetComponent<GridObject>().FetchRowPosition();
+    }
+
+    private int CheckCurrentSelectedGridObjectColPosition()
+    {
+        return currentSelectedGridObject.GetComponent<GridObject>().FetchColPosition();
+    }
+
+    private int CheckCurrentSelectedGridObjectId()
+    {
+        return currentSelectedGridObject.GetComponent<GridObject>().FetchGridObjectId();
+    }
+
+    private void ChangeCurrentSelectedGridObject(int gridObjectId)
+    {
+        currentSelectedGridObject = gridObjectArray[gridObjectId];
     }
 }

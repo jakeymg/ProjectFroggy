@@ -12,6 +12,7 @@ public class BattleChooseTargetState : State
     {
         owner.southButtonPressed += owner.CancelTargetSelect;
         owner.uiManager.ShowTargetArrow();
+        //Set Selection Hand position and Selection outline position based on position of currently selected grid object
     }
 
     public override void Execute()

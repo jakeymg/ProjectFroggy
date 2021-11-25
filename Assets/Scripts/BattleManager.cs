@@ -150,6 +150,11 @@ public class BattleManager : MonoBehaviour
         _stateMachine.ChangeState(new BattleChooseTargetState(this));
     }
 
+    public void ChangeToChooseStickerState()
+    {
+        _stateMachine.ChangeState(new BattleChooseStickerState(this));
+    }
+
     public void CheckDirectionInput()
     {
         _directionInput = playerControls.BattleControls.Move.ReadValue<Vector2>();
@@ -255,6 +260,7 @@ public class BattleManager : MonoBehaviour
             case PlayerBattleAction.Catch:
                 break;
             case PlayerBattleAction.Sticker:
+                ChangeToChooseStickerState();
                 break;
             case PlayerBattleAction.Run:
                 break;
@@ -385,6 +391,11 @@ public class BattleManager : MonoBehaviour
         }
 
         timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    public void CancelChooseSticker()
+    {
+        ChangeToBattleActionMenuState();
     }
     
     private void SetFirstTarget()
