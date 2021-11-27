@@ -135,6 +135,12 @@ public class BattleManager : MonoBehaviour
         enemyList.Add(Enemy);
     }
 
+    private void SetFirstTarget()
+    {
+        _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+        _currentTarget = enemyPositionOne;
+    }
+
     public void SetFirstBattleMenuState()
     {
         _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
@@ -396,12 +402,6 @@ public class BattleManager : MonoBehaviour
     public void CancelChooseSticker()
     {
         ChangeToBattleActionMenuState();
-    }
-    
-    private void SetFirstTarget()
-    {
-        _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-        _currentTarget = enemyPositionOne;
     }
 
     void OnEastButton(InputAction.CallbackContext context)

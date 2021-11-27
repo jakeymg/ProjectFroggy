@@ -21,10 +21,6 @@ public class StickerGridArea : MonoBehaviour
         CalculateNumberOfGridObjects();
         CreateGridObjectArray();
     }
-    
-    private void Update() {
-        ChangeCurrentSelectedOutlinePosition(currentSelectedGridObject.transform.position);
-    }
 
     private void CalculateNumberOfGridObjects()
     {
@@ -77,7 +73,7 @@ public class StickerGridArea : MonoBehaviour
         if (rowId == 4) {rowId = 3;}
     }
 
-    private void ChangeCurrentSelectedOutlinePosition(Vector3 newPosition)
+    public void ChangeCurrentSelectedOutlinePosition(Vector3 newPosition)
     {
         currentSelectionOutlineObject.transform.position = newPosition;
     }
@@ -85,6 +81,11 @@ public class StickerGridArea : MonoBehaviour
     public Vector3 FetchCurrentGridObjectPosition()
     {
         return currentSelectedGridObject.transform.position;
+    }
+
+    public Vector3 FetchCurrentGridObjectPositionOffset()
+    {
+        return currentSelectedGridObject.GetComponent<GridObject>().CheckGridObjectPositionOffset();
     }
 
     private int CheckCurrentSelectedGridObjectRowPosition()

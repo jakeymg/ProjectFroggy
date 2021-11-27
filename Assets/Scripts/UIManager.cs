@@ -40,7 +40,14 @@ public class UIManager : MonoBehaviour
 
     [Header("Sticker Battle Menu")]
     [SerializeField] private GameObject stickerSelectPanel;
-    [SerializeField] private GameObject StickerGridArea;
+    [SerializeField] private GameObject _stickerGridAreaGameObject;
+    [SerializeField] private StickerGridArea _stickerGridArea;
+    public StickerGridArea stickerGridArea {get{ return _stickerGridArea;}}
+
+    private void Start() 
+    {
+        _stickerGridArea = _stickerGridAreaGameObject.GetComponent<StickerGridArea>();
+    }
 
     public void ChangeCurrentStateText(string currentState)
     {

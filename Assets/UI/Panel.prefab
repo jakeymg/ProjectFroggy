@@ -99,6 +99,7 @@ MonoBehaviour:
   debugGridPositionText: {fileID: 4141808834717754574}
   gridOriginPosCanvas: {x: 0, y: 0, z: 0}
   yPosOffset: -28
+  gridObjectPosOffset: {x: 64, y: -64, z: 0}
 --- !u!1 &4425969174053454958
 GameObject:
   m_ObjectHideFlags: 0

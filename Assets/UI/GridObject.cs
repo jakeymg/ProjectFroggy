@@ -16,6 +16,7 @@ public class GridObject : MonoBehaviour
     [SerializeField] private TextMeshProUGUI debugGridPositionText;
     [SerializeField] private Vector3 gridOriginPosCanvas;
     [SerializeField] private float yPosOffset;
+    [SerializeField] private Vector3 gridObjectPosOffset;
 
     private void Start() 
     {
@@ -101,5 +102,10 @@ public class GridObject : MonoBehaviour
     public GameObject CheckCurrentStickerObject()
     {
         return currentStickerObject;
+    }
+
+    public Vector3 CheckGridObjectPositionOffset()
+    {
+        return gridObjectPosOffset;
     }
 }

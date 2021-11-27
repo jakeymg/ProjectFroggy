@@ -4292,7 +4292,7 @@ MonoBehaviour:
   _mainCameraFramingTransposer: {fileID: 0}
   currentPlayerBattleAction: 0
   defaultPlayerBattleAction: 0
-  moveRepeatDelay: 0.2
+  moveRepeatDelay: 0.15
   timeBeforeNextAction: 0
   _directionInput: {x: 0, y: 0}
   _numberOfEnemies: 3
@@ -5618,7 +5618,8 @@ MonoBehaviour:
   chooseTargetArrow: {fileID: 913225361}
   targetArrowOffset: {x: 0, y: 2, z: 0}
   stickerSelectPanel: {fileID: 468824186}
-  StickerGridArea: {fileID: 1121538533}
+  _stickerGridAreaGameObject: {fileID: 1121538533}
+  _stickerGridArea: {fileID: 0}
 --- !u!4 &2117195914
 Transform:
   m_ObjectHideFlags: 0
