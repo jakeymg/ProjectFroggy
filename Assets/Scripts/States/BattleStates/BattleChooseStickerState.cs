@@ -37,6 +37,7 @@ public class BattleChooseStickerState : State
     {
         owner.CheckDirectionInput();
         owner.CheckTimeBeforeNextAction();
+        owner.CycleSelectedSticker();
     }
 
     public override void OnExit()

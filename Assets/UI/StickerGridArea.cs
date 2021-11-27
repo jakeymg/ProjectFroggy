@@ -107,4 +107,5 @@ public class StickerGridArea : MonoBehaviour
     {
         currentSelectedGridObject = gridObjectArray[gridObjectId];
     }
+
 }

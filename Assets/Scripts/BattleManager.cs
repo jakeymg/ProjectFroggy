@@ -399,6 +399,85 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
+    public void CycleSelectedSticker()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+        else
+        {
+            float xInput = CheckInputDirectionX();
+            float yInput = CheckInputDirectionY();
+
+            if (xInput != 0f || yInput != 0f)
+            {ChangeSelectedSticker(xInput, yInput);}
+        }
+    }
+
+    private void ChangeSelectedSticker(float xInput, float yInput)
+    {
+        bool xInputStronger = IsXInputStrongValue(xInput, yInput);
+
+        if (!xInputStronger)
+        {ChangeSelectedStickerYAxis(yInput);}
+        else 
+        {ChangeSelectedStickerXAxis(xInput);}
+    }
+
+    private void ChangeSelectedStickerYAxis(float directionFloat)
+    {
+        if (directionFloat > 0f)
+        {
+            //Check next grid object to the right
+        }
+        else if (directionFloat < 0f)
+        {
+            //Check next grid object to the left
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    } 
+
+    private void ChangeSelectedStickerXAxis(float directionFloat)
+    {
+        if (directionFloat > 0f)
+        {
+            //Check next grid object above
+        }
+        else if (directionFloat < 0f)
+        {
+            //Check next grid object below
+        }
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
+    public float CheckInputDirectionX()
+    {
+        float xInput = _directionInput.x;
+
+        if (xInput != 0f) {return xInput;}
+        else {return 0f;}
+    }
+
+    public float CheckInputDirectionY()
+    {
+        float yInput = _directionInput.y;
+
+        if (yInput != 0f) {return yInput;}
+        else {return 0f;}
+    }
+
+    public bool IsXInputStrongValue(float x, float y)
+    {
+        float xAbs = Mathf.Abs(x);
+        float yAbs = Mathf.Abs(y);
+
+        if (xAbs > yAbs) {return true;}
+        else {return false;}
+    }
+
     public void CancelChooseSticker()
     {
         ChangeToBattleActionMenuState();
