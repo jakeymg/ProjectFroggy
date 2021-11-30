@@ -143,22 +143,30 @@ public class BattleManager : MonoBehaviour
 
     public void SetFirstBattleMenuState()
     {
-        _stateMachine.InitialiseStateMachine(new BattleActionMenuState(this));
+        State thisState = new BattleActionMenuState(this);
+        _stateMachine.InitialiseStateMachine(thisState);
+        _stateMachine.ChangeBattleManagerStateUI(thisState);
     }
 
     public void ChangeToBattleActionMenuState()
     {
-        _stateMachine.ChangeState(new BattleActionMenuState(this));
+        State thisState = new BattleActionMenuState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeBattleManagerStateUI(thisState);
     }
 
     public void ChangeToChooseTargetState()
     {
-        _stateMachine.ChangeState(new BattleChooseTargetState(this));
+        State thisState = new BattleChooseTargetState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeBattleManagerStateUI(thisState);
     }
 
     public void ChangeToChooseStickerState()
     {
-        _stateMachine.ChangeState(new BattleChooseStickerState(this));
+        State thisState = new BattleChooseStickerState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeBattleManagerStateUI(thisState);
     }
 
     public void CheckDirectionInput()
@@ -429,13 +437,14 @@ public class BattleManager : MonoBehaviour
     {
         if (directionFloat > 0f)
         {
-            //Check next grid object to the right
+            uiManager.stickerGridArea.CheckGridObjectBelow();
         }
         else if (directionFloat < 0f)
         {
-            //Check next grid object to the left
+            uiManager.stickerGridArea.CheckGridObjectAbove();
         }
 
+        uiManager.ChangeSelectedStickerUI();
         timeBeforeNextAction = moveRepeatDelay;
     } 
 
@@ -443,13 +452,14 @@ public class BattleManager : MonoBehaviour
     {
         if (directionFloat > 0f)
         {
-            //Check next grid object above
+            uiManager.stickerGridArea.CheckGridObjectRight();
         }
         else if (directionFloat < 0f)
         {
-            //Check next grid object below
+            uiManager.stickerGridArea.CheckGridObjectLeft();
         }
 
+        uiManager.ChangeSelectedStickerUI();
         timeBeforeNextAction = moveRepeatDelay;
     }
 

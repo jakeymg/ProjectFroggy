@@ -44,7 +44,7 @@ public class StickerGridArea : MonoBehaviour
             CheckColId();
             CheckRowId();
 
-            gridObjectArray[i].GetComponent<GridObject>().SetDebugText();
+            //gridObjectArray[i].GetComponent<GridObject>().SetDebugText();
         }
 
         SetColRowToZero();
@@ -108,4 +108,71 @@ public class StickerGridArea : MonoBehaviour
         currentSelectedGridObject = gridObjectArray[gridObjectId];
     }
 
+    public void CheckGridObjectRight()
+    {
+        int currentColPos = CheckCurrentSelectedGridObjectColPosition();
+        int currentGridObjectId = CheckCurrentSelectedGridObjectId();
+        int newGridObjectId = currentGridObjectId + 1;
+
+        switch(currentColPos)
+        {
+            case 3:
+                Debug.Log("Can't find grid object to right");
+                break;
+            default:
+                ChangeCurrentSelectedGridObject(newGridObjectId);
+                break;
+        }
+    }
+
+    public void CheckGridObjectLeft()
+    {
+        int currentColPos = CheckCurrentSelectedGridObjectColPosition();
+        int currentGridObjectId = CheckCurrentSelectedGridObjectId();
+        int newGridObjectId = currentGridObjectId - 1;
+
+        switch(currentColPos)
+        {
+            case 0:
+                Debug.Log("Can't find grid object to left");
+                break;
+            default:
+                ChangeCurrentSelectedGridObject(newGridObjectId);
+                break;
+        }
+    }
+
+    public void CheckGridObjectAbove()
+    {
+        int currentRowPos = CheckCurrentSelectedGridObjectRowPosition();
+        int currentGridObjectId = CheckCurrentSelectedGridObjectId();
+        int newGridObjectId = currentGridObjectId + 4;
+
+        switch(currentRowPos)
+        {
+            case 3:
+                Debug.Log("Can't find grid object above");
+                break;
+            default:
+                ChangeCurrentSelectedGridObject(newGridObjectId);
+                break;
+        }
+    }
+
+    public void CheckGridObjectBelow()
+    {
+        int currentRowPos = CheckCurrentSelectedGridObjectRowPosition();
+        int currentGridObjectId = CheckCurrentSelectedGridObjectId();
+        int newGridObjectId = currentGridObjectId - 4;
+
+        switch(currentRowPos)
+        {
+            case 0:
+                Debug.Log("Can't find grid object below");
+                break;
+            default:
+                ChangeCurrentSelectedGridObject(newGridObjectId);
+                break;
+        }
+    }
 }

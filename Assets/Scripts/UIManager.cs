@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PromptTrigger recentTriggeredObject;
 
     [Header("Debugging")]
-    [SerializeField] private TextMeshProUGUI currentStateText;
+    [SerializeField] private TextMeshProUGUI currentPlayerStateText;
+    [SerializeField] private TextMeshProUGUI currentBattleManagerStateText;
 
     [Header("Dialouge")]
     [SerializeField] private GameObject dialougePanel;
@@ -49,9 +50,14 @@ public class UIManager : MonoBehaviour
         _stickerGridArea = _stickerGridAreaGameObject.GetComponent<StickerGridArea>();
     }
 
-    public void ChangeCurrentStateText(string currentState)
+    public void ChangeCurrentPlayerStateUI(string currentPlayerState)
     {
-        currentStateText.text = currentState;
+        currentPlayerStateText.text = currentPlayerState;
+    }
+
+    public void ChangeBattleManagerStateUI(string currentBattleManagerState)
+    {
+        currentBattleManagerStateText.text = currentBattleManagerState;
     }
 
     public void ChangePlayerBattleActionText(string newString)
@@ -79,6 +85,15 @@ public class UIManager : MonoBehaviour
     public void HideStickerSelectPanel()
     {
         LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
+    }
+
+    public void ChangeSelectedStickerUI()
+    {
+        Vector3 currentGridObjPos = stickerGridArea.FetchCurrentGridObjectPosition();
+        Vector3 currentGridObjPosOffset = stickerGridArea.FetchCurrentGridObjectPositionOffset();
+
+        ChangeSelectionHandPosition(currentGridObjPos, currentGridObjPosOffset);
+        stickerGridArea.ChangeCurrentSelectedOutlinePosition(currentGridObjPos);
     }
 
     public void ChangeTargetArrowPosition(Vector3 newTargetPosition)

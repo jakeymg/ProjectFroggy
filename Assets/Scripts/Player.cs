@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
     
     void Start()
     {
-        ChangeToIdle();
+        SetFirstPlayerState();
     }
 
     void Update() 
@@ -227,14 +227,60 @@ public class Player : MonoBehaviour
         _interactableTarget = null;
     }
 
+    public void SetFirstPlayerState()
+    {
+        State thisState = new IdleState(this);
+        _stateMachine.InitialiseStateMachine(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
     public void ChangeToSitting()
     {
-        _stateMachine.ChangeState(new SitState(this));
+        State thisState = new SitState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
     }
 
     public void ChangeToIdle()
     {
-        _stateMachine.InitialiseStateMachine(new IdleState(this));
+        State thisState = new IdleState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToChooseBattleAction()
+    {
+        State thisState = new ChooseBattleAction(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToRun()
+    {
+        State thisState = new RunState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToWalk()
+    {
+        State thisState = new WalkState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToFall()
+    {
+        State thisState = new FallState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToSlide()
+    {
+        State thisState = new SlideState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
     }
 
     public void MovePlayer(float speedModifier = 1f)
@@ -314,13 +360,13 @@ public class Player : MonoBehaviour
         if (_isGrounded && _groundSlopeAngle >= 45f)
         {
             if (showDebug) {print("Player should be sliding");}
-            _stateMachine.ChangeState(new SlideState(this));
+            ChangeToSlide();
         }
 
         else if (!_isGrounded && _groundSlopeAngle >= 5f)
         {
             if (showDebug) {print("Player should be falling");}
-            _stateMachine.ChangeState(new FallState(this));
+            ChangeToFall();
         }
 
         else if (_isOnEdge)
@@ -329,10 +375,11 @@ public class Player : MonoBehaviour
             
             if (_groundSlopeAngle >= 0f)
             {
-                _stateMachine.ChangeState(new SlideState(this)); 
+                ChangeToSlide();
                 Debug.Log("Feeling Wobbly"); /* WobbleState eventually */ 
             }
-            else {_stateMachine.ChangeState(new FallState(this));}
+            else 
+            {ChangeToFall();}
         }
 
         else 
@@ -348,11 +395,11 @@ public class Player : MonoBehaviour
         {
             if (moveVelocity >= 0.6f)
             {
-                _stateMachine.ChangeState(new RunState(this));
+                ChangeToRun();
             }
             else
             {
-                _stateMachine.ChangeState(new WalkState(this));
+                ChangeToWalk();
             }
         }
         else

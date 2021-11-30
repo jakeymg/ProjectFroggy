@@ -6,14 +6,12 @@ using Animancer;
 public class IdleState : State
 {
     Player owner;
-    private StateMachine _stateMachine;
     private float _idleTime = 0f;
     
     public IdleState(Player owner) { this.owner = owner;}
 
     public override void OnEnter()
     {
-        _stateMachine = owner.GetComponent<StateMachine>();
         owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
     }
 

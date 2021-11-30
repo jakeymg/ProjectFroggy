@@ -19,8 +19,6 @@ public class StateMachine : MonoBehaviour
                 newState.OnEnter();
                 _currentState = newState;
             }
-
-            UIManager.ChangeCurrentStateText(_currentState.GetType().ToString());
         }
     }
 
@@ -44,6 +42,15 @@ public class StateMachine : MonoBehaviour
     {
         firstState.OnEnter();
         _currentState = firstState;
-        UIManager.ChangeCurrentStateText(firstState.GetType().ToString());
+    }
+
+    public void ChangeBattleManagerStateUI(State stateName)
+    {
+        UIManager.ChangeBattleManagerStateUI(stateName.GetType().ToString());
+    }
+
+    public void ChangeCurrentPlayerStateUI(State stateName)
+    {
+        UIManager.ChangeCurrentPlayerStateUI(stateName.GetType().ToString());
     }
 }
