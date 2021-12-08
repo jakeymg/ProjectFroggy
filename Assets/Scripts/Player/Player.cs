@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
 
     public void SetFirstPlayerState()
     {
-        State thisState = new IdleState(this);
+        State thisState = new ChooseBattleAction(this);
         _stateMachine.InitialiseStateMachine(thisState);
         _stateMachine.ChangeCurrentPlayerStateUI(thisState);
     }

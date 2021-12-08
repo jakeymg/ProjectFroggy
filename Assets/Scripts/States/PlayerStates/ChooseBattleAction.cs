@@ -20,11 +20,7 @@ public class ChooseBattleAction : State
 
     public override void FixedExecute()
     {
-        owner.CheckIfGrounded();
-        owner.CheckSlopeAngle();        
-        owner.ShouldPlayerSlideOrFall();
 
-        owner.ApplyGravity();
     }
 
     public override void OnExit()
