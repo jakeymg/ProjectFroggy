@@ -12,6 +12,7 @@ public class BattleChooseTargetState : State
     {
         owner.southButtonPressed += owner.CancelTargetSelect;
         owner.uiManager.ShowTargetArrow();
+        owner.uiManager.ShowEnemyHealthNamePanel();
         //Set Selection Hand position and Selection outline position based on position of currently selected grid object
     }
 
@@ -31,5 +32,6 @@ public class BattleChooseTargetState : State
     {
         owner.southButtonPressed -= owner.CancelTargetSelect;
         owner.uiManager.HideTargetArrow();
+        owner.uiManager.HideEnemyHealthNamePanel();
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 375ada8cadc555e4fb7074403cccefad, type: 3}
-  m_Name: Headbutt
+  m_Name: Groove
   m_EditorClassIdentifier: 
-  _percentToHit: 0.66
-  _damadgeOnHit: 1
+  _percentToHit: 1
+  _damadgeOnHit: 0

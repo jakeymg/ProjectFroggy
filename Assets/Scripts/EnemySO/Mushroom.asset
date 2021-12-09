@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 2
   _currentHealth: 2
-  _name: Funguy
+  _enemyName: Funguy
   _targetArrowOffset: {x: 0, y: 0, z: 0}
   _actionsList:
   - {fileID: 11400000, guid: 934b99d96b9136149ab1df7c527ea33a, type: 2}
-  - {fileID: 11400000, guid: 934b99d96b9136149ab1df7c527ea33a, type: 2}
+  - {fileID: 11400000, guid: f3105375551037645984868979a3c4a5, type: 2}

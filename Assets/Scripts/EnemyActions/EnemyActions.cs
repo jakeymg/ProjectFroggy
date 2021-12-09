@@ -8,7 +8,7 @@ public class EnemyActions : ScriptableObject
     [SerializeField] private float _percentToHit;
     [SerializeField] private int _damadgeOnHit;
 
-    public virtual void DoAction()
+    public void DoAction()
     {
 
     }

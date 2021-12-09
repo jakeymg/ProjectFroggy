@@ -39,6 +39,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject chooseTargetArrow;
     [SerializeField] private Vector3 targetArrowOffset;
 
+    [Header("Enemy Health Name Panel")]
+    [SerializeField] private GameObject _enemyHealthNamePanel;
+    [SerializeField] private CanvasGroup _enemyHealthNamePanelCG;
+    [SerializeField] private TextMeshProUGUI _enemyNameTMP;
+    [SerializeField] private TextMeshProUGUI _enemyCurrentHealthTMP;
+    [SerializeField] private UnityEngine.UI.Image _enemyCurrentHealthIMG;
+
     [Header("Sticker Battle Menu")]
     [SerializeField] private GameObject stickerSelectPanel;
     [SerializeField] private GameObject _stickerGridAreaGameObject;
@@ -48,6 +55,7 @@ public class UIManager : MonoBehaviour
     private void Start() 
     {
         _stickerGridArea = _stickerGridAreaGameObject.GetComponent<StickerGridArea>();
+        _enemyHealthNamePanelCG = _enemyHealthNamePanel.GetComponent<CanvasGroup>();
     }
 
     public void ChangeCurrentPlayerStateUI(string currentPlayerState)
@@ -112,6 +120,27 @@ public class UIManager : MonoBehaviour
     {
         //chooseTargetArrow.SetActive(false);
         LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.2f);
+    }
+
+    public void ChangeEnemyHealthNamePanelPosition()
+    {
+        _enemyHealthNamePanel.transform.position = chooseTargetArrow.transform.position + new Vector3(0, 110, 0);
+    }
+
+    public void ShowEnemyHealthNamePanel()
+    {
+        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 1f, 0.2f);
+    }
+
+    public void HideEnemyHealthNamePanel()
+    {
+        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 0f, 0.2f);
+    }
+
+    public void SetEnemyHealthPanelDisplayStats(string enemyName, int currentHealth)
+    {
+        _enemyNameTMP.text = enemyName;
+        _enemyCurrentHealthTMP.text = currentHealth.ToString();
     }
 
     public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)
