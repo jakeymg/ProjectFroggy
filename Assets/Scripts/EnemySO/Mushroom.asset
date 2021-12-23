@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Mushroom
   m_EditorClassIdentifier: 
   _maxHealth: 2
-  _currentHealth: 2
   _enemyName: Funguy
   _targetArrowOffset: {x: 0, y: 0, z: 0}
   _actionsList:

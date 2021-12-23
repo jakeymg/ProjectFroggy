@@ -7,14 +7,13 @@ using TMPro;
 
 public class UIHealthBarManager : MonoBehaviour
 {
+    [SerializeField] private GameReferenceManager _gameReferenceManager;
     [SerializeField] private GameObject HealthBarDisplay;
     [SerializeField] private GameObject HealthBarCurrentHealth;
     [SerializeField] private GameObject HealthBarMaxHealth;
     [SerializeField] private TextMeshProUGUI HealthBarCurrentHealthText;
     [SerializeField] private TextMeshProUGUI HealthBarMaxHealthText;
     [SerializeField] private UnityEngine.UI.Image _healthBarDisplayImage;
-
-    [SerializeField] private GameObject Player;
     [SerializeField] private PlayerStats PlayerStats;
     
     private void Awake() 
@@ -22,12 +21,11 @@ public class UIHealthBarManager : MonoBehaviour
         if (HealthBarDisplay == null) { Debug.Log("HealthBarDisplay cannot be found");}
         if (HealthBarCurrentHealth == null) { Debug.Log("HealthBarCurrentHealth cannot be found");}
         if (HealthBarMaxHealth == null) { Debug.Log("HealthBarMaxHealth cannot be found");}
-        if (Player == null) {Debug.Log("No reference to the player found");}
 
         HealthBarCurrentHealthText = HealthBarCurrentHealth.GetComponent<TextMeshProUGUI>();
         HealthBarMaxHealthText = HealthBarMaxHealth.GetComponent<TextMeshProUGUI>();
         _healthBarDisplayImage = HealthBarDisplay.GetComponent<UnityEngine.UI.Image>();
-        PlayerStats = Player.GetComponent<PlayerStats>();
+        PlayerStats = _gameReferenceManager.player.GetComponent<PlayerStats>();
 
         HealthBarMaxHealthText.text = ("/" + PlayerStats.maxHealth.ToString()); 
     }

@@ -1301,7 +1301,8 @@ MonoBehaviour:
   timeBeforeNextAction: 0
   _directionInput: {x: 0, y: 0}
   _numberOfEnemies: 3
-  _currentTarget: {fileID: 0}
+  _currentTargetPosition: {fileID: 0}
+  _currentTargetEnemy: {fileID: 0}
   enemyPositionOne: {fileID: 473059102}
   _enemyOne: {fileID: 0}
   enemyPositionTwo: {fileID: 427622608}
@@ -1581,11 +1582,15 @@ PrefabInstance:
     - target: {fileID: 8083605997922827657, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1484170399}
+      objectReference: {fileID: 0}
     - target: {fileID: 8083605997922827657, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
       propertyPath: PlayerStats
       value: 
-      objectReference: {fileID: 1484170404}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083605997922827657, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
+      propertyPath: _gameReferenceManager
+      value: 
+      objectReference: {fileID: 1159517455}
     - target: {fileID: 8083605997924567045, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
       propertyPath: _player
       value: 

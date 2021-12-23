@@ -137,10 +137,13 @@ public class UIManager : MonoBehaviour
         LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 0f, 0.2f);
     }
 
-    public void SetEnemyHealthPanelDisplayStats(string enemyName, int currentHealth)
+    public void ChangeEnemyHealthPanelDisplayStats(string enemyName, int currentHealth, int maxHealth)
     {
         _enemyNameTMP.text = enemyName;
         _enemyCurrentHealthTMP.text = currentHealth.ToString();
+
+        float newFillAmount = (float)currentHealth / (float)maxHealth;
+        _enemyCurrentHealthIMG.fillAmount = newFillAmount;
     }
 
     public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)
