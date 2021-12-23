@@ -13,11 +13,11 @@ public class BattleChooseStickerState : State
     {
         owner.southButtonPressed += owner.CancelChooseSticker;
        
-        owner.uiManager.ChangeSelectedStickerUI();
+        owner.gameReferenceManager.uiManager.ChangeSelectedStickerUI();
 
         //Show Sticker Page Menu and Selection Hand objects on the UI
-        owner.uiManager.ShowStickerSelectPanel();
-        owner.uiManager.ShowSelectionHand();
+        owner.gameReferenceManager.uiManager.ShowStickerSelectPanel();
+        owner.gameReferenceManager.uiManager.ShowSelectionHand();
     }
 
     public override void Execute()
@@ -35,7 +35,7 @@ public class BattleChooseStickerState : State
     public override void OnExit()
     {
         owner.southButtonPressed -= owner.CancelChooseSticker;
-        owner.uiManager.HideStickerSelectPanel();
-        owner.uiManager.HideSelectionHand();
+        owner.gameReferenceManager.uiManager.HideStickerSelectPanel();
+        owner.gameReferenceManager.uiManager.HideSelectionHand();
     }
 }

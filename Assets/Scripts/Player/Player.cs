@@ -8,10 +8,10 @@ using Cinemachine;
 public class Player : MonoBehaviour
 {
     [Header("General")]
+    [SerializeField] private GameReferenceManager _gameReferenceManager;
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerAnimationManager _animationManager;
-    [SerializeField] private UIManager _uimanager;
     [SerializeField] private GameObject _interactableTarget;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         moveVal = playerControls.Gameplay.Move.ReadValue<Vector2>();
         moveVelocity = moveVal.magnitude;
         
-        if (_uimanager.IsDialougeActive()) 
+        if (_gameReferenceManager.uiManager.IsDialougeActive()) 
         {
             moveVelocity = 0;
         }
@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
 
     public void SetFirstPlayerState()
     {
-        State thisState = new ChooseBattleAction(this);
+        State thisState = new IdleState(this);
         _stateMachine.InitialiseStateMachine(thisState);
         _stateMachine.ChangeCurrentPlayerStateUI(thisState);
     }
@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(float speedModifier = 1f)
     {
-        if (_uimanager.IsDialougeActive()) return;
+        if (_gameReferenceManager.uiManager.IsDialougeActive()) return;
 
         moveDirection = new Vector3(moveVal.x, 0, moveVal.y);
         
@@ -298,6 +298,34 @@ public class Player : MonoBehaviour
 
         //SlidePlayer();
         //ApplyGravity();
+    }
+
+    public IEnumerator MoveToTargetPosition(Vector3 targetPosition, Vector3 startPosition, float timeToMove)
+    {
+        float t = 0f;
+        
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToMove;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        yield return StartCoroutine(MoveToDefaultPosition(startPosition, targetPosition, timeToMove));
+    }
+
+    public IEnumerator MoveToDefaultPosition(Vector3 targetPosition, Vector3 startPosition, float timeToMove) 
+    {
+        float t = 0f;
+
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToMove;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        _gameReferenceManager.battleManager.ChangeToBattleActionMenuState();
     }
 
     public void CheckIfGrounded()
@@ -345,7 +373,7 @@ public class Player : MonoBehaviour
     
     private void ShouldPlayerBeIdle()
     {
-        if (_uimanager.IsDialougeActive()) return;
+        if (_gameReferenceManager.uiManager.IsDialougeActive()) return;
         
         if (_stateMachine.currentState.GetType().ToString() != "SitState" && _stateMachine.currentState.GetType().ToString() != "IdleState")
         {
@@ -410,7 +438,7 @@ public class Player : MonoBehaviour
 
     public void PlayDustParticle()
     {
-        if (_uimanager.IsDialougeActive()) return;
+        if (_gameReferenceManager.uiManager.IsDialougeActive()) return;
         _movementDust.Play();
     }
 

@@ -8,15 +8,14 @@ using Cinemachine;
 public class BattleManager : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private GameReferenceManager _gameReferenceManager;
+    public GameReferenceManager gameReferenceManager {get{return _gameReferenceManager;}}
     [SerializeField] private StateMachine _stateMachine;
-    [SerializeField] private PlayerAnimationManager _animationManager;
-    [SerializeField] private UIManager _uimanager;
-    public UIManager uiManager {get{ return _uimanager;}}
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
-    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private CinemachineVirtualCamera _mainCamera;
     [SerializeField] private CinemachineFramingTransposer _mainCameraFramingTransposer;
+    [SerializeField] private Vector3 _playerDefaultWorldPos;
     
     [Header("Player Battle Actions")]
     [SerializeField] private PlayerBattleAction currentPlayerBattleAction;
@@ -53,9 +52,8 @@ public class BattleManager : MonoBehaviour
     private void Awake() 
     {
         _stateMachine = GetComponent<StateMachine>(); if (_stateMachine == null) { Debug.Log("Player State Machine cannot be found");}
-        //_animationManager = GetComponent<PlayerAnimationManager>(); if (_animationManager == null) { Debug.Log("Player Animation Manager cannot be found");}
         playerInput = GetComponent<PlayerInput>(); if (playerInput == null) { Debug.Log("Player Input cannot be found");}
-        playerStats = GetComponent<PlayerStats>(); if (playerStats == null) { Debug.Log("Player Stats cannot be found");}
+        _playerDefaultWorldPos = _gameReferenceManager.player.transform.position;
 
         if (_mainCamera == null) { Debug.Log("Player Follow Camera cannot be found");}
         _mainCameraFramingTransposer = _mainCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -99,7 +97,7 @@ public class BattleManager : MonoBehaviour
     private void SetStartingBattleAction()
     {
         string newPlayerBattleActionString = defaultPlayerBattleAction.ToString();
-        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+        _gameReferenceManager.uiManager.ChangePlayerBattleActionText(newPlayerBattleActionString);
 
     }
 
@@ -168,9 +166,9 @@ public class BattleManager : MonoBehaviour
 
     private void SetFirstTarget()
     {
-        _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-        _uimanager.ChangeEnemyHealthNamePanelPosition();
-        _uimanager.SetEnemyHealthPanelDisplayStats(_enemyOne.enemyName, _enemyOne.currentHealth);
+        _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+        _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
+        _gameReferenceManager.uiManager.SetEnemyHealthPanelDisplayStats(_enemyOne.enemyName, _enemyOne.currentHealth);
         _currentTarget = enemyPositionOne;
     }
 
@@ -198,6 +196,13 @@ public class BattleManager : MonoBehaviour
     public void ChangeToChooseStickerState()
     {
         State thisState = new BattleChooseStickerState(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeBattleManagerStateUI(thisState);
+    }
+
+    public void ChangeToPerformAttackState()
+    {
+        State thisState = new BattlePerformAttackState(this);
         _stateMachine.ChangeState(thisState);
         _stateMachine.ChangeBattleManagerStateUI(thisState);
     }
@@ -260,7 +265,7 @@ public class BattleManager : MonoBehaviour
         }
 
         string newPlayerBattleActionString = currentPlayerBattleAction.ToString();
-        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+        _gameReferenceManager.uiManager.ChangePlayerBattleActionText(newPlayerBattleActionString);
 
         timeBeforeNextAction = moveRepeatDelay;
     }
@@ -287,7 +292,7 @@ public class BattleManager : MonoBehaviour
         }
 
         string newPlayerBattleActionString = currentPlayerBattleAction.ToString();
-        _uimanager.ChangePlayerBattleActionText(newPlayerBattleActionString);
+        _gameReferenceManager.uiManager.ChangePlayerBattleActionText(newPlayerBattleActionString);
 
         timeBeforeNextAction = moveRepeatDelay;
     }
@@ -346,30 +351,30 @@ public class BattleManager : MonoBehaviour
                 break;
             case 2:
                 if (_currentTarget == enemyPositionOne){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionTwo;
                 }
                 else if (_currentTarget == enemyPositionTwo){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionOne;
                 }
                 break;
             case 3:
                 if (_currentTarget == enemyPositionOne){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionTwo;
                 }
                 else if (_currentTarget == enemyPositionTwo){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionThree;
                 }
                 else if (_currentTarget == enemyPositionThree){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionOne;
                 }
                 break;
@@ -389,30 +394,30 @@ public class BattleManager : MonoBehaviour
                 break;
             case 2:
                 if (_currentTarget == enemyPositionOne){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionTwo;
                 }
                 else if (_currentTarget == enemyPositionTwo){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionOne;
                 }
                 break;
             case 3:
                 if (_currentTarget == enemyPositionOne){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionThree.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionThree;
                 }
                 else if (_currentTarget == enemyPositionTwo){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionOne.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionOne;
                 }
                 else if (_currentTarget == enemyPositionThree){
-                    _uimanager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
-                    _uimanager.ChangeEnemyHealthNamePanelPosition();
+                    _gameReferenceManager.uiManager.ChangeTargetArrowPosition(enemyPositionTwo.transform.position);
+                    _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
                     _currentTarget = enemyPositionTwo;
                 }
                 break;
@@ -450,6 +455,18 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
+    public void ChooseTarget()
+    {
+        if (timeBeforeNextAction != 0f)
+        {
+            return;
+        }
+
+        ChangeToPerformAttackState();
+
+        timeBeforeNextAction = moveRepeatDelay;
+    }
+
     public void CycleSelectedSticker()
     {
         if (timeBeforeNextAction != 0f)
@@ -480,14 +497,14 @@ public class BattleManager : MonoBehaviour
     {
         if (directionFloat > 0f)
         {
-            uiManager.stickerGridArea.CheckGridObjectBelow();
+            _gameReferenceManager.uiManager.stickerGridArea.CheckGridObjectBelow();
         }
         else if (directionFloat < 0f)
         {
-            uiManager.stickerGridArea.CheckGridObjectAbove();
+            _gameReferenceManager.uiManager.stickerGridArea.CheckGridObjectAbove();
         }
 
-        uiManager.ChangeSelectedStickerUI();
+        _gameReferenceManager.uiManager.ChangeSelectedStickerUI();
         timeBeforeNextAction = moveRepeatDelay;
     } 
 
@@ -495,14 +512,14 @@ public class BattleManager : MonoBehaviour
     {
         if (directionFloat > 0f)
         {
-            uiManager.stickerGridArea.CheckGridObjectRight();
+            _gameReferenceManager.uiManager.stickerGridArea.CheckGridObjectRight();
         }
         else if (directionFloat < 0f)
         {
-            uiManager.stickerGridArea.CheckGridObjectLeft();
+            _gameReferenceManager.uiManager.stickerGridArea.CheckGridObjectLeft();
         }
 
-        uiManager.ChangeSelectedStickerUI();
+        _gameReferenceManager.uiManager.ChangeSelectedStickerUI();
         timeBeforeNextAction = moveRepeatDelay;
     }
 
@@ -534,6 +551,12 @@ public class BattleManager : MonoBehaviour
     public void CancelChooseSticker()
     {
         ChangeToBattleActionMenuState();
+    }
+
+    public void AttackTarget()
+    {
+        Vector3 selectedTargetPos = new Vector3((_currentTarget.transform.position.x), (_playerDefaultWorldPos.y), (_currentTarget.transform.position.z));
+        StartCoroutine(_gameReferenceManager.player.MoveToTargetPosition(selectedTargetPos, _playerDefaultWorldPos, 0.5f));
     }
 
     void OnEastButton(InputAction.CallbackContext context)

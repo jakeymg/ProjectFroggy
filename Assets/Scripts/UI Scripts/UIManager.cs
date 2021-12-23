@@ -8,8 +8,8 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [Header("General")]
+    [SerializeField] private GameReferenceManager _gameReferenceManager;
     [SerializeField] private Canvas mainCanvas;
-    [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _battleManager;
 
     [Header("Prompts")]
@@ -198,7 +198,7 @@ public class UIManager : MonoBehaviour
         {
             yield return dialougeTypewriterEffect.Run(text, dialougeTextArea);
             //Wait for dialouge to finish printing before letting player trigger next line
-            _player.GetComponent<Player>().eastButtonPressed += ProgressDialouge;
+            _gameReferenceManager.player.GetComponent<Player>().eastButtonPressed += ProgressDialouge;
             yield return new WaitUntil(() => _progressDialougeBool);
             _progressDialougeBool = false;
         }
@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
 
     private void ProgressDialouge()
     {
-        _player.GetComponent<Player>().eastButtonPressed -= ProgressDialouge;
+        _gameReferenceManager.player.GetComponent<Player>().eastButtonPressed -= ProgressDialouge;
         _progressDialougeBool = true;
     }
 

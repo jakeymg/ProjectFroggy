@@ -11,9 +11,11 @@ public class BattleChooseTargetState : State
     public override void OnEnter()
     {
         owner.southButtonPressed += owner.CancelTargetSelect;
-        owner.uiManager.ShowTargetArrow();
-        owner.uiManager.ShowEnemyHealthNamePanel();
+        owner.eastButtonPressed += owner.ChooseTarget;
+        owner.gameReferenceManager.uiManager.ShowTargetArrow();
+        owner.gameReferenceManager.uiManager.ShowEnemyHealthNamePanel();
         //Set Selection Hand position and Selection outline position based on position of currently selected grid object
+        Debug.Log("Entering BattleChooseTargetState state");
     }
 
     public override void Execute()
@@ -31,7 +33,9 @@ public class BattleChooseTargetState : State
     public override void OnExit()
     {
         owner.southButtonPressed -= owner.CancelTargetSelect;
-        owner.uiManager.HideTargetArrow();
-        owner.uiManager.HideEnemyHealthNamePanel();
+        owner.eastButtonPressed -= owner.ChooseTarget;
+        owner.gameReferenceManager.uiManager.HideTargetArrow();
+        owner.gameReferenceManager.uiManager.HideEnemyHealthNamePanel();
+        Debug.Log("Exiting BattleChooseTargetState state");
     }
 }

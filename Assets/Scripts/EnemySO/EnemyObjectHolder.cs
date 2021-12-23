@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyObjectHolder : MonoBehaviour
 {
-    [SerializeField] private Enemy EnemyScriptableObject;
+    [SerializeField] private Enemy _enemySO;
+    public Enemy enemySO {get{return _enemySO;} private set{_enemySO = value;}}
     [SerializeField] private int _maxHealth;
     public int maxHealth {get{return _maxHealth;} private set{_maxHealth = value;}}
     [SerializeField] private int _currentHealth;
@@ -26,13 +27,13 @@ public class EnemyObjectHolder : MonoBehaviour
 
     void SetScriptableObjectValues()
     {
-        EnemyScriptableObject.SetFirstQueuedActionID();
-        EnemyScriptableObject.SetCurrentQueuedAction();
+        _enemySO.SetFirstQueuedActionID();
+        _enemySO.SetCurrentQueuedAction();
         
-        _maxHealth = EnemyScriptableObject.maxHealth;
-        _currentHealth = EnemyScriptableObject.currentHealth;
-        _enemyName = EnemyScriptableObject.enemyName;
-        _targetArrowOffset = EnemyScriptableObject.targetArrowOffset;
-        _currentQueuedAction = EnemyScriptableObject.currentQueuedAction;
+        _maxHealth = _enemySO.maxHealth;
+        _currentHealth = _enemySO.currentHealth;
+        _enemyName = _enemySO.enemyName;
+        _targetArrowOffset = _enemySO.targetArrowOffset;
+        _currentQueuedAction = _enemySO.currentQueuedAction;
     }
 }

@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7db370e028b0c14890de748ecfc4abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyScriptableObject: {fileID: 11400000, guid: 683ba79f7ba7f0941b46b36d8203bb87, type: 2}
-  _maxHealth: 0
-  _currentHealth: 0
-  _enemyName: 
+  _enemySO: {fileID: 11400000, guid: 683ba79f7ba7f0941b46b36d8203bb87, type: 2}
+  _maxHealth: 2
+  _currentHealth: 2
+  _enemyName: Funguy
   _targetArrowOffset: {x: 0, y: 0, z: 0}
   _currentQueuedAction: {fileID: 0}
 --- !u!1001 &1515356540766934964

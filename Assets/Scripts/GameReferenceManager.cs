@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameReferenceManager : MonoBehaviour
+{
+    [SerializeField] private UIManager _uimanager;
+    public UIManager uiManager {get{ return _uimanager;}}
+
+    [SerializeField] private Player _player;
+    public Player player {get{ return _player;}}
+
+    [SerializeField] private BattleManager _battleManager;
+    public BattleManager battleManager {get{return _battleManager;}}
+}
