@@ -300,34 +300,6 @@ public class Player : MonoBehaviour
         //ApplyGravity();
     }
 
-    public IEnumerator MoveToTargetPosition(Vector3 targetPosition, Vector3 startPosition, float timeToMove)
-    {
-        float t = 0f;
-        
-        while (t < 1)
-        {
-            t += Time.deltaTime / timeToMove;
-            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            yield return null;
-        }
-
-        yield return StartCoroutine(MoveToDefaultPosition(startPosition, targetPosition, timeToMove));
-    }
-
-    public IEnumerator MoveToDefaultPosition(Vector3 targetPosition, Vector3 startPosition, float timeToMove) 
-    {
-        float t = 0f;
-
-        while (t < 1)
-        {
-            t += Time.deltaTime / timeToMove;
-            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            yield return null;
-        }
-
-        _gameReferenceManager.battleManager.ChangeToBattleActionMenuState();
-    }
-
     public void CheckIfGrounded()
     {
         Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);

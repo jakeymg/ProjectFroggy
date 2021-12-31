@@ -11,7 +11,6 @@ public class BattlePerformAttackState : State
     public override void OnEnter()
     {
         owner.AttackTarget();
-        Debug.Log("Entering BattlePerformAttackState state");
     }
 
     public override void Execute()
@@ -26,6 +25,6 @@ public class BattlePerformAttackState : State
 
     public override void OnExit()
     {
-        Debug.Log("Exiting BattlePerformAttackState state");
+        
     }
 }

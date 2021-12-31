@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
     [SerializeField] private GameObject chooseTargetArrow;
     [SerializeField] private Vector3 targetArrowOffset;
+    [SerializeField] private GameObject floatingDmgTextPrefab;
 
     [Header("Enemy Health Name Panel")]
     [SerializeField] private GameObject _enemyHealthNamePanel;
@@ -76,23 +77,23 @@ public class UIManager : MonoBehaviour
     public void ShowPlayerBattleActionMenu()
     {
         //playerBattleActionPanel.SetActive(true);
-        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 1f, 0.2f);
+        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 1f, 0.1f);
     }
 
     public void HidePlayerBattleActionMenu()
     {
         //playerBattleActionPanel.SetActive(false);
-        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
+        LeanTween.alphaCanvas(playerBattleActionPanel.GetComponent<CanvasGroup>(), 0f, 0.1f);
     }
 
     public void ShowStickerSelectPanel()
     {
-        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 1f, 0.2f);
+        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 1f, 0.1f);
     }
 
     public void HideStickerSelectPanel()
     {
-        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 0f, 0.2f);
+        LeanTween.alphaCanvas(stickerSelectPanel.GetComponent<CanvasGroup>(), 0f, 0.1f);
     }
 
     public void ChangeSelectedStickerUI()
@@ -113,13 +114,13 @@ public class UIManager : MonoBehaviour
     public void ShowTargetArrow()
     {
         //chooseTargetArrow.SetActive(true);
-        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.2f);
+        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.1f);
     }
 
     public void HideTargetArrow()
     {
         //chooseTargetArrow.SetActive(false);
-        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.2f);
+        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.1f);
     }
 
     public void ChangeEnemyHealthNamePanelPosition()
@@ -129,12 +130,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowEnemyHealthNamePanel()
     {
-        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 1f, 0.2f);
+        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 1f, 0.1f);
     }
 
     public void HideEnemyHealthNamePanel()
     {
-        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 0f, 0.2f);
+        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 0f, 0.1f);
     }
 
     public void ChangeEnemyHealthPanelDisplayStats(string enemyName, int currentHealth, int maxHealth)
@@ -144,6 +145,16 @@ public class UIManager : MonoBehaviour
 
         float newFillAmount = (float)currentHealth / (float)maxHealth;
         _enemyCurrentHealthIMG.fillAmount = newFillAmount;
+    }
+
+    public void CreateFloatingDmgText(int dmgAmount, Vector3 position)
+    {
+        Camera cam = Camera.main;
+
+        Vector3 pos = cam.WorldToScreenPoint(position + new Vector3(0, 1, 0));
+
+        GameObject newFloatingDmgText = Instantiate(floatingDmgTextPrefab, pos, Quaternion.identity, mainCanvas.transform);
+        newFloatingDmgText.GetComponent<FloatingDmgText>().SetDmgText(dmgAmount);
     }
 
     public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)

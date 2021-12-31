@@ -13,7 +13,6 @@ public class BattleActionMenuState : State
         owner.eastButtonPressed += owner.ChooseBattleAction;
         owner.gameReferenceManager.uiManager.ShowPlayerBattleActionMenu();
         owner.gameReferenceManager.player.ChangeToChooseBattleAction();
-        Debug.Log("Entering BattleActionMenuState state");
     }
 
     public override void Execute()
@@ -32,6 +31,5 @@ public class BattleActionMenuState : State
     {
         owner.eastButtonPressed -= owner.ChooseBattleAction;
         owner.gameReferenceManager.uiManager.HidePlayerBattleActionMenu();
-        Debug.Log("Exiting BattleActionMenuState state");
     }
 }

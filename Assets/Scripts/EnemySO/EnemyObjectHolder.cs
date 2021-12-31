@@ -34,7 +34,6 @@ public class EnemyObjectHolder : MonoBehaviour
         _actionsList = enemySO.actionsList;
 
         SetFirstQueuedActionID();
-        SetCurrentQueuedAction();
         
         maxHealth = enemySO.maxHealth;
         currentHealth = enemySO.maxHealth;
@@ -45,24 +44,26 @@ public class EnemyObjectHolder : MonoBehaviour
     void SetFirstQueuedActionID()
     {
         _currentQueuedActionID = 0;
+        _currentQueuedAction = _actionsList[_currentQueuedActionID];
     }
 
-    void SetCurrentQueuedAction()
+    void SetNextQueuedAction()
     {
-        _currentQueuedAction = _actionsList[_currentQueuedActionID];
-
         _currentQueuedActionID ++;
 
-        if (_currentQueuedActionID > _actionsList.Count)
+        if (_currentQueuedActionID >= _actionsList.Count)
         {
             _currentQueuedActionID = 0;
         }
         else{}
+
+        _currentQueuedAction = _actionsList[_currentQueuedActionID];
     }
 
-    void DoCurrentQueuedAction()
+    public void DoCurrentQueuedAction(GameObject target)
     {
-        _currentQueuedAction.DoAction();
+        _currentQueuedAction.DoAction(target);
+        SetNextQueuedAction();
     }
 
     public void TakeDamage(int amount)

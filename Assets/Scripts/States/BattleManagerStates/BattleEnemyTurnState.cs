@@ -10,7 +10,7 @@ public class BattleEnemyTurnState : State
     
     public override void OnEnter()
     {
-        
+        owner.PerformEnemyActions();
     }
 
     public override void Execute()
