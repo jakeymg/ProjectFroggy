@@ -5,16 +5,29 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy Action", menuName = "Enemy Action/Enemy Action")]
 public class EnemyActions : ScriptableObject
 {
+    [SerializeField] private string _name;
+    [SerializeField] private string _hitDescription;
+    [SerializeField] private string _missDescription;
     [SerializeField] private float _percentToHit;
     [SerializeField] private int _damadgeOnHit;
+    [SerializeField] private GameReferenceManager gameManagerRef;
 
-    public void DoAction(GameObject target)
+    public void DoAction(GameObject target, string enemyName)
     {
+        if (!gameManagerRef){gameManagerRef = target.GetComponent<Player>().gameReferenceManager;}
+
         bool hitCheck = DoesActionHit();
 
         if (hitCheck)
         {
-            Debug.Log(target + " takes " + _damadgeOnHit + " damadge");
+            Debug.Log(enemyName + _hitDescription);
+            if (_damadgeOnHit == 0){}
+            else {gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position);}
+        }
+        else if (!hitCheck)
+        {
+            Debug.Log(enemyName + _missDescription);
+            gameManagerRef.uiManager.CreateFloatingText("MISS", target.transform.position);
         }
     }
 
@@ -24,12 +37,10 @@ public class EnemyActions : ScriptableObject
 
         if (hitCheck <= _percentToHit)
         {
-            Debug.Log("Enemy successfully hit target");
             return true;
         }
         else
         {
-            Debug.Log("Enemy Missed Attack");
             return false;
         }
     }

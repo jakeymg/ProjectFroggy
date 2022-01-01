@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375ada8cadc555e4fb7074403cccefad, type: 3}
   m_Name: Groove
   m_EditorClassIdentifier: 
+  _name: Groove
+  _hitDescription: ' does a funky dance.'
+  _missDescription: ' seems to have two left feet.'
   _percentToHit: 1
   _damadgeOnHit: 0
+  gameManagerRef: {fileID: 0}

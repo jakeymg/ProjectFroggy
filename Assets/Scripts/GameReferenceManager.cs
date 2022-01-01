@@ -10,6 +10,13 @@ public class GameReferenceManager : MonoBehaviour
     [SerializeField] private Player _player;
     public Player player {get{ return _player;}}
 
+    [SerializeField] private PlayerStats _playerStats;
+    public PlayerStats playerStats {get{ return _playerStats;}}
+
     [SerializeField] private BattleManager _battleManager;
     public BattleManager battleManager {get{return _battleManager;}}
+
+    private void Awake() {
+        _playerStats = player.GetComponent<PlayerStats>();
+    }
 }

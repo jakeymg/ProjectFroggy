@@ -62,7 +62,7 @@ public class EnemyObjectHolder : MonoBehaviour
 
     public void DoCurrentQueuedAction(GameObject target)
     {
-        _currentQueuedAction.DoAction(target);
+        _currentQueuedAction.DoAction(target, enemyName);
         SetNextQueuedAction();
     }
 

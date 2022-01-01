@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private GameReferenceManager _gameReferenceManager;
+    public GameReferenceManager gameReferenceManager {get{return _gameReferenceManager;}}
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerAnimationManager _animationManager;

@@ -574,9 +574,9 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator AttackEnemy()
     {
-        _currentTargetEnemy.TakeDamage(1);
+        _currentTargetEnemy.TakeDamage(_gameReferenceManager.playerStats.strength);
 
-        _gameReferenceManager.uiManager.CreateFloatingDmgText(1, _currentTargetPosition.transform.position);
+        _gameReferenceManager.uiManager.CreateFloatingDmgText(_gameReferenceManager.playerStats.strength, _currentTargetPosition.transform.position);
 
         yield return new WaitForEndOfFrame();
 
@@ -592,6 +592,7 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyOne)
         {
+            yield return new WaitForSeconds(1f);
             _enemyOne.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
 
@@ -602,6 +603,7 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyTwo)
         {
+            yield return new WaitForSeconds(1f);
             _enemyTwo.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
 
@@ -612,6 +614,7 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyTwo)
         {
+            yield return new WaitForSeconds(1f);
             _enemyThree.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
 

@@ -181,6 +181,10 @@ PrefabInstance:
       propertyPath: _gameReferenceManager
       value: 
       objectReference: {fileID: 1159517455}
+    - target: {fileID: 6649955163163866683, guid: 8cf73ff3d2224494bb5452df4e46bee2, type: 3}
+      propertyPath: _strength
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6649955163163866818, guid: 8cf73ff3d2224494bb5452df4e46bee2, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1066,6 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uimanager: {fileID: 2117195913}
   _player: {fileID: 246120152}
+  _playerStats: {fileID: 0}
   _battleManager: {fileID: 1484170403}
 --- !u!4 &1159517456
 Transform:
@@ -1256,7 +1261,6 @@ GameObject:
   - component: {fileID: 1484170403}
   - component: {fileID: 1484170402}
   - component: {fileID: 1484170401}
-  - component: {fileID: 1484170404}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: BattleManager
@@ -1413,20 +1417,6 @@ MonoBehaviour:
   - {fileID: 1515356539686418214, guid: 3948c96465918a946b91b89678e3953c, type: 3}
   - {fileID: 1515356539686418214, guid: 3948c96465918a946b91b89678e3953c, type: 3}
   - {fileID: 1515356539686418214, guid: 3948c96465918a946b91b89678e3953c, type: 3}
---- !u!114 &1484170404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484170399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051e595da2e7b1040b69d08554d75267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 120
-  _currentHealth: 120
 --- !u!1 &1562677565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,6 +1709,10 @@ PrefabInstance:
       propertyPath: _battleManager
       value: 
       objectReference: {fileID: 1484170399}
+    - target: {fileID: 8083605997924567045, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
+      propertyPath: floatingTextPrefab
+      value: 
+      objectReference: {fileID: 7456353158979067957, guid: 742e16a61c8ff3e4cb590aa6abc4275c, type: 3}
     - target: {fileID: 8083605997924567045, guid: 2a4dee647cbfa164ba6489c2cb6b9de7, type: 3}
       propertyPath: _enemyHealthNamePanel
       value: 

@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject chooseTargetArrow;
     [SerializeField] private Vector3 targetArrowOffset;
     [SerializeField] private GameObject floatingDmgTextPrefab;
+    [SerializeField] private GameObject floatingTextPrefab;
 
     [Header("Enemy Health Name Panel")]
     [SerializeField] private GameObject _enemyHealthNamePanel;
@@ -155,6 +156,16 @@ public class UIManager : MonoBehaviour
 
         GameObject newFloatingDmgText = Instantiate(floatingDmgTextPrefab, pos, Quaternion.identity, mainCanvas.transform);
         newFloatingDmgText.GetComponent<FloatingDmgText>().SetDmgText(dmgAmount);
+    }
+
+    public void CreateFloatingText(string txt, Vector3 position)
+    {
+        Camera cam = Camera.main;
+
+        Vector3 pos = cam.WorldToScreenPoint(position + new Vector3(0, 1, 0));
+
+        GameObject newFloatingText = Instantiate(floatingTextPrefab, pos, Quaternion.identity, mainCanvas.transform);
+        newFloatingText.GetComponent<FloatingText>().SetText(txt);
     }
 
     public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)

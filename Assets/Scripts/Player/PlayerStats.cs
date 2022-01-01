@@ -11,6 +11,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int _currentHealth;
     public int currentHealth {get{return _currentHealth;} private set {_currentHealth = value;}}
 
+    [SerializeField] private int _strength;
+    public int strength {get{return _strength;} private set {_strength = value;}}
+
     public void IncreasePlayerCurrentHealth(int v)
     {
         if ((_currentHealth + v) >= _maxHealth)
@@ -32,6 +35,16 @@ public class PlayerStats : MonoBehaviour
         else
         {
             _currentHealth -= v;
+        }
+    }
+
+    public void ChangePlayerStrength(int v)
+    {
+        strength = strength + (v);
+
+        if (strength <= 0)
+        {
+            strength = 0;
         }
     }
 
