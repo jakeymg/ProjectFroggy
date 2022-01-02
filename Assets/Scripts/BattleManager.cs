@@ -169,7 +169,6 @@ public class BattleManager : MonoBehaviour
     {  
         _currentTargetPosition = enemyPositionOne;
         _currentTargetEnemy = _enemyOne;
-        UpdateTargetEnemyUI();
     }
 
     public void SetFirstBattleMenuState()
@@ -436,11 +435,14 @@ public class BattleManager : MonoBehaviour
         timeBeforeNextAction = moveRepeatDelay;
     }
 
+    public void CreateTargetEnemyUI()
+    {
+        _gameReferenceManager.uiManager.CreateEnemyTargetUI(_currentTargetPosition.transform.position, _currentTargetEnemy.gameObject, _currentTargetEnemy.enemyName, _currentTargetEnemy.currentHealth, _currentTargetEnemy.maxHealth);
+    }
+
     public void UpdateTargetEnemyUI()
     {
-        _gameReferenceManager.uiManager.ChangeTargetArrowPosition(_currentTargetPosition.transform.position);
-        _gameReferenceManager.uiManager.ChangeEnemyHealthNamePanelPosition();
-        _gameReferenceManager.uiManager.ChangeEnemyHealthPanelDisplayStats(_currentTargetEnemy.enemyName, _currentTargetEnemy.currentHealth, _currentTargetEnemy.maxHealth);
+        _gameReferenceManager.uiManager.ChangeEnemyTargetUIPosition(_currentTargetPosition.transform.position, _currentTargetEnemy.gameObject, _currentTargetEnemy.enemyName, _currentTargetEnemy.currentHealth, _currentTargetEnemy.maxHealth);
     }
 
     public void CancelTargetSelect()
@@ -576,7 +578,7 @@ public class BattleManager : MonoBehaviour
     {
         _currentTargetEnemy.TakeDamage(_gameReferenceManager.playerStats.strength);
 
-        _gameReferenceManager.uiManager.CreateFloatingDmgText(_gameReferenceManager.playerStats.strength, _currentTargetPosition.transform.position);
+        _gameReferenceManager.uiManager.CreateFloatingDmgText(_gameReferenceManager.playerStats.strength, _currentTargetPosition.transform.position, _currentTargetEnemy.gameObject);
 
         yield return new WaitForEndOfFrame();
 

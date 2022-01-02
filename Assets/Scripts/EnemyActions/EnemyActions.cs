@@ -22,12 +22,12 @@ public class EnemyActions : ScriptableObject
         {
             Debug.Log(enemyName + _hitDescription);
             if (_damadgeOnHit == 0){}
-            else {gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position);}
+            else {gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position, target);}
         }
         else if (!hitCheck)
         {
             Debug.Log(enemyName + _missDescription);
-            gameManagerRef.uiManager.CreateFloatingText("MISS", target.transform.position);
+            gameManagerRef.uiManager.CreateFloatingText("MISS", target.transform.position, target);
         }
     }
 

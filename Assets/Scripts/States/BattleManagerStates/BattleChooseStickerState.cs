@@ -18,6 +18,8 @@ public class BattleChooseStickerState : State
         //Show Sticker Page Menu and Selection Hand objects on the UI
         owner.gameReferenceManager.uiManager.ShowStickerSelectPanel();
         owner.gameReferenceManager.uiManager.ShowSelectionHand();
+
+        owner.gameReferenceManager.battleCamera.ChangeFieldOfView(16);
     }
 
     public override void Execute()
@@ -37,5 +39,6 @@ public class BattleChooseStickerState : State
         owner.southButtonPressed -= owner.CancelChooseSticker;
         owner.gameReferenceManager.uiManager.HideStickerSelectPanel();
         owner.gameReferenceManager.uiManager.HideSelectionHand();
+        owner.gameReferenceManager.battleCamera.ReturnToDefaultFieldOfView();
     }
 }

@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private GameReferenceManager _gameReferenceManager;
-    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private Canvas staticCanvas;
+    [SerializeField] private Canvas dynamicCanvas;
     [SerializeField] private GameObject _battleManager;
 
     [Header("Prompts")]
@@ -36,17 +37,13 @@ public class UIManager : MonoBehaviour
     [Header("Battle Actions")]
     [SerializeField] private GameObject playerBattleActionPanel;
     [SerializeField] private TextMeshProUGUI currentPlayerBattleActionText;
-    [SerializeField] private GameObject chooseTargetArrow;
-    [SerializeField] private Vector3 targetArrowOffset;
     [SerializeField] private GameObject floatingDmgTextPrefab;
     [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private GameObject enemyTargetUIPrefab;
 
     [Header("Enemy Health Name Panel")]
-    [SerializeField] private GameObject _enemyHealthNamePanel;
-    [SerializeField] private CanvasGroup _enemyHealthNamePanelCG;
-    [SerializeField] private TextMeshProUGUI _enemyNameTMP;
-    [SerializeField] private TextMeshProUGUI _enemyCurrentHealthTMP;
-    [SerializeField] private UnityEngine.UI.Image _enemyCurrentHealthIMG;
+    [SerializeField] private GameObject enemyTargetUI;
+    [SerializeField] private Vector3 posOffset;
 
     [Header("Sticker Battle Menu")]
     [SerializeField] private GameObject stickerSelectPanel;
@@ -57,7 +54,6 @@ public class UIManager : MonoBehaviour
     private void Start() 
     {
         _stickerGridArea = _stickerGridAreaGameObject.GetComponent<StickerGridArea>();
-        _enemyHealthNamePanelCG = _enemyHealthNamePanel.GetComponent<CanvasGroup>();
     }
 
     public void ChangeCurrentPlayerStateUI(string currentPlayerState)
@@ -106,66 +102,54 @@ public class UIManager : MonoBehaviour
         stickerGridArea.ChangeCurrentSelectedOutlinePosition(currentGridObjPos);
     }
 
-    public void ChangeTargetArrowPosition(Vector3 newTargetPosition)
+    public void CreateEnemyTargetUI(Vector3 position, GameObject parent, string enemyName, int currentHealth, int maxHealth)
     {
-        Camera cam = Camera.main;
-        chooseTargetArrow.transform.position = cam.WorldToScreenPoint(newTargetPosition + targetArrowOffset);
+        Vector3 pos = Camera.main.WorldToScreenPoint(position + posOffset);
+
+        GameObject newEnemyTargetUI = Instantiate(enemyTargetUIPrefab, pos, Quaternion.identity, staticCanvas.transform);
+
+        enemyTargetUI = newEnemyTargetUI;
+
+        enemyTargetUI.GetComponent<EnemyTargetUI>().ChangeEnemyHealthPanelDisplayStats(enemyName, currentHealth, maxHealth);
+        enemyTargetUI.GetComponent<EnemyTargetUI>().SetTargetObject(parent, posOffset);
     }
 
-    public void ShowTargetArrow()
+    public void ChangeEnemyTargetUIPosition(Vector3 position, GameObject parent, string enemyName, int currentHealth, int maxHealth)
     {
-        //chooseTargetArrow.SetActive(true);
-        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 1f, 0.1f);
+        Vector3 pos = Camera.main.WorldToScreenPoint(position + new Vector3(0, 1, 0));
+
+        enemyTargetUI.transform.position = pos;
+
+        enemyTargetUI.GetComponent<EnemyTargetUI>().ChangeEnemyHealthPanelDisplayStats(enemyName, currentHealth, maxHealth);
+        enemyTargetUI.GetComponent<EnemyTargetUI>().SetTargetObject(parent, posOffset);
     }
 
-    public void HideTargetArrow()
+    public void DestroyEnemyTargetUI()
     {
-        //chooseTargetArrow.SetActive(false);
-        LeanTween.alphaCanvas(chooseTargetArrow.GetComponent<CanvasGroup>(), 0f, 0.1f);
+        enemyTargetUI.GetComponent<EnemyTargetUI>().DestroyThis();
     }
 
-    public void ChangeEnemyHealthNamePanelPosition()
-    {
-        _enemyHealthNamePanel.transform.position = chooseTargetArrow.transform.position + new Vector3(0, 110, 0);
-    }
 
-    public void ShowEnemyHealthNamePanel()
-    {
-        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 1f, 0.1f);
-    }
-
-    public void HideEnemyHealthNamePanel()
-    {
-        LeanTween.alphaCanvas(_enemyHealthNamePanelCG, 0f, 0.1f);
-    }
-
-    public void ChangeEnemyHealthPanelDisplayStats(string enemyName, int currentHealth, int maxHealth)
-    {
-        _enemyNameTMP.text = enemyName;
-        _enemyCurrentHealthTMP.text = currentHealth.ToString();
-
-        float newFillAmount = (float)currentHealth / (float)maxHealth;
-        _enemyCurrentHealthIMG.fillAmount = newFillAmount;
-    }
-
-    public void CreateFloatingDmgText(int dmgAmount, Vector3 position)
+    public void CreateFloatingDmgText(int dmgAmount, Vector3 position, GameObject parent)
     {
         Camera cam = Camera.main;
 
         Vector3 pos = cam.WorldToScreenPoint(position + new Vector3(0, 1, 0));
 
-        GameObject newFloatingDmgText = Instantiate(floatingDmgTextPrefab, pos, Quaternion.identity, mainCanvas.transform);
+        GameObject newFloatingDmgText = Instantiate(floatingDmgTextPrefab, pos, Quaternion.identity, staticCanvas.transform);
         newFloatingDmgText.GetComponent<FloatingDmgText>().SetDmgText(dmgAmount);
+        newFloatingDmgText.GetComponent<FloatingDmgText>().SetTargetObject(parent);
     }
 
-    public void CreateFloatingText(string txt, Vector3 position)
+    public void CreateFloatingText(string txt, Vector3 position, GameObject parent)
     {
         Camera cam = Camera.main;
 
         Vector3 pos = cam.WorldToScreenPoint(position + new Vector3(0, 1, 0));
 
-        GameObject newFloatingText = Instantiate(floatingTextPrefab, pos, Quaternion.identity, mainCanvas.transform);
+        GameObject newFloatingText = Instantiate(floatingTextPrefab, pos, Quaternion.identity, staticCanvas.transform);
         newFloatingText.GetComponent<FloatingText>().SetText(txt);
+        newFloatingText.GetComponent<FloatingText>().SetTargetObject(parent);
     }
 
     public void ChangeSelectionHandPosition(Vector3 newSelectionPosition, Vector3 offsetAmount)

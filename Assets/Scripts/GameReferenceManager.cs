@@ -16,6 +16,9 @@ public class GameReferenceManager : MonoBehaviour
     [SerializeField] private BattleManager _battleManager;
     public BattleManager battleManager {get{return _battleManager;}}
 
+    [SerializeField] private ChangeCameraTarget _battleCamera;
+    public ChangeCameraTarget battleCamera {get{return _battleCamera;}}
+
     private void Awake() {
         _playerStats = player.GetComponent<PlayerStats>();
     }
