@@ -4817,7 +4817,6 @@ GameObject:
   - component: {fileID: 6649955163163866822}
   - component: {fileID: 6649955163163866682}
   - component: {fileID: 6649955163163866823}
-  - component: {fileID: 6649955163163866818}
   - component: {fileID: 6649955163163866817}
   - component: {fileID: 6649955163163866816}
   - component: {fileID: 6649955163163866819}
@@ -4883,10 +4882,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2c00536f40b344a94779db826302be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameReferenceManager: {fileID: 0}
   _stateMachine: {fileID: 6649955163163866819}
   _controller: {fileID: 6649955163163866822}
   _animationManager: {fileID: 6649955163163866816}
-  _uimanager: {fileID: 0}
   _interactableTarget: {fileID: 0}
   playerInput: {fileID: 0}
   playerStats: {fileID: 6649955163163866683}
@@ -5030,25 +5029,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &6649955163163866818
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6649955163163866681}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6649955163163866817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5110,6 +5090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 120
   _currentHealth: 120
+  _strength: 1
 --- !u!1001 &6649955163213420802
 PrefabInstance:
   m_ObjectHideFlags: 0

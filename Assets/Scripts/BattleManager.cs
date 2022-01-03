@@ -585,9 +585,9 @@ public class BattleManager : MonoBehaviour
         ChangeToEnemyTurnState();
     }
 
-    public void PerformEnemyActions()
+    public void StartEnemyTurnCoroutine()
     {
-        StartCoroutine(EnemyOneTurn());   
+        StartCoroutine(EnemyTurn()); 
     }
 
     IEnumerator EnemyOneTurn()
@@ -597,8 +597,6 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _enemyOne.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
-
-        yield return StartCoroutine(EnemyTwoTurn());
     }
 
     IEnumerator EnemyTwoTurn()
@@ -608,8 +606,6 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _enemyTwo.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
-
-        yield return StartCoroutine(EnemyThreeTurn());
     }
 
     IEnumerator EnemyThreeTurn()
@@ -619,12 +615,13 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _enemyThree.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
         }
-
-        yield return StartCoroutine(FinishEnemyTurns());
     }
 
-    IEnumerator FinishEnemyTurns()
+    IEnumerator EnemyTurn()
     {
+        yield return StartCoroutine(EnemyOneTurn());
+        yield return StartCoroutine(EnemyTwoTurn());
+        yield return StartCoroutine(EnemyThreeTurn());
         yield return new WaitForEndOfFrame();
         ChangeToBattleActionMenuState();
     }

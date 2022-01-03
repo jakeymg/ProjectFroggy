@@ -22,7 +22,11 @@ public class EnemyActions : ScriptableObject
         {
             Debug.Log(enemyName + _hitDescription);
             if (_damadgeOnHit == 0){}
-            else {gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position, target);}
+            else 
+            {
+                gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position, target);
+                gameManagerRef.playerStats.DecreasePlayerCurrentHealth(_damadgeOnHit);
+            }
         }
         else if (!hitCheck)
         {

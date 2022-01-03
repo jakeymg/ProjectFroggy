@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameReferenceManager: {fileID: 0}
-  staticCanvas: {fileID: 0}
+  staticCanvas: {fileID: 8083605998102681793}
   dynamicCanvas: {fileID: 0}
   _battleManager: {fileID: 0}
   actionPromptPanel: {fileID: 8083605998750879439}
@@ -474,10 +474,11 @@ MonoBehaviour:
   selectionHandObject: {fileID: 8083605998806904510}
   playerBattleActionPanel: {fileID: 8083605998800044024}
   currentPlayerBattleActionText: {fileID: 8083605999554638753}
-  floatingDmgTextPrefab: {fileID: 0}
-  floatingTextPrefab: {fileID: 0}
-  enemyTargetUIPrefab: {fileID: 0}
+  floatingDmgTextPrefab: {fileID: 4248005285941600360, guid: 2e8d3055d3dae974c8c035dd7ab56b01, type: 3}
+  floatingTextPrefab: {fileID: 7456353158979067957, guid: 742e16a61c8ff3e4cb590aa6abc4275c, type: 3}
+  enemyTargetUIPrefab: {fileID: 2438297442434116542, guid: 6e50e2caad00558438db29c53c3543c3, type: 3}
   enemyTargetUI: {fileID: 0}
+  posOffset: {x: 0, y: 3, z: 0}
   stickerSelectPanel: {fileID: 8083605999614861558}
   _stickerGridAreaGameObject: {fileID: 8083605998661157225}
   _stickerGridArea: {fileID: 0}
@@ -2396,7 +2397,7 @@ GameObject:
   - component: {fileID: 8083605998870046239}
   - component: {fileID: 8083605998870046233}
   m_Layer: 5
-  m_Name: TargetArrow
+  m_Name: TargetArrowPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,14 +2443,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2001adcb87c3803439cb44c9dd0220fa, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2467,7 +2468,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8083605998870046237}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -3650,7 +3651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 517.9, y: 508}
+  m_AnchoredPosition: {x: 1477.9, y: -32}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8083605999614867100

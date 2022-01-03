@@ -27,39 +27,28 @@ public class UIHealthBarManager : MonoBehaviour
         _healthBarDisplayImage = HealthBarDisplay.GetComponent<UnityEngine.UI.Image>();
         PlayerStats = _gameReferenceManager.player.GetComponent<PlayerStats>();
 
+        HealthBarCurrentHealthText.text = (PlayerStats.currentHealth.ToString());
         HealthBarMaxHealthText.text = ("/" + PlayerStats.maxHealth.ToString()); 
     }
 
-    public void DecreaseHealthButton(int v)
-    {
-        PlayerStats.DecreasePlayerCurrentHealth(v);
-        DecreaseHealthDisplay(PlayerStats.currentHealth);
-    }
-
-    private void DecreaseHealthDisplay(int to)
+    public void DecreaseHealthDisplay(int currentHealth)
     {
         int maxHealth = PlayerStats.maxHealth;
 
         float currentFloatValue = _healthBarDisplayImage.fillAmount;
-        float newFloatValue = (float)to / (float)maxHealth;;
+        float newFloatValue = (float)currentHealth / (float)maxHealth;;
 
         HealthBarCurrentHealthText.text = PlayerStats.currentHealth.ToString();
 
         LeanTween.value(_healthBarDisplayImage.gameObject, HealthBarDisplayFloatCallback, currentFloatValue, newFloatValue, 0.25f);
     }
 
-    public void IncreaseHealthButton(int v)
-    {
-        PlayerStats.IncreasePlayerCurrentHealth(v);
-        IncreaseHealthDisplay(PlayerStats.currentHealth);
-    }
-
-    private void IncreaseHealthDisplay(int to)
+    public void IncreaseHealthDisplay(int currentHealth)
     {
         int maxHealth = PlayerStats.maxHealth;
 
         float currentFloatValue = _healthBarDisplayImage.fillAmount;
-        float newFloatValue = (float)to / (float)maxHealth;
+        float newFloatValue = (float)currentHealth / (float)maxHealth;
 
         HealthBarCurrentHealthText.text = PlayerStats.currentHealth.ToString();
 

@@ -29,7 +29,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool _dialougeIsActive = false;
 
     [Header("HealthBar")]
-    [SerializeField] private GameObject UIHealthBarManager;
+    [SerializeField] private UIHealthBarManager _uiHealthBarManager;
+    public UIHealthBarManager uiHealthBarManager {get{return _uiHealthBarManager;}}
 
     [Header("SelectionHand")]
     [SerializeField] private GameObject selectionHandObject;
@@ -128,7 +129,6 @@ public class UIManager : MonoBehaviour
     {
         enemyTargetUI.GetComponent<EnemyTargetUI>().DestroyThis();
     }
-
 
     public void CreateFloatingDmgText(int dmgAmount, Vector3 position, GameObject parent)
     {

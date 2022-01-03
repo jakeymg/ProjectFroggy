@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField] private GameReferenceManager _gameReferenceManager;
     [SerializeField] private int _maxHealth;
     public int maxHealth {get{return _maxHealth;}}
 
@@ -16,26 +17,30 @@ public class PlayerStats : MonoBehaviour
 
     public void IncreasePlayerCurrentHealth(int v)
     {
-        if ((_currentHealth + v) >= _maxHealth)
+        if ((currentHealth + v) >= maxHealth)
         {
-            _currentHealth = _maxHealth;
+            currentHealth = maxHealth;
         }
         else
         {
-            _currentHealth += v;
+            currentHealth += v;
         }
+
+        _gameReferenceManager.uiManager.uiHealthBarManager.IncreaseHealthDisplay(currentHealth);
     }
 
     public void DecreasePlayerCurrentHealth(int v)
     {
-        if ((_currentHealth - v) <= 0)
+        if ((currentHealth - v) <= 0)
         {
-            _currentHealth = 0;
+            currentHealth = 0;
         }
         else
         {
-            _currentHealth -= v;
+            currentHealth -= v;
         }
+
+        _gameReferenceManager.uiManager.uiHealthBarManager.DecreaseHealthDisplay(currentHealth);
     }
 
     public void ChangePlayerStrength(int v)
