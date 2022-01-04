@@ -6,6 +6,13 @@ using UnityEngine;
 public class EnemyActions : ScriptableObject
 {
     [SerializeField] private string _name;
+    [SerializeField] public enum EnemyActionType{
+        BasicAttack,
+        SpecialAttack,
+        Buff,
+        Debuff,
+    }
+    [SerializeField] public EnemyActionType _actionType;
     [SerializeField] private string _hitDescription;
     [SerializeField] private string _missDescription;
     [SerializeField] private float _percentToHit;
@@ -16,6 +23,46 @@ public class EnemyActions : ScriptableObject
     {
         if (!gameManagerRef){gameManagerRef = target.GetComponent<Player>().gameReferenceManager;}
 
+        switch (_actionType)
+        {
+            case EnemyActionType.BasicAttack:
+                BasicAttack(target, enemyName);
+                break;
+            case EnemyActionType.SpecialAttack:
+                SpecialAttack(target, enemyName);
+                break;
+            case EnemyActionType.Buff:
+                break;
+            case EnemyActionType.Debuff:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void BasicAttack(GameObject target, string enemyName)
+    {
+        bool hitCheck = DoesActionHit();
+
+        if (hitCheck)
+        {
+            Debug.Log(enemyName + _hitDescription);
+            if (_damadgeOnHit == 0){}
+            else 
+            {
+                gameManagerRef.uiManager.CreateFloatingDmgText(_damadgeOnHit, target.transform.position, target);
+                gameManagerRef.playerStats.DecreasePlayerCurrentHealth(_damadgeOnHit);
+            }
+        }
+        else if (!hitCheck)
+        {
+            Debug.Log(enemyName + _missDescription);
+            gameManagerRef.uiManager.CreateFloatingText("MISS", target.transform.position, target);
+        }
+    }
+
+    private void SpecialAttack(GameObject target, string enemyName)
+    {
         bool hitCheck = DoesActionHit();
 
         if (hitCheck)

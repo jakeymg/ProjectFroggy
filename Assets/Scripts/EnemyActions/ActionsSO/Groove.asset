@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Groove
   m_EditorClassIdentifier: 
   _name: Groove
+  _actionType: 1
   _hitDescription: ' does a funky dance.'
   _missDescription: ' seems to have two left feet.'
   _percentToHit: 1

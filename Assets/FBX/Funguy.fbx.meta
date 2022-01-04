@@ -6,6 +6,30 @@ ModelImporter:
   - first:
       74: 4699274299699868179
     second: Armature.001|Idle
+  - first:
+      74: 6933230299598937152
+    second: enemy_funguy_BattleIdle
+  - first:
+      74: -3765233685566903331
+    second: Armature.001|AttackBasic
+  - first:
+      74: 4104862851236600179
+    second: Armature.001|HurtBasic
+  - first:
+      74: -6842231883359570523
+    second: Armature.001|SpecialAction
+  - first:
+      74: -7991431304398245759
+    second: enemy_funguy_BattleIdle
+  - first:
+      74: -5883165431695441302
+    second: enemy_funguy_AttackBasic
+  - first:
+      74: 7107713751562380733
+    second: enemy_funguy_HurtBasic
+  - first:
+      74: -8046111196632092765
+    second: enemy_funguy_SpecialAction
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -40,11 +64,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.001|Idle
-      takeName: Armature.001|Idle
+      name: enemy_funguy_BattleIdle
+      takeName: Armature.001|BattleIdle
       internalID: 0
       firstFrame: 0
-      lastFrame: 48
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -52,6 +76,93 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: enemy_funguy_AttackBasic
+      takeName: Armature.001|AttackBasic
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: enemy_funguy_HurtBasic
+      takeName: Armature.001|HurtBasic
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: enemy_funguy_SpecialAction
+      takeName: Armature.001|SpecialAction
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

@@ -47,7 +47,28 @@ ModelImporter:
     second: Armature|Slide
   - first:
       74: 6881873686158965456
-    second: Armature|Falling
+    second: player_Falling
+  - first:
+      74: 2157948989193965817
+    second: player_Idle
+  - first:
+      74: 2962040738362775655
+    second: player_Run
+  - first:
+      74: -540840976423022441
+    second: player_Sitting_1
+  - first:
+      74: 1807219190443753853
+    second: player_Sitting_2
+  - first:
+      74: -5909302493284409048
+    second: player_SittingEnter
+  - first:
+      74: 4883860316391656822
+    second: player_Walk
+  - first:
+      74: 1300192723273615302
+    second: player_Slide
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -87,7 +108,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Idle
+      name: player_Idle
       takeName: Armature|Idle
       internalID: 0
       firstFrame: 0
@@ -116,7 +137,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Run
+      name: player_Run
       takeName: Armature|Run
       internalID: 0
       firstFrame: 0
@@ -145,7 +166,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Sitting_1
+      name: player_Sitting_1
       takeName: Armature|Sitting_1
       internalID: 0
       firstFrame: 0
@@ -174,7 +195,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Sitting_2
+      name: player_Sitting_2
       takeName: Armature|Sitting_2
       internalID: 0
       firstFrame: 0
@@ -203,7 +224,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SittingEnter
+      name: player_SittingEnter
       takeName: Armature|SittingEnter
       internalID: 0
       firstFrame: 0
@@ -232,7 +253,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Walk
+      name: player_Walk
       takeName: Armature|Walk
       internalID: 0
       firstFrame: 0
@@ -261,7 +282,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Slide
+      name: player_Slide
       takeName: Armature|Slide
       internalID: 0
       firstFrame: 0
@@ -290,7 +311,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Falling
+      name: player_Falling
       takeName: Armature|Falling
       internalID: 0
       firstFrame: 0

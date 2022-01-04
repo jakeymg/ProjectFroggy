@@ -594,8 +594,8 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyOne)
         {
-            yield return new WaitForSeconds(1f);
             _enemyOne.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -603,8 +603,8 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyTwo)
         {
-            yield return new WaitForSeconds(1f);
             _enemyTwo.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -612,16 +612,18 @@ public class BattleManager : MonoBehaviour
     {
         if (_enemyTwo)
         {
-            yield return new WaitForSeconds(1f);
             _enemyThree.DoCurrentQueuedAction(_gameReferenceManager.player.gameObject);
+            yield return new WaitForSeconds(1f);
         }
     }
 
     IEnumerator EnemyTurn()
     {
+        yield return new WaitForSeconds(1f);
         yield return StartCoroutine(EnemyOneTurn());
         yield return StartCoroutine(EnemyTwoTurn());
         yield return StartCoroutine(EnemyThreeTurn());
+        
         yield return new WaitForEndOfFrame();
         ChangeToBattleActionMenuState();
     }

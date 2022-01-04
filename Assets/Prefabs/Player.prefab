@@ -5057,10 +5057,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Animancer: {fileID: 6649955163163866817}
   _SittingIdle:
-  - {fileID: -4173182996324890193, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  - {fileID: -3505090100846251808, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  _SittingTwo: {fileID: -575661766842029341, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-  _Sliding: {fileID: -7605684959570508923, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  - {fileID: -5909302493284409048, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  - {fileID: -540840976423022441, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  _SittingTwo: {fileID: 1807219190443753853, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+  _Sliding: {fileID: 1300192723273615302, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
   _Falling: {fileID: 6881873686158965456, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
   _IdleWalkRunMixer: {fileID: 11400000, guid: 48a7b4aea2e6b434a9c68de53d78628f, type: 2}
 --- !u!114 &6649955163163866819
@@ -5088,6 +5088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051e595da2e7b1040b69d08554d75267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameReferenceManager: {fileID: 0}
   _maxHealth: 120
   _currentHealth: 120
   _strength: 1

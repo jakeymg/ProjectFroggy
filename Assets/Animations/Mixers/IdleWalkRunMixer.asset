@@ -20,14 +20,14 @@ MonoBehaviour:
       _Callbacks: []
     _Speed: 1
     _States:
-    - {fileID: -8945691123924629249, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-    - {fileID: 8349542763059015795, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
-    - {fileID: -7551964380084998518, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+    - {fileID: 2157948989193965817, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+    - {fileID: 4883860316391656822, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
+    - {fileID: 2962040738362775655, guid: 29e76db04e6d4a84b9d0260622d1d484, type: 3}
     _Speeds: []
-    _SynchroniseChildren: 00
+    _SynchroniseChildren: 
     _Thresholds:
     - 0
-    - 0.6
+    - 0.5
     - 1
     _DefaultParameter: 0
-    _ExtrapolateSpeed: 0
+    _ExtrapolateSpeed: 1
