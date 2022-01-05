@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerAnimationManager _animationManager;
+    public PlayerAnimationManager animationManager{get{return _animationManager;}}
     [SerializeField] private GameObject _interactableTarget;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerControls playerControls;
@@ -256,6 +257,20 @@ public class Player : MonoBehaviour
         _stateMachine.ChangeCurrentPlayerStateUI(thisState);
     }
 
+    public void ChangeToChooseSticker()
+    {
+        State thisState = new ChooseSticker(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
+    public void ChangeToReadyToAttack()
+    {
+        State thisState = new ReadyToAttack(this);
+        _stateMachine.ChangeState(thisState);
+        _stateMachine.ChangeCurrentPlayerStateUI(thisState);
+    }
+
     public void ChangeToRun()
     {
         State thisState = new RunState(this);
@@ -299,6 +314,11 @@ public class Player : MonoBehaviour
 
         //SlidePlayer();
         //ApplyGravity();
+    }
+
+    public void RotateToTarget(GameObject target)
+    {
+        this.transform.forward
     }
 
     public void CheckIfGrounded()
