@@ -316,11 +316,6 @@ public class Player : MonoBehaviour
         //ApplyGravity();
     }
 
-    public void RotateToTarget(GameObject target)
-    {
-        this.transform.forward
-    }
-
     public void CheckIfGrounded()
     {
         Vector3 _groundCheckOrigin = new Vector3(transform.position.x, transform.position.y - (_controller.height / 2), transform.position.z);

@@ -12,7 +12,11 @@ public class BattleChooseTargetState : State
     {
         owner.southButtonPressed += owner.CancelTargetSelect;
         owner.eastButtonPressed += owner.ChooseTarget;
-        owner.gameReferenceManager.battleCamera.ChangeTargetPosition(owner.gameReferenceManager.battleCamera.gameObject, new Vector3(0, 0, 1.5f));
+
+        //owner.gameReferenceManager.battleCamera.ChangeTargetPosition(owner.gameReferenceManager.battleCamera.gameObject, new Vector3(-1f, 0f, 1f));
+        owner.gameReferenceManager.battleCamera.ChangeFieldOfView(16);
+
+        owner.gameReferenceManager.player.ChangeToReadyToAttack();
 
         owner.CreateTargetEnemyUI();
     }
@@ -33,7 +37,7 @@ public class BattleChooseTargetState : State
     {
         owner.southButtonPressed -= owner.CancelTargetSelect;
         owner.eastButtonPressed -= owner.ChooseTarget;
+
         owner.gameReferenceManager.uiManager.DestroyEnemyTargetUI();
-        owner.gameReferenceManager.battleCamera.ReturnToDefaultPosition();
     }
 }

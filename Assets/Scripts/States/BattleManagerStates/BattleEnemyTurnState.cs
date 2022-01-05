@@ -11,6 +11,7 @@ public class BattleEnemyTurnState : State
     public override void OnEnter()
     {
         owner.StartEnemyTurnCoroutine();
+
     }
 
     public override void Execute()

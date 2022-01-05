@@ -10,7 +10,7 @@ public class SitState : State
 
     public override void OnEnter()
     {
-        owner.GetComponent<PlayerAnimationManager>().PlaySittingAnimation();
+        owner.animationManager.PlaySittingAnimation();
     }
 
     public override void Execute()

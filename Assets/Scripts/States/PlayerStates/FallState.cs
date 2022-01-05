@@ -10,7 +10,7 @@ public class FallState : State
 
     public override void OnEnter()
     {
-        owner.GetComponent<PlayerAnimationManager>().PlayFalling();
+        owner.animationManager.PlayFalling();
     }
 
     public override void Execute()

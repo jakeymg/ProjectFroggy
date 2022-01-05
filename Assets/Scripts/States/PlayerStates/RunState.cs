@@ -10,7 +10,7 @@ public class RunState : State
 
     public override void OnEnter()
     {
-        owner.GetComponent<PlayerAnimationManager>().PlayIdleWalkRunMixer();
+        owner.animationManager.PlayIdleWalkRunMixer();
     }
 
     public override void Execute()

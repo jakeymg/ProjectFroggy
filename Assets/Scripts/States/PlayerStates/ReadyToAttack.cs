@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 
-public class ChooseBattleAction : State
+public class ReadyToAttack : State
 {
     Player owner;    
-    public ChooseBattleAction(Player owner) { this.owner = owner;}
+    public ReadyToAttack(Player owner) { this.owner = owner;}
 
     public override void OnEnter()
     {
-        owner.animationManager.PlayThinking();
-        
-        LeanTween.rotateY(owner.gameObject, 110f, 0.2f);
+        owner.animationManager.PlayReadyToAttack();
+
+        LeanTween.rotateY(owner.gameObject, 0f, 0.2f);
     }
 
     public override void Execute()

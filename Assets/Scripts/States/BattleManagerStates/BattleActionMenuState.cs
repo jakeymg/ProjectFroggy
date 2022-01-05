@@ -11,8 +11,14 @@ public class BattleActionMenuState : State
     public override void OnEnter()
     {
         owner.eastButtonPressed += owner.ChooseBattleAction;
+
         owner.gameReferenceManager.uiManager.ShowPlayerBattleActionMenu();
+
         owner.gameReferenceManager.player.ChangeToChooseBattleAction();
+
+        owner.gameReferenceManager.battleCamera.ReturnToDefaultPosition();
+        owner.gameReferenceManager.battleCamera.ReturnToDefaultFieldOfView();
+
     }
 
     public override void Execute()
@@ -30,6 +36,7 @@ public class BattleActionMenuState : State
     public override void OnExit()
     {
         owner.eastButtonPressed -= owner.ChooseBattleAction;
+        
         owner.gameReferenceManager.uiManager.HidePlayerBattleActionMenu();
     }
 }

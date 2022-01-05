@@ -580,6 +580,8 @@ public class BattleManager : MonoBehaviour
 
         _gameReferenceManager.uiManager.CreateFloatingDmgText(_gameReferenceManager.playerStats.strength, _currentTargetPosition.transform.position, _currentTargetEnemy.gameObject);
 
+        StartCoroutine(_gameReferenceManager.player.animationManager.PlayAttackBasic());
+
         yield return new WaitForEndOfFrame();
 
         ChangeToEnemyTurnState();

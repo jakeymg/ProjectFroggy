@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 
-public class ChooseBattleAction : State
+public class ChooseSticker : State
 {
     Player owner;    
-    public ChooseBattleAction(Player owner) { this.owner = owner;}
+    public ChooseSticker(Player owner) { this.owner = owner;}
 
     public override void OnEnter()
     {
-        owner.animationManager.PlayThinking();
-        
-        LeanTween.rotateY(owner.gameObject, 110f, 0.2f);
+        owner.animationManager.PlayChooseSticker();
     }
 
     public override void Execute()

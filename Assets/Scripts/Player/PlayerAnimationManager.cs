@@ -48,9 +48,10 @@ public class PlayerAnimationManager : MonoBehaviour
         _Animancer.Play(_readyToAttack, 0.1f);
     }
 
-    public void PlayAttackBasic()
+    public IEnumerator PlayAttackBasic()
     {
-        _Animancer.Play(_attackBasic, 0.1f);
+        yield return _Animancer.Play(_attackBasic, 0.1f);
+        _Animancer.Play(_readyToAttack, 0.1f);
     }
 
     public void PlayChooseSticker()
