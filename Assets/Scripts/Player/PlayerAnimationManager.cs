@@ -15,6 +15,13 @@ public class PlayerAnimationManager : MonoBehaviour
     private LinearMixerState _IdleWalkRunState;
     public float IdleWalkRunMixerValue {get => _IdleWalkRunState.Parameter; set => _IdleWalkRunState.Parameter = value;}
 
+    [Header("Battle Animations")]
+    [SerializeField] private AnimationClip _thinking;
+    [SerializeField] private AnimationClip _readyToAttack;
+    [SerializeField] private AnimationClip _attackBasic;
+    [SerializeField] private AnimationClip _chooseSticker;
+
+
     public void PlayIdleWalkRunMixer()
     {
         _Animancer.Play(_IdleWalkRunMixer);
@@ -29,6 +36,26 @@ public class PlayerAnimationManager : MonoBehaviour
     public void PlayFalling()
     {
         _Animancer.Play(_Falling, 0.1f);
+    }
+
+    public void PlayThinking()
+    {
+        _Animancer.Play(_thinking, 0.1f);
+    }
+
+    public void PlayReadyToAttack()
+    {
+        _Animancer.Play(_readyToAttack, 0.1f);
+    }
+
+    public void PlayAttackBasic()
+    {
+        _Animancer.Play(_attackBasic, 0.1f);
+    }
+
+    public void PlayChooseSticker()
+    {
+        _Animancer.Play(_chooseSticker, 0.1f);
     }
 
     public void PlaySittingAnimation()
